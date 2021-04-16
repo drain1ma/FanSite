@@ -1,7 +1,9 @@
 ﻿@model Fan_Website.ViewModel.ScreenshotViewModel 
+@inject UserManager<IdentityUser> userManager
 @{
     string title = ViewBag.Action + " Screenshot";
     ViewBag.Title = title;
+    var user = await userManager.GetUserAsync(User);
 }
 
 <h2>@title</h2>
@@ -26,18 +28,17 @@
         <input asp-for="ScreenshotDescription" class="form-control">
     </div>
 
-
     <button type="submit" class="btn btn-primary">@ViewBag.Action</button>
     <a asp-controller="Screenshot" asp-action="Index" class="btn btn-primary">Cancel</a>
 
     @section Scripts {
         <script>
-                    $(document).ready(function () {
-                        $('.custom-file-input').on("change", function () {
-                            var fileName = $(this).val().split("\\").pop();
-                            $(this).next('.custom-file-label').html(fileName);
-                        });
-                    });
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+            });
         </script>
     }
 </form>

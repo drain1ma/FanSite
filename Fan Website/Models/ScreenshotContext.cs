@@ -22,6 +22,7 @@ namespace Fan_Website.Models
                     ScreenshotTitle = "Final Fantasy XV Chocobo",
                     ImagePath = "Final_Fantasy_XV_Chocobo-1.png",
                     ScreenshotDescription = "I finally managed to find a chocobo",
+                    UserName = "mattdrain98"
                 },
                 new Screenshot
                 {
@@ -29,6 +30,7 @@ namespace Fan_Website.Models
                     ScreenshotTitle = "Sephiroth from Final Fantasy VII",
                     ImagePath = "Final-Fantasy-VII-Remake-Sephiroth.png",
                     ScreenshotDescription = "This is my favorite game of all time",
+                    UserName = "mattdrain98"
                 }
              );
         }

@@ -35,6 +35,9 @@ namespace Fan_Website.Migrations.Screenshot
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ScreenshotId");
 
                     b.ToTable("Screenshots");
@@ -45,14 +48,16 @@ namespace Fan_Website.Migrations.Screenshot
                             ScreenshotId = 4,
                             ImagePath = "Final_Fantasy_XV_Chocobo-1.png",
                             ScreenshotDescription = "I finally managed to find a chocobo",
-                            ScreenshotTitle = "Final Fantasy XV Chocobo"
+                            ScreenshotTitle = "Final Fantasy XV Chocobo",
+                            UserName = "mattdrain98"
                         },
                         new
                         {
                             ScreenshotId = 2,
                             ImagePath = "Final-Fantasy-VII-Remake-Sephiroth.png",
-                            ScreenshotDescription = "This is my favorite game of all title",
-                            ScreenshotTitle = "Sephiroth from Final Fantasy VII"
+                            ScreenshotDescription = "This is my favorite game of all time",
+                            ScreenshotTitle = "Sephiroth from Final Fantasy VII",
+                            UserName = "mattdrain98"
                         });
                 });
 #pragma warning restore 612, 618

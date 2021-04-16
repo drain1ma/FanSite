@@ -1,6 +1,7 @@
 ﻿@model List<Screenshot>
 @inject SignInManager<IdentityUser> signInManager
 
+
 @{
     ViewBag.Title = "My Screenshots";
 }
@@ -24,9 +25,9 @@
 
         <h1 class="text-center"><b>@screenshot.ScreenshotTitle</b></h1>
         <img class="screenshots" src="@photoPath" asp-append-version="true" /><br />
-        @screenshot.ScreenshotDescription
+        @screenshot.ScreenshotDescription<br />
 
-        @if (signInManager.IsSignedIn(User))
+        @if (signInManager.IsSignedIn(User) && screenshot.UserName == User.Identity.Name)
         {
             <a style="text-align: right" asp-controller="Screenshot" asp-action="Delete"
                asp-route-id="@screenshot.ScreenshotId"

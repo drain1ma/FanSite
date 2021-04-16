@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Fan_Website.ViewModel;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 
 namespace Fan_Website.Controllers
 {
@@ -15,11 +16,12 @@ namespace Fan_Website.Controllers
         private ScreenshotContext context { get; set; }
 
         private readonly IHostingEnvironment hostingEnvironment;
-
+        
         public ScreenshotController(ScreenshotContext ctx, IHostingEnvironment hostingEnvironment)
         {
             context = ctx;
             this.hostingEnvironment = hostingEnvironment;
+
         }
         public IActionResult Index()
         {
@@ -37,7 +39,6 @@ namespace Fan_Website.Controllers
             if (ModelState.IsValid)
             {
                 string uniqueFileName = null;
-
                 // If the Photo property on the incoming model object is not null, then the user
                 // has selected an image to upload.
                 if (model.Image != null)
@@ -61,7 +62,8 @@ namespace Fan_Website.Controllers
                     ScreenshotDescription = model.ScreenshotDescription,
                     // Store the file name in PhotoPath property of the employee object
                     // which gets saved to the Employees database table
-                    ImagePath = uniqueFileName
+                    ImagePath = uniqueFileName,
+                    UserName = User.Identity.Name 
                 };
 
                 context.Screenshots.Add(newScreenshot);

@@ -14,7 +14,8 @@ namespace Fan_Website.Migrations.Screenshot
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ScreenshotTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ScreenshotDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ScreenshotDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -23,13 +24,13 @@ namespace Fan_Website.Migrations.Screenshot
 
             migrationBuilder.InsertData(
                 table: "Screenshots",
-                columns: new[] { "ScreenshotId", "ImagePath", "ScreenshotDescription", "ScreenshotTitle" },
-                values: new object[] { 4, "Final_Fantasy_XV_Chocobo-1.png", "I finally managed to find a chocobo", "Final Fantasy XV Chocobo" });
+                columns: new[] { "ScreenshotId", "ImagePath", "ScreenshotDescription", "ScreenshotTitle", "UserName" },
+                values: new object[] { 4, "Final_Fantasy_XV_Chocobo-1.png", "I finally managed to find a chocobo", "Final Fantasy XV Chocobo", "mattdrain98" });
 
             migrationBuilder.InsertData(
                 table: "Screenshots",
-                columns: new[] { "ScreenshotId", "ImagePath", "ScreenshotDescription", "ScreenshotTitle" },
-                values: new object[] { 2, "Final-Fantasy-VII-Remake-Sephiroth.png", "This is my favorite game of all title", "Sephiroth from Final Fantasy VII" });
+                columns: new[] { "ScreenshotId", "ImagePath", "ScreenshotDescription", "ScreenshotTitle", "UserName" },
+                values: new object[] { 2, "Final-Fantasy-VII-Remake-Sephiroth.png", "This is my favorite game of all time", "Sephiroth from Final Fantasy VII", "mattdrain98" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
