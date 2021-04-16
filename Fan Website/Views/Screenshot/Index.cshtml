@@ -1,0 +1,28 @@
+﻿@model List<Screenshot>
+@{
+    ViewBag.Title = "My Screenshots";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/css/images.css" rel="stylesheet" />
+</head>
+<body>
+    <a asp-controller="Screenshot" asp-action="Create">Upload New Screenshot</a><br />
+
+    @foreach (var screenshot in Model)
+    {
+        var photoPath = "~/images/" + (screenshot.ImagePath);
+
+        <h1 class="text-center"><b>@screenshot.ScreenshotTitle</b></h1>
+        <img class="screenshots" src="@photoPath" asp-append-version="true" /><br />
+        @screenshot.ScreenshotDescription
+
+        <a style="text-align: right" asp-controller="Screenshot" asp-action="Delete"
+           asp-route-id="@screenshot.ScreenshotId"
+           asp-route-slug="@screenshot.Slug">Delete</a>
+    }
+</body>
+</html>

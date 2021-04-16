@@ -1,0 +1,23 @@
+﻿@model Screenshot
+@{
+    ViewBag.Title = "Delete Screenshot";
+}
+
+<h2>Confirm Deletion</h2>
+
+<br />
+
+
+<h3>
+    @Model.ScreenshotTitle<br />
+    <img class="screenshots" src="~/images/@Model.ImagePath"/><br />
+    <br />@Model.ScreenshotDescription
+</h3>
+
+<form asp-action="Delete" method="post">
+
+    <input type="hidden" asp-for="ScreenshotId" />
+
+    <button type="submit" class="btn btn-primary">Delete</button>
+    <a asp-controller="Screenshot" asp-action="Index" class="btn btn-primary">Cancel</a>
+</form>

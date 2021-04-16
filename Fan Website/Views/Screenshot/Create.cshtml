@@ -1,0 +1,43 @@
+﻿@model Fan_Website.ViewModel.ScreenshotViewModel 
+@{
+    string title = ViewBag.Action + " Screenshot";
+    ViewBag.Title = title;
+}
+
+<h2>@title</h2>
+
+<form enctype="multipart/form-data" asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="ScreenshotTitle">Title</label>
+        <input asp-for="ScreenshotTitle" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Image">Screenshot</label>
+        <div class="custom-file">
+            <input asp-for="Image" class="form-control custom-file-input" />
+            <label class="custom-file-label">Choose file...</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ScreenshotDescription">Description</label>
+        <input asp-for="ScreenshotDescription" class="form-control">
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">@ViewBag.Action</button>
+    <a asp-controller="Screenshot" asp-action="Index" class="btn btn-primary">Cancel</a>
+
+    @section Scripts {
+        <script>
+                    $(document).ready(function () {
+                        $('.custom-file-input').on("change", function () {
+                            var fileName = $(this).val().split("\\").pop();
+                            $(this).next('.custom-file-label').html(fileName);
+                        });
+                    });
+        </script>
+    }
+</form>
