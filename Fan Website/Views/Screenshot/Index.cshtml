@@ -1,4 +1,6 @@
 ﻿@model List<Screenshot>
+@inject SignInManager<IdentityUser> signInManager
+
 @{
     ViewBag.Title = "My Screenshots";
 }
@@ -10,7 +12,11 @@
     <link href="~/css/images.css" rel="stylesheet" />
 </head>
 <body>
-    <a asp-controller="Screenshot" asp-action="Create">Upload New Screenshot</a><br />
+
+    @if (signInManager.IsSignedIn(User))
+    {
+        <a asp-controller="Screenshot" asp-action="Create">Upload New Screenshot</a><br />
+    }
 
     @foreach (var screenshot in Model)
     {
@@ -20,9 +26,13 @@
         <img class="screenshots" src="@photoPath" asp-append-version="true" /><br />
         @screenshot.ScreenshotDescription
 
-        <a style="text-align: right" asp-controller="Screenshot" asp-action="Delete"
-           asp-route-id="@screenshot.ScreenshotId"
-           asp-route-slug="@screenshot.Slug">Delete</a>
+        @if (signInManager.IsSignedIn(User))
+        {
+            <a style="text-align: right" asp-controller="Screenshot" asp-action="Delete"
+               asp-route-id="@screenshot.ScreenshotId"
+               asp-route-slug="@screenshot.Slug">Delete</a>
+        }
+
     }
 </body>
 </html>
