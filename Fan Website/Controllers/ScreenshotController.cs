@@ -28,6 +28,12 @@ namespace Fan_Website.Controllers
             var screenshot = context.Screenshots.ToList();
             return View(screenshot);
         }
+        public IActionResult UserScreenshots()
+        {
+            var screenshot = context.Screenshots.ToList();
+            return View(screenshot); 
+        }
+
         public IActionResult Add()
         {
             ViewBag.Action = "Create";

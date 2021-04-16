@@ -45,6 +45,13 @@
                         @if (signInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
+                                <form method="post" asp-controller="Screenshot" asp-action="UserScreenshots">
+                                    <button type="submit" class="nav-link btn btn-link py-0" style="width: auto">
+                                        Your Screenshots
+                                    </button>
+                                </form>
+                            </li>
+                            <li class="nav-item">
                                 <form method="post" asp-controller="Account" asp-action="Logout">
                                     <button type="submit" class="nav-link btn btn-link py-0" style="width: auto">
                                         Logout @User.Identity.Name
@@ -54,6 +61,7 @@
                         }
                         else
                         {
+
                             <li class="nav-item">
                                 <a class="nav-link" asp-action="Register" asp-controller="Account">Register</a>
                             </li>
