@@ -13,12 +13,13 @@
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/css/images.css" rel="stylesheet" />
 </head>
 <body>
-    <link href="~/css/images.css" rel="stylesheet" />
+    
     <div class="text-center" style="background: skyblue">
         <img src="~/images/chocobo.png" class="chocobo" alt="chocobo" />
-        <img src="~/images/finalfantasylogo.png" class="logo" alt="logo"/>
+        <img src="~/images/logo.png" class="logo" alt="logo"/>
         <img src="~/images/cactuar.png" class="cactuar" alt="cactuar" />
     </div>
 
@@ -39,6 +40,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Screenshot" asp-action="Index">Screenshots</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Forum" asp-action="Index">Forum</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
