@@ -54,5 +54,19 @@ namespace Fan_Website.Controllers
 
             return View();
         }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var post = context.Posts.Find(id);
+            return View(post);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Forum posts)
+        {
+            context.Posts.Remove(posts);
+            context.SaveChanges();
+            return RedirectToAction("Index", "Forum");
+        }
     }
 }

@@ -15,5 +15,7 @@ namespace Fan_Website.Models
         public string Post { get; set; }
         public DateTime? CreatedOn { get; set; }
 
+        public string Slug =>
+            PostTitle?.Replace(' ', '-').ToLower();
     }
 }

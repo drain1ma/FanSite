@@ -1,0 +1,22 @@
+﻿@model Forum
+@{
+    ViewBag.Title = "Delete Post";
+}
+
+<h2>Confirm Deletion</h2>
+
+<br />
+
+
+<h3>
+    @Model.PostTitle<br />
+    <br />@Model.Post
+</h3>
+
+<form asp-action="Delete" method="post">
+
+    <input type="hidden" asp-for="ForumId" />
+
+    <button type="submit" class="btn btn-primary">Delete</button>
+    <a asp-controller="Screenshot" asp-action="Index" class="btn btn-primary">Cancel</a>
+</form>

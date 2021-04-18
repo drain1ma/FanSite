@@ -16,7 +16,13 @@
     {
         <h1>@post.PostTitle</h1><a>@post.UserName - @post.CreatedOn</a><br />
         <a>@post.Post</a>
-    }
+        @if (signInManager.IsSignedIn(User) && post.UserName == User.Identity.Name)
+        {
+            <a style="text-align: right" asp-controller="Forum" asp-action="Delete"
+               asp-route-id="@post.ForumId"
+               asp-route-slug="@post.Slug">Delete</a>
+        }
 
+    }
 </body>
 </html>
