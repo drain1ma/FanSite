@@ -8,11 +8,15 @@
 <!DOCTYPE html>
 <html>
 <body>
+    @if (signInManager.IsSignedIn(User))
+    {
+        <a asp-controller="Forum" asp-action="Create">Create new post</a><br />
+    }
     @foreach (var post in Model)
     {
-        <h1>@post.PostTitle</h1><a>@post.CreatedOn</a><a>@post.UserName</a><br /> 
+        <h1>@post.PostTitle</h1><a>@post.UserName - @post.CreatedOn</a><br />
         <a>@post.Post</a>
-    }; 
+    }
 
 </body>
 </html>

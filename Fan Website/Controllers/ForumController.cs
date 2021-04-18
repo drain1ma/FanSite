@@ -1,4 +1,5 @@
 ﻿using Fan_Website.Models;
+using Fan_Website.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,37 @@ namespace Fan_Website.Controllers
         {
             var posts = context.Posts.ToList();
             return View(posts);
+        }
+        [HttpGet] 
+        public IActionResult Create()
+        {
+            ViewBag.Action = "Post"; 
+            return View("Create", new ForumViewModel()); 
+        }
+        [HttpPost]
+        public IActionResult Create(ForumViewModel model)
+        {
+            ViewBag.Action = "Post";
+            if (ModelState.IsValid)
+            {
+
+
+                Forum newPost = new Forum
+                {
+                    PostTitle = model.PostTitle,
+                    Post = model.Post,
+                    UserName = User.Identity.Name,
+                    CreatedOn = DateTime.Now 
+                };
+
+                context.Posts.Add(newPost);
+
+                context.SaveChanges();
+                return RedirectToAction("Index", "Forum");
+
+            }
+
+            return View();
         }
     }
 }
