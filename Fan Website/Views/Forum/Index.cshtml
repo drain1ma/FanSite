@@ -1,5 +1,18 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<Forum>
+@inject SignInManager<IdentityUser> signInManager
+
 @{
+    ViewBag.Title = "Posts";
 }
+
+<!DOCTYPE html>
+<html>
+<body>
+    @foreach (var post in Model)
+    {
+        <h1>@post.PostTitle</h1><a>@post.CreatedOn</a><a>@post.UserName</a><br /> 
+        <a>@post.Post</a>
+    }; 
+
+</body>
+</html>

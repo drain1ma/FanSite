@@ -35,9 +35,12 @@ namespace Fan_Website
 
             services.AddDbContext<AppDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
+
             services.AddDbContext<ScreenshotContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
 
+            services.AddDbContext<ForumContext>(options =>
+               options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
 
 
 
