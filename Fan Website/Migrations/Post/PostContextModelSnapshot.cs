@@ -4,16 +4,14 @@ using Fan_Website.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Fan_Website.Migrations.Forum
+namespace Fan_Website.Migrations.Post
 {
-    [DbContext(typeof(ForumContext))]
-    [Migration("20210418041549_Forum")]
-    partial class Forum
+    [DbContext(typeof(PostContext))]
+    partial class PostContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,37 +19,37 @@ namespace Fan_Website.Migrations.Forum
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Fan_Website.Models.Forum", b =>
+            modelBuilder.Entity("Fan_Website.Models.Post", b =>
                 {
-                    b.Property<int>("ForumId")
+                    b.Property<int>("PostId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Post")
+                    b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PostTitle")
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ForumId");
+                    b.HasKey("PostId");
 
                     b.ToTable("Posts");
 
                     b.HasData(
                         new
                         {
-                            ForumId = 1,
-                            CreatedOn = new DateTime(2021, 4, 18, 0, 15, 49, 427, DateTimeKind.Local).AddTicks(6027),
-                            Post = "The reason I believe this to be the best game is due to the character development as well as the pacing of the story as a whole. Without the characters the game would not have been nearly as good, although the story was still fantastic as well.",
-                            PostTitle = "Final Fantasy IX is the best",
-                            UserName = "mattdrain98"
+                            PostId = 1,
+                            Content = "Like I said in the title, this is my favorite game and nothing can change my mind about that.",
+                            CreatedOn = new DateTime(2021, 4, 18, 23, 28, 30, 572, DateTimeKind.Utc).AddTicks(5601),
+                            Title = "This is my favorite game!",
+                            UserName = "linguisticgamer98"
                         });
                 });
 #pragma warning restore 612, 618

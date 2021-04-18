@@ -9,7 +9,7 @@ namespace Fan_Website.ViewModel
     { 
         public string PostTitle { get; set; }
         public string UserName { get; set; }
-        public string Post { get; set; }
+        public string Description { get; set; }
         public DateTime? CreatedOn { get; set; }
 
         public string Slug =>

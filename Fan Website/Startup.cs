@@ -42,7 +42,8 @@ namespace Fan_Website
             services.AddDbContext<ForumContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
 
-
+            services.AddDbContext<PostContext>(options =>
+               options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
 
             services.AddControllersWithViews();
         }

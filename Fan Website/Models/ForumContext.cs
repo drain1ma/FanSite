@@ -11,7 +11,7 @@ namespace Fan_Website.Models
         public ForumContext(DbContextOptions<ForumContext> options)
             : base(options)
         { }
-        public DbSet<Forum> Posts { get; set; }
+        public DbSet<Forum> Forums { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -22,9 +22,9 @@ namespace Fan_Website.Models
                 new Forum
                 {
                     ForumId = 1,
-                    PostTitle = "Final Fantasy IX is the best",
+                    PostTitle = "Final Fantasy IX",
                     UserName = "mattdrain98",
-                    Post = "The reason I believe this to be the best game is due to the character development as well as the pacing of the story as a whole. Without the characters the game would not have been nearly as good, although the story was still fantastic as well.",
+                    Description = "A place to talk about Final Fantasy IX", 
                     CreatedOn = DateTime.Now
                 });
         }

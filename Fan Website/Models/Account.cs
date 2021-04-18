@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,12 +11,6 @@ namespace Fan_Website.Models
     {
         [Key]
         public int UserId { get; set; }
-
-        public string UserName { get; set; }
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }

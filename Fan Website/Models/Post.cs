@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Fan_Website.Models
 {
-    public class Forum
+    public class Post
     {
-        [Key]
-        public int ForumId { get; set; }
-        public string PostTitle { get; set; }
-        public string Description { get; set; }
+        public int PostId { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
         public DateTime CreatedOn { get; set; }
         public string UserName { get; set; }
         public string Slug =>
-            PostTitle?.Replace(' ', '-').ToLower();
+            Title?.Replace(' ', '-').ToLower();
+
     }
 }

@@ -21,8 +21,6 @@ namespace Fan_Website.Models
                 new Account
                 {
                     UserId = 1,
-                    UserName = "mattdrain98",
-                    Email = "matthewdrain98@gmail.com",
                     Password = "Larkin71!",
                     ConfirmPassword = "Larkin71!"
                 });

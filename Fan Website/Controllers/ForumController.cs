@@ -20,8 +20,8 @@ namespace Fan_Website.Controllers
         }
         public IActionResult Index()
         {
-            var posts = context.Posts.ToList();
-            return View(posts);
+            var forums = context.Forums.ToList();
+            return View(forums);
         }
         [HttpGet] 
         public IActionResult Create()
@@ -37,15 +37,15 @@ namespace Fan_Website.Controllers
             {
 
 
-                Forum newPost = new Forum
+                Forum newForum = new Forum
                 {
                     PostTitle = model.PostTitle,
-                    Post = model.Post,
+                    Description = model.Description,
                     UserName = User.Identity.Name,
                     CreatedOn = DateTime.Now 
                 };
 
-                context.Posts.Add(newPost);
+                context.Forums.Add(newForum);
 
                 context.SaveChanges();
                 return RedirectToAction("Index", "Forum");
@@ -57,14 +57,14 @@ namespace Fan_Website.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var post = context.Posts.Find(id);
-            return View(post);
+            var forum = context.Forums.Find(id);
+            return View(forum);
         }
 
         [HttpPost]
-        public IActionResult Delete(Forum posts)
+        public IActionResult Delete(Forum forum)
         {
-            context.Posts.Remove(posts);
+            context.Forums.Remove(forum);
             context.SaveChanges();
             return RedirectToAction("Index", "Forum");
         }

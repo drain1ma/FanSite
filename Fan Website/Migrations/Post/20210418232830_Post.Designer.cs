@@ -4,14 +4,16 @@ using Fan_Website.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Fan_Website.Migrations.Forum
+namespace Fan_Website.Migrations.Post
 {
-    [DbContext(typeof(ForumContext))]
-    partial class ForumContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(PostContext))]
+    [Migration("20210418232830_Post")]
+    partial class Post
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,37 +21,37 @@ namespace Fan_Website.Migrations.Forum
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Fan_Website.Models.Forum", b =>
+            modelBuilder.Entity("Fan_Website.Models.Post", b =>
                 {
-                    b.Property<int>("ForumId")
+                    b.Property<int>("PostId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostTitle")
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ForumId");
+                    b.HasKey("PostId");
 
-                    b.ToTable("Forums");
+                    b.ToTable("Posts");
 
                     b.HasData(
                         new
                         {
-                            ForumId = 1,
-                            CreatedOn = new DateTime(2021, 4, 18, 18, 56, 7, 591, DateTimeKind.Local).AddTicks(4760),
-                            Description = "A place to talk about Final Fantasy IX",
-                            PostTitle = "Final Fantasy IX",
-                            UserName = "mattdrain98"
+                            PostId = 1,
+                            Content = "Like I said in the title, this is my favorite game and nothing can change my mind about that.",
+                            CreatedOn = new DateTime(2021, 4, 18, 23, 28, 30, 572, DateTimeKind.Utc).AddTicks(5601),
+                            Title = "This is my favorite game!",
+                            UserName = "linguisticgamer98"
                         });
                 });
 #pragma warning restore 612, 618
