@@ -15,3 +15,5 @@ Currently, the code that I have within the project is only capable of enlarging 
 - [x] Users capable of deleting only the images they upload
 - [ ] A forum for users to interact with one another
 - [ ] Layout that looks appealing to the users
+- [ ] Adding user profile pictures
+- [ ] Adding a dropdownlist 
