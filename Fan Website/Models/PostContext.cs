@@ -22,7 +22,8 @@ namespace Fan_Website.Models
                     Title = "This is my favorite game!",
                     Content = "Like I said in the title, this is my favorite game and nothing can change my mind about that.",
                     CreatedOn = DateTime.UtcNow,
-                    UserName = "linguisticgamer98"
+                    UserName = "linguisticgamer98", 
+                    Forum = "Final Fantasy IX"
                 }
              );
         }

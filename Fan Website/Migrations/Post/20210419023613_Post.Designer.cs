@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fan_Website.Migrations.Post
 {
     [DbContext(typeof(PostContext))]
-    [Migration("20210418232830_Post")]
+    [Migration("20210419023613_Post")]
     partial class Post
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,6 +34,9 @@ namespace Fan_Website.Migrations.Post
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Forum")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -49,7 +52,8 @@ namespace Fan_Website.Migrations.Post
                         {
                             PostId = 1,
                             Content = "Like I said in the title, this is my favorite game and nothing can change my mind about that.",
-                            CreatedOn = new DateTime(2021, 4, 18, 23, 28, 30, 572, DateTimeKind.Utc).AddTicks(5601),
+                            CreatedOn = new DateTime(2021, 4, 19, 2, 36, 13, 531, DateTimeKind.Utc).AddTicks(1386),
+                            Forum = "Final Fantasy IX",
                             Title = "This is my favorite game!",
                             UserName = "linguisticgamer98"
                         });
