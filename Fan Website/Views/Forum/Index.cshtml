@@ -12,17 +12,27 @@
     {
         <a asp-controller="Forum" asp-action="Create">Create new forum</a><br />
     }
-    @foreach (var forum in Model)
-    {
-        <a asp-controller="Post" asp-action="Index">@forum.PostTitle </a><a>- @forum.CreatedOn</a><br />
-        <a>@forum.Description</a><br />
-        @if (signInManager.IsSignedIn(User) && forum.UserName.Equals(User.Identity.Name))
+<table class="table table-bordered">
+    <tbody>
+        @foreach (var forum in Model)
         {
-            <a style="text-align: right" asp-controller="Forum" asp-action="Delete"
-               asp-route-id="@forum.ForumId"
-               asp-route-slug="@forum.Slug">Delete</a>
-        }
+        <tr>
+            <td><a asp-controller="Post" asp-action="Index">@forum.PostTitle </a></td>
+            <td>
+                @forum.Description @if (signInManager.IsSignedIn(User) && forum.UserName.Equals(User.Identity.Name))
+                {
+                    <a style="text-align: right" asp-controller = "Forum" asp-action = "Delete"
+                                asp-route-id = "@forum.ForumId"
+                                asp-route-slug = "@forum.Slug" ><p style="text-align: right">Delete</p>
+                        </a>
+                 }  
+            </td>
 
-    }
+            
+        </tr>
+
+        }
+    </tbody>
+</table>
 </body>
 </html>

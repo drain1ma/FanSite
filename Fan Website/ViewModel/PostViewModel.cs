@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fan_Website.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Fan_Website.ViewModel
         public string Content { get; set; }
         public DateTime CreatedOn { get; set; }
         public string UserName { get; set; }
+     //   public int ForumId { get; set; }
         public string Forum { get; set; }
         public string Slug =>
             Title?.Replace(' ', '-').ToLower();

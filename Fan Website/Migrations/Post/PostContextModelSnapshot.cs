@@ -27,6 +27,7 @@ namespace Fan_Website.Migrations.Post
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Content")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
@@ -36,6 +37,7 @@ namespace Fan_Website.Migrations.Post
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
@@ -50,7 +52,7 @@ namespace Fan_Website.Migrations.Post
                         {
                             PostId = 1,
                             Content = "Like I said in the title, this is my favorite game and nothing can change my mind about that.",
-                            CreatedOn = new DateTime(2021, 4, 19, 2, 36, 13, 531, DateTimeKind.Utc).AddTicks(1386),
+                            CreatedOn = new DateTime(2021, 4, 20, 3, 42, 45, 804, DateTimeKind.Utc).AddTicks(9431),
                             Forum = "Final Fantasy IX",
                             Title = "This is my favorite game!",
                             UserName = "linguisticgamer98"

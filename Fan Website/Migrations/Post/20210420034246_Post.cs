@@ -13,8 +13,8 @@ namespace Fan_Website.Migrations.Post
                 {
                     PostId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Forum = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -27,7 +27,7 @@ namespace Fan_Website.Migrations.Post
             migrationBuilder.InsertData(
                 table: "Posts",
                 columns: new[] { "PostId", "Content", "CreatedOn", "Forum", "Title", "UserName" },
-                values: new object[] { 1, "Like I said in the title, this is my favorite game and nothing can change my mind about that.", new DateTime(2021, 4, 19, 2, 36, 13, 531, DateTimeKind.Utc).AddTicks(1386), "Final Fantasy IX", "This is my favorite game!", "linguisticgamer98" });
+                values: new object[] { 1, "Like I said in the title, this is my favorite game and nothing can change my mind about that.", new DateTime(2021, 4, 20, 3, 42, 45, 804, DateTimeKind.Utc).AddTicks(9431), "Final Fantasy IX", "This is my favorite game!", "linguisticgamer98" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
