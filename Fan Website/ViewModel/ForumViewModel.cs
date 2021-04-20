@@ -8,6 +8,7 @@ namespace Fan_Website.ViewModel
 {
     public class ForumViewModel
     {
+        public string ForumId { get; set; }
         [Required(ErrorMessage = "Please enter a title.")]
         public string PostTitle { get; set; }
         [Required(ErrorMessage = "Please enter a description.")]

@@ -18,7 +18,8 @@ namespace Fan_Website.Controllers
         }
         public IActionResult Index()
         {
-            var posts = context.Posts.ToList(); 
+            var posts = context.Posts.ToList();
+            ViewBag.Forums = context.Forums.OrderBy(g => g.PostTitle).ToList();
             return View(posts);
         }
 
@@ -26,12 +27,14 @@ namespace Fan_Website.Controllers
         public IActionResult Create()
         {
             ViewBag.Action = "Post";
+            ViewBag.Forums = context.Forums.OrderBy(g => g.PostTitle).ToList();
             return View("Create", new PostViewModel());
         }
         [HttpPost]
         public IActionResult Create(Post model)
         {
             ViewBag.Action = "Post";
+            ViewBag.Forums = context.Forums.OrderBy(g => g.PostTitle).ToList();
             if (ModelState.IsValid)
             {
 

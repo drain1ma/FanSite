@@ -16,8 +16,8 @@ namespace Fan_Website.Models
         public string Content { get; set; }
         public DateTime CreatedOn { get; set; }
         public string UserName { get; set; }
-      //  public int ForumId { get; set; }
-        public string Forum { get; set; }
+        public string ForumId { get; set; }
+        public Forum Forum { get; set; }
         public string Slug =>
             Title?.Replace(' ', '-').ToLower();
 

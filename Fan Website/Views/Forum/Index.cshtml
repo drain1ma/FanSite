@@ -21,7 +21,7 @@
             <td>
                 @forum.Description @if (signInManager.IsSignedIn(User) && forum.UserName.Equals(User.Identity.Name))
                 {
-                    <a style="text-align: right" asp-controller = "Forum" asp-action = "Delete"
+                    <a asp-controller = "Forum" asp-action = "Delete"
                                 asp-route-id = "@forum.ForumId"
                                 asp-route-slug = "@forum.Slug" ><p style="text-align: right">Delete</p>
                         </a>

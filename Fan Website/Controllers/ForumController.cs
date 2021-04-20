@@ -10,11 +10,11 @@ namespace Fan_Website.Controllers
 {
     public class ForumController: Controller
     {
-        private ForumContext context { get; set; }
+        private PostContext context { get; set; }
 
       
 
-        public ForumController(ForumContext ctx)
+        public ForumController(PostContext ctx)
         {
             context = ctx;
         }
@@ -42,7 +42,8 @@ namespace Fan_Website.Controllers
                     PostTitle = model.PostTitle,
                     Description = model.Description,
                     UserName = User.Identity.Name,
-                    CreatedOn = DateTime.Now 
+                    CreatedOn = DateTime.Now,
+                    ForumId = model.ForumId 
                 };
 
                 context.Forums.Add(newForum);
@@ -55,7 +56,7 @@ namespace Fan_Website.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             var forum = context.Forums.Find(id);
             return View(forum);
