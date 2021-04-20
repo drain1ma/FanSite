@@ -10,7 +10,9 @@ namespace Fan_Website.Models
     {
         [Key]
         public int ForumId { get; set; }
+        [Required(ErrorMessage = "Please enter a title.")] 
         public string PostTitle { get; set; }
+        [Required(ErrorMessage = "Please enter a description")]
         public string Description { get; set; }
         public DateTime CreatedOn { get; set; }
         public string UserName { get; set; }
