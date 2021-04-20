@@ -42,7 +42,7 @@ namespace Fan_Website.Controllers
                     Content = model.Content,
                     UserName = User.Identity.Name,
                     CreatedOn = DateTime.Now,
-                    Forum = model.Forum 
+                    Forum = model.Forum
                 };
 
                 context.Posts.Add(newPost);

@@ -12,15 +12,15 @@
     {
         <a asp-controller="Forum" asp-action="Create">Create new forum</a><br />
     }
-    @foreach (var post in Model)
+    @foreach (var forum in Model)
     {
-        <a asp-controller="Post" asp-action="Index">@post.PostTitle </a><a>- @post.CreatedOn</a><br />
-        <a>@post.Description</a><br />
-        @if (signInManager.IsSignedIn(User) && post.UserName == User.Identity.Name)
+        <a asp-controller="Post" asp-action="Index">@forum.PostTitle </a><a>- @forum.CreatedOn</a><br />
+        <a>@forum.Description</a><br />
+        @if (signInManager.IsSignedIn(User) && forum.UserName.Equals(User.Identity.Name))
         {
             <a style="text-align: right" asp-controller="Forum" asp-action="Delete"
-               asp-route-id="@post.ForumId"
-               asp-route-slug="@post.Slug">Delete</a>
+               asp-route-id="@forum.ForumId"
+               asp-route-slug="@forum.Slug">Delete</a>
         }
 
     }
