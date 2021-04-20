@@ -11,19 +11,13 @@
 <body>
     @if (signInManager.IsSignedIn(User))
     {
-        <a asp-controller="Post" asp-action="Create">Create new forum</a><br />
+        <a asp-controller="Post" asp-action="Create">Create new post</a><br />
     }
     @foreach (var post in Model)
     {
-        foreach (var forum in ViewBag.Forums)
-        {
-            if (post.ForumId == forum.ForumId)
-            {
-                <h1>@post.Title</h1><a>@post.UserName - @post.CreatedOn</a><br />
-                <a>@post.Content</a>
-            }
 
-        }
+            <h1>@post.Title</h1><a>@post.UserName - @post.CreatedOn</a><br />
+            <a>@post.Content</a>
 
         @if (signInManager.IsSignedIn(User) && post.UserName == User.Identity.Name)
         {
