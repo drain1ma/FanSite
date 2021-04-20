@@ -15,9 +15,16 @@
     }
     @foreach (var post in Model)
     {
-        
-        <h1>@post.Title</h1><a>@post.UserName - @post.CreatedOn</a><br />
-        <a>@post.Content</a>
+        foreach (var forum in ViewBag.Forums)
+        {
+            if (post.ForumId == forum.ForumId)
+            {
+                <h1>@post.Title</h1><a>@post.UserName - @post.CreatedOn</a><br />
+                <a>@post.Content</a>
+            }
+
+        }
+
         @if (signInManager.IsSignedIn(User) && post.UserName == User.Identity.Name)
         {
             <a style="text-align: right" asp-controller="Post" asp-action="Delete"

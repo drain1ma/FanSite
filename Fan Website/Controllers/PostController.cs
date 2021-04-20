@@ -45,7 +45,8 @@ namespace Fan_Website.Controllers
                     Content = model.Content,
                     UserName = User.Identity.Name,
                     CreatedOn = DateTime.Now,
-                    Forum = model.Forum
+                    Forum = model.Forum, 
+                    ForumId = model.ForumId 
                 };
 
                 context.Posts.Add(newPost);
@@ -56,6 +57,20 @@ namespace Fan_Website.Controllers
             }
 
             return View();
+        }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var post = context.Posts.Find(id);
+            return View(post);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Post post)
+        {
+            context.Posts.Remove(post);
+            context.SaveChanges();
+            return RedirectToAction("Index", "Post");
         }
     }
 }
