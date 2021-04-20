@@ -17,3 +17,4 @@ Currently, the code that I have within the project is only capable of enlarging 
 - [ ] Layout that looks appealing to the users
 - [ ] Adding user profile pictures
 - [ ] Adding a dropdownlist 
+- [ ] Forums should link to specific posts related to that topic
