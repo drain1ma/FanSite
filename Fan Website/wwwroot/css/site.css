@@ -76,10 +76,11 @@ body {
 }
 
 .video {
-    width: 50%; 
-    height: 50%; 
-    display: flex; 
-    justify-content: center; 
+    width: 50%;
+    height: 50%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .delete{
     float: right; 
