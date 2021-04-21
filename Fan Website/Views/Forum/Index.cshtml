@@ -7,12 +7,15 @@
 
 <!DOCTYPE html>
 <html>
+<head>
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
 <body>
     @if (signInManager.IsSignedIn(User))
     {
         <a asp-controller="Forum" asp-action="Create">Create new forum</a><br />
     }
-<table class="table table-bordered">
+<table class="table table-bordered" style="background-color: white">
     <tbody>
         @foreach (var forum in Model)
         {
@@ -24,12 +27,13 @@
             <td>
                 @forum.CreatedOn @if (signInManager.IsSignedIn(User) && forum.UserName.Equals(User.Identity.Name))
                         {
-                                   <a asp-controller="Forum" asp-action="Delete"
-                                       asp-route-id="@forum.ForumId"
-                                       asp-route-slug="@forum.Slug">
-                                        Delete
-                                    </a>
-
+                <div style="float: right">
+                    <a asp-controller="Forum" asp-action="Delete"
+                       asp-route-id="@forum.ForumId"
+                       asp-route-slug="@forum.Slug">
+                        Delete
+                    </a>
+                </div>
                         }
             </td>
         </tr>
@@ -39,7 +43,11 @@
     <div class="d-flex">
         <div class="p-2 flex-grow-1"></div>
         <div class="p-2">
-            <a class="btn btn-primary" asp-controller="Post" asp-action="Create">Add Post</a>
+            @if (signInManager.IsSignedIn(User))
+            {
+                <a class="btn btn-primary" asp-controller="Post" asp-action="Create">Add Post</a>
+            }
+
         </div>
     </div>
 

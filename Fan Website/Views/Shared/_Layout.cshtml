@@ -15,7 +15,6 @@
     <link href="~/css/images.css" rel="stylesheet" />
 </head>
 <body>
-
     <div class="text-center" style="background: skyblue">
         <img src="~/images/chocobo.png" class="chocobo" alt="chocobo" />
         <img src="~/images/logo.png" class="logo" alt="logo" />
@@ -65,7 +64,7 @@
                         }
                         else
                         {
-                            
+
                             <li class="nav-item">
                                 <a class="nav-link" asp-action="Register" asp-controller="Account">Register</a>
                             </li>
@@ -79,17 +78,21 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - Final Fantasy Fan Site - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="container bg-white">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
         </div>
-    </footer>
+           
+
+    
+        <footer class="border-top footer text-muted bg-white">
+            <div class="container">
+                &copy; 2021 - Final Fantasy Fan Site - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+  
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

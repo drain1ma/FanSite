@@ -59,8 +59,13 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-image: url(../images/backgroundimage.png);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .footer {
   position: absolute;
@@ -73,4 +78,14 @@ body {
 .video {
     width: 50%; 
     height: 50%; 
+    display: flex; 
+    justify-content: center; 
+}
+.delete{
+    float: right; 
+}
+
+.bg-image {
+    
+    filter: blur(8px); 
 }
