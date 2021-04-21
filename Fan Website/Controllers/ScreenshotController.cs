@@ -9,6 +9,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 
+
 namespace Fan_Website.Controllers
 {
     public class ScreenshotController: Controller

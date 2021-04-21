@@ -17,5 +17,7 @@ namespace Fan_Website.ViewModel
         public string UserName { get; set; }
         public string Slug =>
             ScreenshotTitle?.Replace(' ', '-').ToLower();
+
+        
     }
 }

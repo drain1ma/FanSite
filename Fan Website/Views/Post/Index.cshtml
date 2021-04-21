@@ -1,6 +1,5 @@
 ﻿@model List<Post>
 @inject SignInManager<IdentityUser> signInManager
-
 @{
     ViewBag.Title = "Posts";
 
@@ -9,21 +8,19 @@
 <!DOCTYPE html>
 <html>
 <body>
-    @if (signInManager.IsSignedIn(User))
-    {
-        <a asp-controller="Post" asp-action="Create">Create new post</a><br />
-    }
+
     @foreach (var post in Model)
     {
-
-            <h1>@post.Title</h1><a>@post.UserName - @post.CreatedOn</a><br />
-            <a>@post.Content</a>
+        <h1>@post.Title</h1><a>@post.UserName - @post.CreatedOn</a><br />
+        <a>@post.Content</a>
 
         @if (signInManager.IsSignedIn(User) && post.UserName == User.Identity.Name)
         {
-            <a style="text-align: right" asp-controller="Post" asp-action="Delete"
-               asp-route-id="@post.PostId"
-               asp-route-slug="@post.Slug">Delete</a>
+<div class="d-flex">
+    <a style="text-align: right" asp-controller="Post" asp-action="Delete"
+       asp-route-id="@post.PostId"
+       asp-route-slug="@post.Slug">Delete</a>
+</div>
         }
 
     }

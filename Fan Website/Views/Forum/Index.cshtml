@@ -19,20 +19,30 @@
         <tr>
             <td><a asp-controller="Post" asp-action="Index">@forum.PostTitle </a></td>
             <td>
-                @forum.Description @if (signInManager.IsSignedIn(User) && forum.UserName.Equals(User.Identity.Name))
-                {
-                    <a asp-controller = "Forum" asp-action = "Delete"
-                                asp-route-id = "@forum.ForumId"
-                                asp-route-slug = "@forum.Slug" ><p style="text-align: right">Delete</p>
-                        </a>
-                 }  
+                @forum.Description 
             </td>
+            <td>
+                @forum.CreatedOn @if (signInManager.IsSignedIn(User) && forum.UserName.Equals(User.Identity.Name))
+                        {
+                                   <a asp-controller="Forum" asp-action="Delete"
+                                       asp-route-id="@forum.ForumId"
+                                       asp-route-slug="@forum.Slug">
+                                        Delete
+                                    </a>
 
-            
+                        }
+            </td>
         </tr>
-
         }
     </tbody>
 </table>
+    <div class="d-flex">
+        <div class="p-2 flex-grow-1"></div>
+        <div class="p-2">
+            <a class="btn btn-primary" asp-controller="Post" asp-action="Create">Add Post</a>
+        </div>
+    </div>
+
+
 </body>
 </html>

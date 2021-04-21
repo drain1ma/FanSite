@@ -43,7 +43,7 @@ namespace Fan_Website.Controllers
                     Description = model.Description,
                     UserName = User.Identity.Name,
                     CreatedOn = DateTime.Now,
-                    ForumId = model.ForumId 
+                    ForumId = model.ForumId
                 };
 
                 context.Forums.Add(newForum);
@@ -55,6 +55,7 @@ namespace Fan_Website.Controllers
 
             return View();
         }
+
         [HttpGet]
         public IActionResult Delete(string id)
         {
