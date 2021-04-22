@@ -46,20 +46,23 @@
                     <ul class="navbar-nav ml-auto">
                         @if (signInManager.IsSignedIn(User))
                         {
-                            <li class="nav-item">
-                                <form method="post" asp-controller="Screenshot" asp-action="UserScreenshots">
-                                    <button type="submit" class="nav-link btn btn-link py-0" style="width: auto">
-                                        Your Screenshots
-                                    </button>
-                                </form>
-                            </li>
-
-                            <li class="nav-item">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                My Profile
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Screenshot" asp-action="UserScreenshots">Your Screenshots</a>
                                 <form method="post" asp-controller="Account" asp-action="Logout">
-                                    <button type="submit" class="nav-link btn btn-link py-0" style="width: auto">
-                                        Logout @User.Identity.Name
+                                    <button class="dropdown-item" type="submit" style="border: none">
+                                        Logout
                                     </button>
                                 </form>
+                            </div>
+                            
+                        </li>
+                            <li class="nav-item">
+                                
                             </li>
                         }
                         else

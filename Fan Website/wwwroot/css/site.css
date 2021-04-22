@@ -90,3 +90,9 @@ body {
     
     filter: blur(8px); 
 }
+
+.logoutbutton {
+    padding: 0;
+    border: none;
+    background: none;
+}
