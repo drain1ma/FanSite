@@ -13,7 +13,7 @@
 <body>
     @if (signInManager.IsSignedIn(User))
     {
-        <a asp-controller="Forum" asp-action="Create">Create new forum</a><br />
+        <a class="btn btn-primary" asp-controller="Forum" asp-action="Create">Create new forum</a><br />
     }
 <table class="table table-bordered" style="background-color: white">
     <tbody>
