@@ -53,12 +53,14 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" asp-controller="Screenshot" asp-action="UserScreenshots">Your Screenshots</a>
+                                <a class="dropdown-item" asp-controller="Post" asp-action="UserPosts">Your Posts</a>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">Change Password</a>
                                 <form method="post" asp-controller="Account" asp-action="Logout">
                                     <button class="dropdown-item" type="submit" style="border: none">
                                         Logout
                                     </button>
                                 </form>
-                                <a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">Change Password</a>
+
                             </div>
                             
                         </li>

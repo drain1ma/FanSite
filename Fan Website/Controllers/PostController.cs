@@ -23,6 +23,13 @@ namespace Fan_Website.Controllers
             return View(posts);
         }
 
+        public IActionResult UserPosts()
+        {
+            var posts = context.Posts.ToList();
+            ViewBag.Forums = context.Forums.OrderBy(g => g.PostTitle).ToList();
+            return View(posts);
+        }
+
         [HttpGet]
         public IActionResult Create()
         {
