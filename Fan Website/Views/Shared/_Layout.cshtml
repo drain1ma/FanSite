@@ -52,6 +52,7 @@
                                 My Profile
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Account" asp-action="AccountInfo">@User.Identity.Name's Account </a>
                                 <a class="dropdown-item" asp-controller="Screenshot" asp-action="UserScreenshots">Your Screenshots</a>
                                 <a class="dropdown-item" asp-controller="Post" asp-action="UserPosts">Your Posts</a>
                                 <a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">Change Password</a>

@@ -1,0 +1,14 @@
+﻿@inject SignInManager<IdentityUser> signInManager
+
+
+<!DOCTYPE html>
+<html>
+<body>
+   
+    @foreach (var account in Model)
+            {
+                <h1>User</h1>
+                @User.Identity.Name 
+            }
+</body>
+</html>

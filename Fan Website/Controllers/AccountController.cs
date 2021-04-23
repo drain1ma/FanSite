@@ -22,6 +22,12 @@ namespace Fan_Website.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
+
+        public IActionResult AccountInfo()
+        {
+            var users = User.Identities.ToList();
+            return View(users); 
+        }
         [HttpGet]
         public IActionResult ChangePassword()
         {
