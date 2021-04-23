@@ -97,7 +97,7 @@
         }
     </style>
 
-    <a asp-controller="Screenshot" asp-action="Create">Upload New Screenshot</a><br />
+    <a class="btn btn-primary" asp-controller="Screenshot" asp-action="Create">Upload New Screenshot</a><br />
 
     @foreach (var screenshot in Model)
     {
@@ -105,45 +105,48 @@
         {
             var photoPath = "~/images/" + (screenshot.ImagePath);
 
-            <h1 class="text-center"><b>@screenshot.ScreenshotTitle</b></h1>
+        <div class="card-body card-img-bottom bg-white">
+            <h1><b>@screenshot.ScreenshotTitle</b></h1>
             <img id="myImg" alt="@screenshot.ScreenshotTitle" class="screenshots myImg" src="@photoPath" asp-append-version="true" /><br />
-            @screenshot.ScreenshotDescription<br />
+            @screenshot.ScreenshotDescription
 
 
-            <a style="text-align: right" asp-controller="Screenshot" asp-action="Delete"
-               asp-route-id="@screenshot.ScreenshotId"
-               asp-route-slug="@screenshot.Slug">Delete</a>
+            <a class="delete" style="text-align: right" asp-controller="Screenshot" asp-action="Delete"
+                    asp-route-id="@screenshot.ScreenshotId"
+                     asp-route-slug="@screenshot.Slug">Delete</a>
+        </div>
         }
 
     }
-    <div id="myModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="img01">
-        <div id="caption"></div>
-    </div>
-    <script>
 
-        // Get the modal
-        var modal = document.getElementById('myModal');
+                <div id="myModal" class="modal">
+                    <span class="close">&times;</span>
+                    <img class="modal-content" id="img01">
+                    <div id="caption"></div>
+                </div>
+                <script>
 
-        // Get the image and insert it inside the modal - use its "alt" text as a caption
-        var img = $('.myImg');
-        var modalImg = $("#img01");
-        var captionText = document.getElementById("caption");
-        $('.myImg').click(function () {
-            modal.style.display = "block";
-            var newSrc = this.src;
-            modalImg.attr('src', newSrc);
-            captionText.innerHTML = this.alt;
-        });
+                    // Get the modal
+                    var modal = document.getElementById('myModal');
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+                    // Get the image and insert it inside the modal - use its "alt" text as a caption
+                    var img = $('.myImg');
+                    var modalImg = $("#img01");
+                    var captionText = document.getElementById("caption");
+                    $('.myImg').click(function () {
+                        modal.style.display = "block";
+                        var newSrc = this.src;
+                        modalImg.attr('src', newSrc);
+                        captionText.innerHTML = this.alt;
+                    });
 
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-    </script>
-</body>
+                    // Get the <span> element that closes the modal
+                    var span = document.getElementsByClassName("close")[0];
+
+                    // When the user clicks on <span> (x), close the modal
+                    span.onclick = function () {
+                        modal.style.display = "none";
+                    }
+                </script>
+        </body>
 </html>
