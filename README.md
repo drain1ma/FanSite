@@ -7,7 +7,7 @@ This page is capable of displaying the images the users store from the sql datab
 
 
 ![Enlarging Image](https://user-images.githubusercontent.com/56358612/115103316-fdc03700-9f1e-11eb-9908-54f63a2e43c6.png)
-Currently, the code that I have within the project is only capable of enlarging all the images within the database. It currently allows users to do that using javascript and jQuery within the html document. 
+Currently, the code that I have within the project is now capable of enlarging all the images within the database. It currently allows users to do that using javascript and jQuery within the html document. Users are also able to add profile pictures to their profiles, and I am currently working on having the profile picture display with whatever the user posts to the site. 
 
 - [x] User authentication
 - [x] Images uploaded to database and stored with username
