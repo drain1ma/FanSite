@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Fan_Website.Models
 {
-    public class AppDbContext : IdentityDbContext
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
           : base(options)
         { }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set;  }
         public DbSet<Account> Accounts { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

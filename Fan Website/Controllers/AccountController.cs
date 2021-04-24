@@ -1,5 +1,7 @@
-﻿using Fan_Website.Models;
+﻿using Fan_Website.Infrastructure;
+using Fan_Website.Models;
 using Fan_Website.ViewModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,20 +14,22 @@ namespace Fan_Website.Controllers
     public class AccountController : Controller
     {
         private AppDbContext context { get; set; }
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly IUnitOfWork unitOfWork; 
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager,
-           SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager,
+           SignInManager<ApplicationUser> signInManager, IUnitOfWork unitOfWork)
         {
 
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.unitOfWork = unitOfWork; 
         }
 
         public IActionResult AccountInfo()
         {
-            var users = User.Identities.ToList();
+            var users = userManager.Users; 
             return View(users); 
         }
         [HttpGet]
@@ -74,15 +78,17 @@ namespace Fan_Website.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(IFormFile file, RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
+                unitOfWork.UploadImage(file);
                 // Copy data from RegisterViewModel to IdentityUser
-                var user = new IdentityUser
+                var user = new ApplicationUser
                 {
                     UserName = model.UserName,
-                    Email = model.Email
+                    Email = model.Email,
+                    ImagePath = file.FileName
                 };
                 // Store user data in AspNetUsers database table
                 var result = await userManager.CreateAsync(user, model.Password);

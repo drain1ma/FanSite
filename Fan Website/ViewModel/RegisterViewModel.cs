@@ -8,7 +8,7 @@ namespace Fan_Website.ViewModel
 {
     public class RegisterViewModel
     {
-
+        public string ImagePath { get; set; }
         public string UserName { get; set; }
         [Required]
         [EmailAddress]

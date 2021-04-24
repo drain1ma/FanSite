@@ -1,4 +1,6 @@
+using Fan_Website.Infrastructure;
 using Fan_Website.Models;
+using Fan_Website.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,7 +32,7 @@ namespace Fan_Website
                 options.LowercaseUrls = true;
                 options.AppendTrailingSlash = true;
             });
-            services.AddIdentity<IdentityUser, IdentityRole>()
+           services.AddIdentity<ApplicationUser, IdentityRole>()
                .AddEntityFrameworkStores<AppDbContext>();
 
             services.AddDbContext<AppDbContext>(options =>
@@ -41,6 +43,10 @@ namespace Fan_Website
 
             services.AddDbContext<PostContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
+
+            services.AddIdentityCore<ApplicationUser>().AddRoles<IdentityRole>().AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>(); 
 
             services.AddControllersWithViews();
         }

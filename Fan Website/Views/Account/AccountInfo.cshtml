@@ -1,14 +1,22 @@
-﻿@inject SignInManager<IdentityUser> signInManager
-
+﻿@model IEnumerable<ApplicationUser> 
+@inject SignInManager<ApplicationUser> signInManager
 
 <!DOCTYPE html>
 <html>
 <body>
-   
-    @foreach (var account in Model)
-            {
-                <h1>User</h1>
-                @User.Identity.Name 
-            }
+
+
+    @foreach (var user in Model)
+    {
+        if (signInManager.IsSignedIn(User) && user.UserName == User.Identity.Name)
+        {
+            <img src="~/images/@user.ImagePath" class="img-thumbnail" />
+        }
+
+    }
+
+
+    <h1>User</h1>
+    @User.Identity.Name
 </body>
 </html>
