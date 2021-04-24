@@ -12,8 +12,8 @@ Currently, the code that I have within the project is now capable of enlarging a
 - [x] User authentication
 - [x] Images uploaded to database and stored with username
 - [x] Users capable of deleting only the images they upload
+- [x] Adding user profile pictures
 - [ ] A forum for users to interact with one another
 - [ ] Layout that looks appealing to the users
-- [ ] Adding user profile pictures
 - [ ] Adding a dropdownlist 
 - [ ] Forums should link to specific posts related to that topic
