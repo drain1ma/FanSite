@@ -1,4 +1,4 @@
-﻿@inject SignInManager<ApplicationUser> signInManager 
+﻿@inject SignInManager<ApplicationUser> signInManager
 @using System.Web
 
 <!DOCTYPE html>
@@ -46,28 +46,31 @@
                     <ul class="navbar-nav ml-auto">
                         @if (signInManager.IsSignedIn(User))
                         {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                My Profile
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" asp-controller="Account" asp-action="AccountInfo">@User.Identity.Name's Account </a>
-                                <a class="dropdown-item" asp-controller="Screenshot" asp-action="UserScreenshots">Your Screenshots</a>
-                                <a class="dropdown-item" asp-controller="Post" asp-action="UserPosts">Your Posts</a>
-                                <a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">Change Password</a>
-                                <form method="post" asp-controller="Account" asp-action="Logout">
-                                    <button class="dropdown-item" type="submit" style="border: none">
-                                        Logout
-                                    </button>
-                                </form>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    My Profile
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="AccountInfo">@User.Identity.Name's Account </a>
+                                    <a class="dropdown-item" asp-controller="Screenshot" asp-action="UserScreenshots">Your Screenshots</a>
+                                    <a class="dropdown-item" asp-controller="Post" asp-action="UserPosts">Your Posts</a>
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">Change Password</a>
+                                    <form method="post" asp-controller="Account" asp-action="Logout">
+                                        <button class="dropdown-item" type="submit" style="border: none">
+                                            Logout
+                                        </button>
+                                    </form>
 
-                            </div>
-                            
-                        </li>
+                                </div>
+
+                            </li>
                             <li class="nav-item">
                                 
+                                  
                             </li>
+
+
                         }
                         else
                         {
@@ -86,20 +89,20 @@
         </nav>
     </header>
 
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
-           
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
 
-    
-        <footer class="border-top footer text-muted bg-white">
-            <div class="container">
-                &copy; 2021 - Final Fantasy Fan Site - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>
-  
+
+
+    <footer class="border-top footer text-muted bg-white">
+        <div class="container">
+            &copy; 2021 - Final Fantasy Fan Site - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

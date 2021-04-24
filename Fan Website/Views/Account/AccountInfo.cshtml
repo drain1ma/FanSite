@@ -4,13 +4,28 @@
 <!DOCTYPE html>
 <html>
 <body>
-
+    <link href="~/css/images.css" rel="stylesheet" />
 
     @foreach (var user in Model)
     {
         if (signInManager.IsSignedIn(User) && user.UserName == User.Identity.Name)
         {
-            <img src="~/images/@user.ImagePath" class="img-thumbnail" />
+            if (user.ImagePath == null)
+            {
+                <img src="~/images/blankpicture.png" class="img-thumbnail pfp" />
+                <div class="form-group">
+                    <label asp-for="@user.ImagePath">Change Profile Picture</label>
+                    <input type="file" name="file" />
+                    <span asp-validation-for="@user.ImagePath" class="text-danger"></span>
+                </div>
+                break;
+            }
+            <img src="~/images/@user.ImagePath" class="img-thumbnail pfp" />
+            <div class="form-group">
+                <label asp-for="@user.ImagePath">Change Profile Picture</label>
+                <input type="file" name="file" />
+                <span asp-validation-for="@user.ImagePath" class="text-danger"></span>
+            </div>
         }
 
     }
@@ -18,5 +33,7 @@
 
     <h1>User</h1>
     @User.Identity.Name
+
+
 </body>
 </html>
