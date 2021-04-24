@@ -21,23 +21,28 @@ namespace Fan_Website.Service
         }
         public async void UploadImage(IFormFile file)
         {
-            long totalBytes = file.Length; //this came up with error last time
-            string fileName = file.FileName.Trim('"');
-            fileName = EnsureFileName(fileName);
-
-            byte[] buffer = new byte[16 * 1024];
-            using (FileStream output = File.Create(GetPathAndFileName(fileName)))
+            if (file != null)
             {
-                using (Stream input = file.OpenReadStream())
+                long totalBytes = file.Length;
+                string fileName = file.FileName.Trim('"');
+                fileName = EnsureFileName(fileName);
+
+                byte[] buffer = new byte[16 * 1024];
+                using (FileStream output = File.Create(GetPathAndFileName(fileName)))
                 {
-                    int readBytes; 
-                    while ((readBytes = input.Read(buffer, 0, buffer.Length)) > 0)
+                    using (Stream input = file.OpenReadStream())
                     {
-                        await output.WriteAsync(buffer, 0, readBytes);
-                      //  totalBytes += readBytes; 
+                        int readBytes;
+                        while ((readBytes = input.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            await output.WriteAsync(buffer, 0, readBytes);
+                            totalBytes += readBytes;
+                        }
                     }
                 }
             }
+            
+            
         }
 
         private string GetPathAndFileName(object filename)

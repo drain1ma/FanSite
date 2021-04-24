@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Fan_Website.Models
 {
-    public class AppDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
           : base(options)
         { }
         public DbSet<ApplicationUser> ApplicationUsers { get; set;  }

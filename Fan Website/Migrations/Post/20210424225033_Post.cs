@@ -48,17 +48,17 @@ namespace Fan_Website.Migrations.Post
             migrationBuilder.InsertData(
                 table: "Forums",
                 columns: new[] { "ForumId", "CreatedOn", "Description", "PostTitle", "UserName" },
-                values: new object[] { "IX", new DateTime(2021, 4, 20, 0, 25, 3, 158, DateTimeKind.Local).AddTicks(4748), "A place to talk about Final Fantasy IX!", "Final Fantasy IX", "linguisticgamer98" });
+                values: new object[] { "IX", new DateTime(2021, 4, 24, 18, 50, 33, 119, DateTimeKind.Local).AddTicks(2291), "A place to talk about Final Fantasy IX!", "Final Fantasy IX", "linguisticgamer98" });
 
             migrationBuilder.InsertData(
                 table: "Forums",
                 columns: new[] { "ForumId", "CreatedOn", "Description", "PostTitle", "UserName" },
-                values: new object[] { "X", new DateTime(2021, 4, 20, 0, 25, 3, 160, DateTimeKind.Local).AddTicks(3067), "A place to talk about Final Fantasy X!", "Final Fantasy X", "mattdrain98" });
+                values: new object[] { "X", new DateTime(2021, 4, 24, 18, 50, 33, 121, DateTimeKind.Local).AddTicks(1525), "A place to talk about Final Fantasy X!", "Final Fantasy X", "mattdrain98" });
 
             migrationBuilder.InsertData(
                 table: "Posts",
                 columns: new[] { "PostId", "Content", "CreatedOn", "ForumId", "Title", "UserName" },
-                values: new object[] { 1, "Like I said in the title, this is my favorite game and nothing can change my mind about that.", new DateTime(2021, 4, 20, 4, 25, 3, 157, DateTimeKind.Utc).AddTicks(4026), "IX", "This is my favorite game!", "linguisticgamer98" });
+                values: new object[] { 1, "Like I said in the title, this is my favorite game and nothing can change my mind about that.", new DateTime(2021, 4, 24, 22, 50, 33, 118, DateTimeKind.Utc).AddTicks(541), "IX", "This is my favorite game!", "linguisticgamer98" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_ForumId",

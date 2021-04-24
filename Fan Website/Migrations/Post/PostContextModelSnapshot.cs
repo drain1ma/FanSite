@@ -46,7 +46,7 @@ namespace Fan_Website.Migrations.Post
                         new
                         {
                             ForumId = "IX",
-                            CreatedOn = new DateTime(2021, 4, 20, 0, 25, 3, 158, DateTimeKind.Local).AddTicks(4748),
+                            CreatedOn = new DateTime(2021, 4, 24, 18, 50, 33, 119, DateTimeKind.Local).AddTicks(2291),
                             Description = "A place to talk about Final Fantasy IX!",
                             PostTitle = "Final Fantasy IX",
                             UserName = "linguisticgamer98"
@@ -54,7 +54,7 @@ namespace Fan_Website.Migrations.Post
                         new
                         {
                             ForumId = "X",
-                            CreatedOn = new DateTime(2021, 4, 20, 0, 25, 3, 160, DateTimeKind.Local).AddTicks(3067),
+                            CreatedOn = new DateTime(2021, 4, 24, 18, 50, 33, 121, DateTimeKind.Local).AddTicks(1525),
                             Description = "A place to talk about Final Fantasy X!",
                             PostTitle = "Final Fantasy X",
                             UserName = "mattdrain98"
@@ -96,7 +96,7 @@ namespace Fan_Website.Migrations.Post
                         {
                             PostId = 1,
                             Content = "Like I said in the title, this is my favorite game and nothing can change my mind about that.",
-                            CreatedOn = new DateTime(2021, 4, 20, 4, 25, 3, 157, DateTimeKind.Utc).AddTicks(4026),
+                            CreatedOn = new DateTime(2021, 4, 24, 22, 50, 33, 118, DateTimeKind.Utc).AddTicks(541),
                             ForumId = "IX",
                             Title = "This is my favorite game!",
                             UserName = "linguisticgamer98"

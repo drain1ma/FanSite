@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Fan_Website.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
-    [Migration("20210423061126_InitialCreate")]
+    [DbContext(typeof(ApplicationDbContext))]
+    [Migration("20210424225013_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

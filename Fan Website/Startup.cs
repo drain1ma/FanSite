@@ -33,18 +33,18 @@ namespace Fan_Website
                 options.AppendTrailingSlash = true;
             });
            services.AddIdentity<ApplicationUser, IdentityRole>()
-               .AddEntityFrameworkStores<AppDbContext>();
+               .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddDbContext<AppDbContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+               options.UseSqlServer(Configuration.GetConnectionString("ApplicationDbContext")));
 
             services.AddDbContext<ScreenshotContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
+               options.UseSqlServer(Configuration.GetConnectionString("ApplicationDbContext")));
 
             services.AddDbContext<PostContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
+               options.UseSqlServer(Configuration.GetConnectionString("ApplicationDbContext")));
 
-            services.AddIdentityCore<ApplicationUser>().AddRoles<IdentityRole>().AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+            services.AddIdentityCore<ApplicationUser>().AddRoles<IdentityRole>().AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>(); 
 

@@ -13,7 +13,7 @@ namespace Fan_Website.Controllers
 {
     public class AccountController : Controller
     {
-        private AppDbContext context { get; set; }
+        private ApplicationDbContext context { get; set; }
         private readonly IUnitOfWork unitOfWork; 
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
@@ -26,11 +26,21 @@ namespace Fan_Website.Controllers
             this.signInManager = signInManager;
             this.unitOfWork = unitOfWork; 
         }
-
+        [HttpGet]
         public IActionResult AccountInfo()
         {
             var users = userManager.Users; 
             return View(users); 
+        }
+
+        [HttpPost]
+        public IActionResult AccountInfo(IFormFile file)
+        {
+            if (ModelState.IsValid)
+            {
+                unitOfWork.UploadImage(file); 
+            }
+            return View();
         }
         [HttpGet]
         public IActionResult ChangePassword()
@@ -82,16 +92,39 @@ namespace Fan_Website.Controllers
         {
             if (ModelState.IsValid)
             {
-                unitOfWork.UploadImage(file);
-                // Copy data from RegisterViewModel to IdentityUser
+                if (file != null)
+                {
+                    unitOfWork.UploadImage(file);
+                    // Copy data from RegisterViewModel to IdentityUser
+                    var otheruser = new ApplicationUser
+                    {
+                        UserName = model.UserName,
+                        Email = model.Email,
+                        ImagePath = file.FileName
+                    };
+                    var otherresult = await userManager.CreateAsync(otheruser, model.Password);
+
+
+                   
+                    // If user is successfully created, sign-in the user using
+                    // SignInManager and redirect to index action of HomeController
+                    if (otherresult.Succeeded)
+                    {
+                        await signInManager.SignInAsync(otheruser, isPersistent: false);
+                        return RedirectToAction("Index", "Home");
+                    }
+
+
+                }
+
                 var user = new ApplicationUser
                 {
                     UserName = model.UserName,
                     Email = model.Email,
-                    ImagePath = file.FileName
                 };
-                // Store user data in AspNetUsers database table
                 var result = await userManager.CreateAsync(user, model.Password);
+
+
 
                 // If user is successfully created, sign-in the user using
                 // SignInManager and redirect to index action of HomeController
@@ -100,6 +133,9 @@ namespace Fan_Website.Controllers
                     await signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
+
+                // Store user data in AspNetUsers database table
+
 
                 // If there are any errors, add them to the ModelState object
                 // which will be displayed by the validation summary tag helper
