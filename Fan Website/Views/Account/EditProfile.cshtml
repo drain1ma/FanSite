@@ -1,0 +1,21 @@
+﻿@model Fan_Website.ViewModel.EditProfileViewModel
+
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName">Current Password</label>
+                <input asp-for="UserName" class="form-control" readonly/>
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImagePath">Profile Picture</label>
+                <input type="file" name="file"/>
+                <span asp-validation-for="ImagePath" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>

@@ -13,7 +13,7 @@ namespace Fan_Website.Controllers
 {
     public class AccountController : Controller
     {
-        private ApplicationDbContext context { get; set; }
+        private AppDbContext context { get; set; }
         private readonly IUnitOfWork unitOfWork; 
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
@@ -26,21 +26,27 @@ namespace Fan_Website.Controllers
             this.signInManager = signInManager;
             this.unitOfWork = unitOfWork; 
         }
-        [HttpGet]
         public IActionResult AccountInfo()
         {
             var users = userManager.Users; 
             return View(users); 
         }
-
-        [HttpPost]
-        public IActionResult AccountInfo(IFormFile file)
+        [HttpGet]
+        public IActionResult EditProfile()
         {
-            if (ModelState.IsValid)
-            {
-                unitOfWork.UploadImage(file); 
-            }
             return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditProfile(IFormFile file, EditProfileViewModel model)
+        {
+                unitOfWork.UploadImage(file);
+                var user = await userManager.GetUserAsync(User);
+                user.UserName = model.UserName;
+                user.ImagePath = file.FileName;
+
+                await userManager.UpdateAsync(user);
+                return RedirectToAction("AccountInfo", "Account"); 
+
         }
         [HttpGet]
         public IActionResult ChangePassword()

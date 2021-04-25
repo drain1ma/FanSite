@@ -15,22 +15,23 @@
                 <img src="~/images/blankpicture.png" class="img-thumbnail pfp" />
                 <form method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label asp-for="@user.ImagePath">Change Profile Picture</label>
+                        <label asp-for="@user.ImagePath">Change Profile Picture</label><br />
                         <input type="file" name="file" />
                         <span asp-validation-for="@user.ImagePath" class="text-danger"></span>
                     </div>
+                    <a class="btn btn-primary" asp-controller="Account" asp-action="EditProfile">Edit Profile</a><br />
                 </form>
                 break;
             }
             <img src="~/images/@user.ImagePath" class="img-thumbnail pfp" />
             <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label asp-for="@user.ImagePath">Change Profile Picture</label>
+                    <label asp-for="@user.ImagePath">Change Profile Picture</label><br />
                     <input type="file" name="file" />
                     <span asp-validation-for="@user.ImagePath" class="text-danger"></span>
                 </div>
-                <button type="submit" class="btn btn-primary">Update Profile Picture</button>
             </form>
+            <a class="btn btn-primary" asp-controller="Account" asp-action="EditProfile">Edit Profile</a><br />
         }
 
     }
