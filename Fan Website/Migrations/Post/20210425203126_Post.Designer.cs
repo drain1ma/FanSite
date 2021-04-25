@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fan_Website.Migrations.Post
 {
     [DbContext(typeof(PostContext))]
-    [Migration("20210424225033_Post")]
+    [Migration("20210425203126_Post")]
     partial class Post
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,7 +48,7 @@ namespace Fan_Website.Migrations.Post
                         new
                         {
                             ForumId = "IX",
-                            CreatedOn = new DateTime(2021, 4, 24, 18, 50, 33, 119, DateTimeKind.Local).AddTicks(2291),
+                            CreatedOn = new DateTime(2021, 4, 25, 16, 31, 26, 247, DateTimeKind.Local).AddTicks(4683),
                             Description = "A place to talk about Final Fantasy IX!",
                             PostTitle = "Final Fantasy IX",
                             UserName = "linguisticgamer98"
@@ -56,7 +56,7 @@ namespace Fan_Website.Migrations.Post
                         new
                         {
                             ForumId = "X",
-                            CreatedOn = new DateTime(2021, 4, 24, 18, 50, 33, 121, DateTimeKind.Local).AddTicks(1525),
+                            CreatedOn = new DateTime(2021, 4, 25, 16, 31, 26, 249, DateTimeKind.Local).AddTicks(2810),
                             Description = "A place to talk about Final Fantasy X!",
                             PostTitle = "Final Fantasy X",
                             UserName = "mattdrain98"
@@ -98,7 +98,7 @@ namespace Fan_Website.Migrations.Post
                         {
                             PostId = 1,
                             Content = "Like I said in the title, this is my favorite game and nothing can change my mind about that.",
-                            CreatedOn = new DateTime(2021, 4, 24, 22, 50, 33, 118, DateTimeKind.Utc).AddTicks(541),
+                            CreatedOn = new DateTime(2021, 4, 25, 20, 31, 26, 246, DateTimeKind.Utc).AddTicks(4473),
                             ForumId = "IX",
                             Title = "This is my favorite game!",
                             UserName = "linguisticgamer98"

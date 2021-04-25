@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fan_Website.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210424225013_InitialCreate")]
+    [Migration("20210425203107_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fan_Website.Migrations.Screenshot
 {
     [DbContext(typeof(ScreenshotContext))]
-    [Migration("20210424225049_Screenshot")]
+    [Migration("20210425203142_Screenshot")]
     partial class Screenshot
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
