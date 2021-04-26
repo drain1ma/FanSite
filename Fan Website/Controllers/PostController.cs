@@ -19,14 +19,14 @@ namespace Fan_Website.Controllers
         public IActionResult Index()
         {
             var posts = context.Posts.ToList();
-            ViewBag.Forums = context.Forums.OrderBy(g => g.PostTitle).ToList();
+            ViewBag.Forums = context.Forums.OrderBy(p => p.PostTitle).ToList();
             return View(posts);
         }
 
         public IActionResult UserPosts()
         {
             var posts = context.Posts.ToList();
-            ViewBag.Forums = context.Forums.OrderBy(g => g.PostTitle).ToList();
+            ViewBag.Forums = context.Forums.OrderBy(p => p.PostTitle).ToList();
             return View(posts);
         }
 
@@ -34,14 +34,14 @@ namespace Fan_Website.Controllers
         public IActionResult Create()
         {
             ViewBag.Action = "Post";
-            ViewBag.Forums = context.Forums.OrderBy(g => g.PostTitle).ToList();
+            ViewBag.Forums = context.Forums.OrderBy(p => p.PostTitle).ToList();
             return View("Create", new PostViewModel());
         }
         [HttpPost]
         public IActionResult Create(Post model)
         {
             ViewBag.Action = "Post";
-            ViewBag.Forums = context.Forums.OrderBy(g => g.PostTitle).ToList();
+            ViewBag.Forums = context.Forums.OrderBy(p => p.PostTitle).ToList();
             if (ModelState.IsValid)
             {
 
@@ -51,7 +51,7 @@ namespace Fan_Website.Controllers
                     Title = model.Title,
                     Content = model.Content,
                     UserName = User.Identity.Name,
-                    CreatedOn = DateTimeOffset.Now,
+                    CreatedOn = DateTimeOffset.Now.LocalDateTime,
                     Forum = model.Forum, 
                     ForumId = model.ForumId 
                 };
