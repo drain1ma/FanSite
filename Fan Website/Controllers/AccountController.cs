@@ -31,6 +31,14 @@ namespace Fan_Website.Controllers
             var users = userManager.Users; 
             return View(users); 
         }
+
+        public IActionResult NewUsers()
+        {
+            var users = userManager.Users;
+            return View(users);
+        }
+
+
         [HttpGet]
         public IActionResult EditProfile()
         {
@@ -41,7 +49,7 @@ namespace Fan_Website.Controllers
         {
                 unitOfWork.UploadImage(file);
                 var user = await userManager.GetUserAsync(User);
-                user.UserName = model.UserName;
+                user.UserName = User.Identity.Name;
                 user.ImagePath = file.FileName;
 
                 await userManager.UpdateAsync(user);

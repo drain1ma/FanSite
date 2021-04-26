@@ -21,16 +21,23 @@ namespace Fan_Website.Models
                     PostId = 1,
                     Title = "This is my favorite game!",
                     Content = "Like I said in the title, this is my favorite game and nothing can change my mind about that.",
-                    CreatedOn = DateTime.UtcNow,
+                    CreatedOn = DateTimeOffset.Now,
                     UserName = "linguisticgamer98",
                     ForumId = "IX"
                 }
              );
 
             modelBuilder.Entity<Forum>().HasData(
-                new Forum { ForumId = "IX", PostTitle = "Final Fantasy IX", Description = "A place to talk about Final Fantasy IX!", CreatedOn = DateTime.Now, UserName = "linguisticgamer98"},
-                new Forum { ForumId = "X", PostTitle = "Final Fantasy X", Description = "A place to talk about Final Fantasy X!", CreatedOn = DateTime.Now, UserName = "mattdrain98" }
-                ); 
+                    new Forum
+                    {
+                        ForumId = "IX",
+                        PostTitle = "Final Fantasy IX", 
+                        Description = "A place to discuss Final Fantasy IX!", 
+                        CreatedOn = DateTimeOffset.Now,
+                        UserName = "linguisticgamer98"
+                    }
+                 ); 
+           
         }
     }
 }

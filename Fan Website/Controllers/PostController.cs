@@ -51,7 +51,7 @@ namespace Fan_Website.Controllers
                     Title = model.Title,
                     Content = model.Content,
                     UserName = User.Identity.Name,
-                    CreatedOn = DateTime.Now,
+                    CreatedOn = DateTimeOffset.Now,
                     Forum = model.Forum, 
                     ForumId = model.ForumId 
                 };

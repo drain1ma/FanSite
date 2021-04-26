@@ -42,7 +42,7 @@ namespace Fan_Website.Controllers
                     PostTitle = model.PostTitle,
                     Description = model.Description,
                     UserName = User.Identity.Name,
-                    CreatedOn = DateTime.Now,
+                    CreatedOn = DateTimeOffset.Now,
                     ForumId = model.ForumId
                 };
 

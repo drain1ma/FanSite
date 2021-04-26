@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ApplicationUser>
+@inject SignInManager<ApplicationUser> signInManager
+
+<!DOCTYPE html>
+<html>
+<body>
+    <link href="~/css/images.css" rel="stylesheet" />
+
+    @foreach (var user in Model)
+    {
+        @user.UserName<br />
+        if (user.ImagePath == null)
+        {
+            <img src="~/images/blankpicture.png" class="img-thumbnail pfp" /><br />
+            break;
+        }
+
+        <img src="~/images/@user.ImagePath" class="img-thumbnail pfp" /><br />
+
+    }
+</body>
+</html>

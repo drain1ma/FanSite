@@ -18,7 +18,7 @@ namespace Fan_Website.Models
             modelBuilder.Entity<Screenshot>().HasData(
                 new Screenshot
                 {
-                    ScreenshotId = 4,
+                    ScreenshotId = 6,
                     ScreenshotTitle = "Final Fantasy XV Chocobo",
                     ImagePath = "Final_Fantasy_XV_Chocobo-1.png",
                     ScreenshotDescription = "I finally managed to find a chocobo",
@@ -26,7 +26,7 @@ namespace Fan_Website.Models
                 },
                 new Screenshot
                 {
-                    ScreenshotId = 2,
+                    ScreenshotId = 9,
                     ScreenshotTitle = "Sephiroth from Final Fantasy VII",
                     ImagePath = "Final-Fantasy-VII-Remake-Sephiroth.png",
                     ScreenshotDescription = "This is my favorite game of all time",

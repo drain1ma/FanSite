@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Fan_Website</RootNamespace>
+    <UserSecretsId>c9172391-f14c-4b25-b30b-ad16dc40734e</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
