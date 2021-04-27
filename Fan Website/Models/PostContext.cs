@@ -21,7 +21,7 @@ namespace Fan_Website.Models
                     PostId = 1,
                     Title = "This is my favorite game!",
                     Content = "Like I said in the title, this is my favorite game and nothing can change my mind about that.",
-                    CreatedOn = DateTimeOffset.Now,
+                    CreatedOn = DateTime.Now,
                     UserName = "linguisticgamer98",
                     ForumId = "IX"
                 }
@@ -33,7 +33,7 @@ namespace Fan_Website.Models
                         ForumId = "IX",
                         PostTitle = "Final Fantasy IX", 
                         Description = "A place to discuss Final Fantasy IX!", 
-                        CreatedOn = DateTimeOffset.Now,
+                        CreatedOn = DateTime.Now,
                         UserName = "linguisticgamer98"
                     }
                  ); 

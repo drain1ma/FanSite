@@ -13,7 +13,7 @@ namespace Fan_Website.Models
         public string PostTitle { get; set; }
         [Required(ErrorMessage = "Please enter a description")]
         public string Description { get; set; }
-        public DateTimeOffset CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
         public string UserName { get; set; }
         public string Slug =>
             PostTitle?.Replace(' ', '-').ToLower();

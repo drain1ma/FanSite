@@ -25,7 +25,7 @@
                 @forum.Description 
             </td>
             <td>
-                @forum.CreatedOn.ToString("d") @forum.CreatedOn.ToString("t") @if (signInManager.IsSignedIn(User) && forum.UserName.Equals(User.Identity.Name))
+                @TimeZoneInfo.ConvertTime(forum.CreatedOn, TimeZoneInfo.Local) @if (signInManager.IsSignedIn(User) && forum.UserName.Equals(User.Identity.Name))
                 {
                     <div style="float: right">
                         <a asp-controller="Forum" asp-action="Delete"

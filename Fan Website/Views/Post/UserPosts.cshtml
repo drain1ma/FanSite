@@ -13,7 +13,7 @@
         {
             if (signInManager.IsSignedIn(User) && post.UserName == User.Identity.Name)
             {
-                <h1>@post.Title</h1><a>@post.UserName - @post.CreatedOn.ToString("d") @post.CreatedOn.ToString("t")</a><br />
+                <h1>@post.Title</h1><a>@post.UserName - @TimeZoneInfo.ConvertTime(post.CreatedOn, TimeZoneInfo.Local)</a><br />
                 <a>@post.Content</a>
                 <div class="d-flex">
                     <a style="text-align: right" asp-controller="Post" asp-action="Delete"
