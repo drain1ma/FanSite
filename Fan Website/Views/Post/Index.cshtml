@@ -11,7 +11,7 @@
 
     @foreach (var post in Model)
     {
-        <h1>@post.Title</h1><a>@post.UserName - @post.CreatedOn</a><br />
+        <h1>@post.Title</h1><a>@post.UserName - @post.CreatedOn.ToString("d") @post.CreatedOn.ToString("t")</a><br />
         <a>@post.Content</a>
 
         @if (signInManager.IsSignedIn(User) && post.UserName == User.Identity.Name)

@@ -25,16 +25,16 @@
                 @forum.Description 
             </td>
             <td>
-                @forum.CreatedOn @if (signInManager.IsSignedIn(User) && forum.UserName.Equals(User.Identity.Name))
-                        {
-                <div style="float: right">
-                    <a asp-controller="Forum" asp-action="Delete"
-                       asp-route-id="@forum.ForumId"
-                       asp-route-slug="@forum.Slug">
-                        Delete
-                    </a>
-                </div>
-                        }
+                @forum.CreatedOn.ToString("d") @forum.CreatedOn.ToString("t") @if (signInManager.IsSignedIn(User) && forum.UserName.Equals(User.Identity.Name))
+                {
+                    <div style="float: right">
+                        <a asp-controller="Forum" asp-action="Delete"
+                           asp-route-id="@forum.ForumId"
+                           asp-route-slug="@forum.Slug">
+                            Delete
+                        </a>
+                    </div>
+                }
             </td>
         </tr>
         }
