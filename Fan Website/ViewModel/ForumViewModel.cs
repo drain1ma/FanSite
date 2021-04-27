@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fan_Website.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace Fan_Website.ViewModel
         public string Description { get; set; }
         public DateTime CreatedOn { get; set; }
         public string UserName { get; set; }
+        public IEnumerable<Post> Posts { get; set; }
+
         public string Slug =>
             PostTitle?.Replace(' ', '-').ToLower();
     }

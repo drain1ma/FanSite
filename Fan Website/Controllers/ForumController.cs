@@ -35,15 +35,15 @@ namespace Fan_Website.Controllers
             ViewBag.Action = "Post";
             if (ModelState.IsValid)
             {
-
-
+                var posts = context.Posts.ToList(); 
                 Forum newForum = new Forum
                 {
                     PostTitle = model.PostTitle,
                     Description = model.Description,
                     UserName = User.Identity.Name,
-                    CreatedOn = DateTimeOffset.Now.LocalDateTime,
-                    ForumId = model.ForumId
+                    CreatedOn = DateTime.UtcNow,
+                    ForumId = model.PostTitle,
+                    Posts = posts
                 };
 
                 context.Forums.Add(newForum);

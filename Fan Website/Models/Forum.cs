@@ -15,6 +15,7 @@ namespace Fan_Website.Models
         public string Description { get; set; }
         public DateTime CreatedOn { get; set; }
         public string UserName { get; set; }
+        public IEnumerable<Post> Posts { get; set; }
         public string Slug =>
             PostTitle?.Replace(' ', '-').ToLower();
     }
