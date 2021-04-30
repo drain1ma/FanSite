@@ -1,4 +1,5 @@
 ﻿using Fan_Website.Services;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,10 @@ namespace Fan_Website.Service
             context = ctx;
         }
 
-        public Task Add(Post post)
+        public async Task Add(Post post)
         {
-            throw new NotImplementedException();
+            context.Add(post);
+            await context.SaveChangesAsync(); 
         }
 
         public Task AddReply(PostReply reply)
@@ -42,7 +44,11 @@ namespace Fan_Website.Service
 
         public Post GetById(int id)
         {
-            throw new NotImplementedException();
+            return context.Posts.Where(post => post.PostId == id)
+                .Include(post => post.User)
+                .Include(post => post.Replies).ThenInclude(reply => reply.User)
+                .Include(post => post.Forum)
+                .First(); 
         }
 
         public IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery)

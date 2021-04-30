@@ -1,22 +1,28 @@
-﻿@model Fan_Website.ViewModel.PostViewModel 
-@inject SignInManager<ApplicationUser> signInManager
-@{
-    ViewBag.Title = "Posts";
+﻿@model Fan_Website.Models.Post.PostIndexModel
 
+<h1>@Model.Title</h1>
+
+<div>
+    Author: @Model.AuthorName (@Model.AuthorRating) 
+    Created: @Model.Date
+</div>
+
+<div>
+    @Model.PostContent
+</div>
+
+@if (Model.Replies.Any())
+{
+    foreach(var reply in Model.Replies)
+                {
+                    <div>
+                        <div>
+                            Reply Author: @reply.AuthorName
+                            Reply Created: @reply.Date  
+                        </div>
+                        <div>
+                            Reply: @reply.ReplyContent 
+                        </div>
+                    </div>
+                }
 }
-
-<!DOCTYPE html>
-<html>
-<body>
-
-    <table class="table table-bordered">
-
-
-
-
-    </table>
-
-
-
-</body>
-</html>
