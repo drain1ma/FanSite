@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Fan_Website.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Fan_Website.Models
+namespace Fan_Website
 {
     public class Post
     {
@@ -15,7 +16,7 @@ namespace Fan_Website.Models
         [Required(ErrorMessage = "Please enter content.")]
         public string Content { get; set; }
         public DateTime CreatedOn { get; set; }
-        public string UserName { get; set; }
+        public ApplicationUser User { get; set; }
         public Forum Forum { get; set; }
         public string Slug =>
             Title?.Replace(' ', '-').ToLower();

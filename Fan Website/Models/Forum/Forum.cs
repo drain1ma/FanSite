@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Fan_Website.Models
+namespace Fan_Website
 {
     public class Forum
     {

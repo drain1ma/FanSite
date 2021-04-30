@@ -42,7 +42,7 @@ namespace Fan_Website.Controllers
                 Description = current.PostTitle, 
                 CreatedOn = current.CreatedOn, 
                 UserName = current.UserName, 
-                Posts = current.Posts, 
+                Posts = current.Posts
             }; 
             ViewBag.Action = "Post";
             ViewBag.Forums = context.Forums.OrderBy(p => p.PostTitle).ToList();
