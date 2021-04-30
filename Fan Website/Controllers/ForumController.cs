@@ -10,11 +10,11 @@ namespace Fan_Website.Controllers
 {
     public class ForumController: Controller
     {
-        private PostContext context { get; set; }
+        private AppDbContext context { get; set; }
 
       
 
-        public ForumController(PostContext ctx)
+        public ForumController(AppDbContext ctx)
         {
             context = ctx;
         }
@@ -38,12 +38,13 @@ namespace Fan_Website.Controllers
                 var posts = context.Posts.ToList(); 
                 Forum newForum = new Forum
                 {
+
                     PostTitle = model.PostTitle,
                     Description = model.Description,
                     UserName = User.Identity.Name,
                     CreatedOn = DateTime.UtcNow,
                     ForumId = model.PostTitle,
-                    Posts = posts
+                    Posts = posts     
                 };
 
                 context.Forums.Add(newForum);

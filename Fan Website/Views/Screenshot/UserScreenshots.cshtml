@@ -147,6 +147,11 @@
                     span.onclick = function () {
                         modal.style.display = "none";
                     }
+                    window.onclick = function (event) {
+                        if (event.target.id != "myImg") {
+                            $("#myModal").hide();
+                        }
+                    }
                 </script>
         </body>
 </html>

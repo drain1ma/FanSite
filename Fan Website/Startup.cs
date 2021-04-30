@@ -38,12 +38,6 @@ namespace Fan_Website
             services.AddDbContext<AppDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
 
-            services.AddDbContext<ScreenshotContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
-
-            services.AddDbContext<PostContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
-
             services.AddIdentityCore<ApplicationUser>().AddRoles<IdentityRole>().AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>(); 

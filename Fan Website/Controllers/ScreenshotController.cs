@@ -14,11 +14,11 @@ namespace Fan_Website.Controllers
 {
     public class ScreenshotController: Controller
     {
-        private ScreenshotContext context { get; set; }
+        private AppDbContext context { get; set; }
 
         private readonly IHostingEnvironment hostingEnvironment;
         
-        public ScreenshotController(ScreenshotContext ctx, IHostingEnvironment hostingEnvironment)
+        public ScreenshotController(AppDbContext ctx, IHostingEnvironment hostingEnvironment)
         {
             context = ctx;
             this.hostingEnvironment = hostingEnvironment;

@@ -10,9 +10,8 @@ namespace Fan_Website.Controllers
 {
     public class PostController : Controller
     {
-        private PostContext context { get; set; }
-
-        public PostController(PostContext ctx)
+        private AppDbContext context { get; set; }
+        public PostController(AppDbContext ctx)
         {
             context = ctx;
         }
@@ -33,11 +32,21 @@ namespace Fan_Website.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(string id)
         {
+            Forum current = context.Forums.FirstOrDefault(f => f.ForumId == id);
+
+            ForumViewModel model = new ForumViewModel
+            {
+                PostTitle = current.PostTitle, 
+                Description = current.PostTitle, 
+                CreatedOn = current.CreatedOn, 
+                UserName = current.UserName, 
+                Posts = current.Posts, 
+            }; 
             ViewBag.Action = "Post";
             ViewBag.Forums = context.Forums.OrderBy(p => p.PostTitle).ToList();
-            return View("Create", new PostViewModel());
+            return View("Create", model);
         }
         [HttpPost]
         public IActionResult Create(PostViewModel model)
@@ -46,21 +55,26 @@ namespace Fan_Website.Controllers
             ViewBag.Forums = context.Forums.OrderBy(p => p.PostTitle).ToList();
             if (ModelState.IsValid)
             {
+                
                 Post newPost = new Post
                 {
                     Title = model.Title,
                     Content = model.Content,
                     UserName = User.Identity.Name,
                     CreatedOn = DateTime.UtcNow,
-                    Forum = model.Forum,
-                    ForumId = model.ForumId                };
+                    Forum = model.Forum                   
+                };
 
                 context.Posts.Add(newPost);
-
+                
                 context.SaveChanges();
                 return RedirectToAction("Index", "Post");
 
             }
+
+            var forums = context.Forums.ToList(); 
+
+
 
             return View();
         }

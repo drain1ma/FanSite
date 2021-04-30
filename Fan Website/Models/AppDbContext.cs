@@ -14,6 +14,10 @@ namespace Fan_Website.Models
         { }
         public DbSet<ApplicationUser> ApplicationUsers { get; set;  }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Forum> Forums { get; set; }
+        public DbSet<Screenshot> Screenshots { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -25,6 +29,45 @@ namespace Fan_Website.Models
                     Password = "Larkin71!",
                     ConfirmPassword = "Larkin71!"
                 });
+            modelBuilder.Entity<Post>().HasData(
+                new Post
+                {
+                    PostId = 1,
+                    Title = "This is my favorite game!",
+                    Content = "Like I said in the title, this is my favorite game and nothing can change my mind about that.",
+                    CreatedOn = DateTime.UtcNow,
+                    UserName = "linguisticgamer98"                
+                }
+             );
+
+            modelBuilder.Entity<Forum>().HasData(
+                    new Forum
+                    {
+                        ForumId = "IX",
+                        PostTitle = "Final Fantasy IX",
+                        Description = "A place to discuss Final Fantasy IX!",
+                        CreatedOn = DateTime.UtcNow,
+                        UserName = "linguisticgamer98"
+                    }
+                 );
+            modelBuilder.Entity<Screenshot>().HasData(
+            new Screenshot
+            {
+                ScreenshotId = 6,
+                ScreenshotTitle = "Final Fantasy XV Chocobo",
+                ImagePath = "Final_Fantasy_XV_Chocobo-1.png",
+                ScreenshotDescription = "I finally managed to find a chocobo",
+                UserName = "mattdrain98"
+            },
+            new Screenshot
+            {
+                ScreenshotId = 9,
+                ScreenshotTitle = "Sephiroth from Final Fantasy VII",
+                ImagePath = "Final-Fantasy-VII-Remake-Sephiroth.png",
+                ScreenshotDescription = "This is my favorite game of all time",
+                UserName = "mattdrain98"
+            }
+         );
         }
     }
 }

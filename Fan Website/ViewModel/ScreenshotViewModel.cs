@@ -13,7 +13,7 @@ namespace Fan_Website.ViewModel
         public String ScreenshotTitle { get; set; }
         [Required(ErrorMessage = "Please upload a screenshot.")]
         public IFormFile Image { get; set; }
-        public String ScreenshotDescription { get; set; }
+        public string ScreenshotDescription { get; set; }
         public string UserName { get; set; }
         public string Slug =>
             ScreenshotTitle?.Replace(' ', '-').ToLower();

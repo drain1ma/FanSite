@@ -1,4 +1,4 @@
-﻿@model List<Post>
+﻿@model Fan_Website.ViewModel.PostViewModel 
 @inject SignInManager<ApplicationUser> signInManager
 @{
     ViewBag.Title = "Posts";
@@ -9,19 +9,14 @@
 <html>
 <body>
 
-    @foreach (var post in Model)
-    {
-            <h1>@post.Title</h1><a>@post.UserName - @TimeZoneInfo.ConvertTime(post.CreatedOn, TimeZoneInfo.Local)</a><br />
-            <a>@post.Content</a>
-        @if (signInManager.IsSignedIn(User) && post.UserName == User.Identity.Name)
-        {
-            <div class="d-flex">
-                <a style="text-align: right" asp-controller="Post" asp-action="Delete"
-                   asp-route-id="@post.PostId"
-                   asp-route-slug="@post.Slug">Delete</a>
-            </div>
-        }
+    <table class="table table-bordered">
 
-    }
+
+
+
+    </table>
+
+
+
 </body>
 </html>

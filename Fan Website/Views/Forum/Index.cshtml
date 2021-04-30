@@ -15,12 +15,21 @@
     {
         <a class="btn btn-primary" asp-controller="Forum" asp-action="Create">Create Forum</a><br />
     }
+
 <table class="table table-bordered" style="background-color: white">
     <tbody>
+
+
         @foreach (var forum in Model)
         {
+
+
         <tr>
-            <td><a asp-controller="Post" asp-action="Index" asp-route-id="@forum.ForumId" asp-route-slug="@forum.Slug">@forum.PostTitle</a></td>
+            <td>
+                <a asp-controller="Post" asp-action="Index" 
+                   asp-route-id="@forum.ForumId" asp-route-slug="@forum.Slug">@forum.PostTitle
+                </a>
+            </td>
             <td>
                 @forum.Description
             </td>
