@@ -1,65 +1,21 @@
-﻿@model List<Forum>
-@inject SignInManager<ApplicationUser> signInManager
+﻿@model Fan_Website.Models.Forum.ForumIndexModel 
 
-@{
-    ViewBag.Title = "Posts";
-}
+<h1>Forums</h1>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <link href="~/css/site.css" rel="stylesheet" />
-</head>
-<body>
-    @if (signInManager.IsSignedIn(User))
-    {
-        <a class="btn btn-primary" asp-controller="Forum" asp-action="Create">Create Forum</a><br />
-    }
-
-<table class="table table-bordered" style="background-color: white">
+<table class="table table-hover" id="forumIndexTable">
     <tbody>
-
-
-        @foreach (var forum in Model)
-        {
-
-
-        <tr>
-            <td>
-                <a asp-controller="Post" asp-action="Index" 
-                   asp-route-id="@forum.ForumId" asp-route-slug="@forum.Slug">@forum.PostTitle
-                </a>
-            </td>
-            <td>
-                @forum.Description
-            </td>
-            <td>
-                @TimeZoneInfo.ConvertTime(forum.CreatedOn, TimeZoneInfo.Local) @if (signInManager.IsSignedIn(User) && forum.UserName.Equals(User.Identity.Name))
-                {
-                    <div style="float: right">
-                        <a asp-controller="Forum" asp-action="Delete"
-                           asp-route-id="@forum.ForumId"
-                           asp-route-slug="@forum.Slug">
-                            Delete
-                        </a>
-                    </div>
-                }
-            </td>
-        </tr>
-        }
+        @foreach(var forum in Model.ForumList)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Forum" asp-action="Topic" asp-route-id="@forum.Id">
+                            @forum.Name
+                        </a>    
+                    </td>
+                    <td>
+                        @forum.Description
+                    </td>
+                </tr>
+            }
     </tbody>
 </table>
-    <div class="d-flex">
-        <div class="p-2 flex-grow-1"></div>
-        <div class="p-2">
-            @if (signInManager.IsSignedIn(User))
-            {
-                <a class="btn btn-primary" asp-controller="Post" asp-action="Create">Add Post</a>
-            }
-
-        </div>
-    </div>
-
-
-</body>
-</html>

@@ -44,7 +44,7 @@ namespace Fan_Website
             modelBuilder.Entity<Forum>().HasData(
                     new Forum
                     {
-                        ForumId = "IX",
+                        ForumId = 1,
                         PostTitle = "Final Fantasy IX",
                         Description = "A place to discuss Final Fantasy IX!",
                         CreatedOn = DateTime.UtcNow,

@@ -1,4 +1,6 @@
 ﻿using Fan_Website.Models;
+using Fan_Website.Models.Forum;
+using Fan_Website.Services;
 using Fan_Website.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,68 +10,75 @@ using System.Threading.Tasks;
 
 namespace Fan_Website.Controllers
 {
-    public class ForumController: Controller
+    public class ForumController : Controller
     {
-        private AppDbContext context { get; set; }
+        private IForum forumService { get; set; }
+        private IPost postService { get; set; }
 
-      
 
-        public ForumController(AppDbContext ctx)
+        public ForumController(IForum _forumService, IPost _postService)
         {
-            context = ctx;
+            forumService = _forumService;
+            postService = _postService; 
         }
         public IActionResult Index()
         {
-            var forums = context.Forums.ToList();
-            return View(forums);
-        }
-        [HttpGet] 
-        public IActionResult Create()
-        {
-            ViewBag.Action = "Post"; 
-            return View("Create", new ForumViewModel()); 
-        }
-        [HttpPost]
-        public IActionResult Create(ForumViewModel model)
-        {
-            ViewBag.Action = "Post";
-            if (ModelState.IsValid)
-            {
-                var posts = context.Posts.ToList(); 
-                Forum newForum = new Forum
+            var forums = forumService.GetAll()
+                .Select(forum => new ForumListingModel
                 {
+                    Id = forum.ForumId,
+                    Name = forum.PostTitle,
+                    Description = forum.Description 
 
-                    PostTitle = model.PostTitle,
-                    Description = model.Description,
-                    UserName = User.Identity.Name,
-                    CreatedOn = DateTime.UtcNow,
-                    ForumId = model.PostTitle,
-                    Posts = posts     
-                };
+                });
 
-                context.Forums.Add(newForum);
-
-                context.SaveChanges();
-                return RedirectToAction("Index", "Forum");
-
-            }
-
-            return View();
+            var model = new ForumIndexModel
+            {
+                ForumList = forums 
+            }; 
+            return View(model);
         }
 
-        [HttpGet]
-        public IActionResult Delete(string id)
+        public IActionResult Topic(int id)
         {
-            var forum = context.Forums.Find(id);
-            return View(forum);
+            var forum = forumService.GetById(id);
+            var posts = forum.Posts;
+
+            var postListings = posts.Select(post => new PostListingModel
+            {
+                Id = post.PostId,
+                AuthorId = post.User.Id,
+                AuthorRating = post.User.Rating,
+                Title = post.Title,
+                DatePosted = post.CreatedOn.ToString(),
+                RepliesCount = post.Replies.Count(),
+                Forum = BuildForumListing(post) 
+            });
+
+            var model = new ForumTopicModel
+            {
+                Posts = postListings,
+                Forum = BuildForumListing(forum) 
+            }; 
+
+            return View(model); 
         }
 
-        [HttpPost]
-        public IActionResult Delete(Forum forum)
+        private ForumListingModel BuildForumListing(Post post)
         {
-            context.Forums.Remove(forum);
-            context.SaveChanges();
-            return RedirectToAction("Index", "Forum");
+            var forum = post.Forum;
+
+            return BuildForumListing(forum); 
+        }
+
+        private ForumListingModel BuildForumListing(Forum forum)
+        {
+            return new ForumListingModel
+            {
+                Id = forum.ForumId,
+                Name = forum.PostTitle,
+                Description = forum.Description
+            };
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Fan_Website
 {
     public class Forum
     {
-        public string ForumId { get; set; }
+        public int ForumId { get; set; }
         [Required(ErrorMessage = "Please enter a title.")] 
         public string PostTitle { get; set; }
         [Required(ErrorMessage = "Please enter a description")]

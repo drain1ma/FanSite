@@ -18,6 +18,7 @@ namespace Fan_Website
         public DateTime CreatedOn { get; set; }
         public ApplicationUser User { get; set; }
         public Forum Forum { get; set; }
+        public IEnumerable<PostReply> Replies { get; set; }
         public string Slug =>
             Title?.Replace(' ', '-').ToLower();
 

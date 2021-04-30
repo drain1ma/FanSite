@@ -1,6 +1,7 @@
 using Fan_Website.Infrastructure;
 using Fan_Website.Models;
 using Fan_Website.Service;
+using Fan_Website.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,12 +37,13 @@ namespace Fan_Website
                .AddEntityFrameworkStores<AppDbContext>();
 
             services.AddDbContext<AppDbContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
+               options.UseSqlServer(Configuration.GetConnectionString("Fansite")));
 
             services.AddIdentityCore<ApplicationUser>().AddRoles<IdentityRole>().AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
-            services.AddTransient<IUnitOfWork, UnitOfWork>(); 
-
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IForum, ForumService>(); ;
+            services.AddScoped<IPost, PostService>(); 
             services.AddControllersWithViews();
         }
 

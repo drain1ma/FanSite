@@ -1,5 +1,6 @@
 ﻿using Fan_Website.Models;
 using Fan_Website.Services;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,12 @@ namespace Fan_Website.Service
 {
     public class ForumService : IForum
     {
+        private readonly AppDbContext context; 
+
+        public ForumService(AppDbContext ctx)
+        {
+            context = ctx; 
+        }
         public Task Create(Forum forum)
         {
             throw new NotImplementedException();
@@ -21,12 +28,21 @@ namespace Fan_Website.Service
 
         public IEnumerable<Forum> GetAll()
         {
-            throw new NotImplementedException();
+            return context.Forums
+                .Include(forum => forum.Posts); 
         }
 
         public Forum GetById(int id)
         {
-            throw new NotImplementedException();
+            var forum = context.Forums.Where(forum => forum.ForumId == id)
+                .Include(f => f.Posts)
+                    .ThenInclude(p => p.User)
+                .Include(f => f.Posts)
+                    .ThenInclude(p => p.Replies)
+                        .ThenInclude(r => r.User)
+                        .FirstOrDefault();
+
+            return forum; 
         }
 
         public Task UpdateForumDescription(int forumId, string newDescription)
