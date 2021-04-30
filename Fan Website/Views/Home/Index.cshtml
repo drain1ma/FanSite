@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Fan_Website.Models.Home.HomeIndexModel 
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -12,10 +13,10 @@
     <h1 class="text-center">Final Fantasy XVI Trailer</h1>
     
 
-    <div class="container text-center video">
+    <div class="container text-left video">
         <div class="box">
             <div class="videoBx">
-                <video autoplay controls="controls">
+                <video controls="controls">
                     <source src="~/videos/Final%20Fantasy%20XVI%20-%20Awakening%20Trailer%20PS5.mp4" type="video/mp4" />
                 </video>
             </div>
@@ -29,8 +30,47 @@
         </div>
      </div>
 
+    <div>
+        <form asp-controller="Search" asp-action="Search" method="post">
+            <input asp-for="SearchQuery" type="text" class="homeSearch" placeholder="Search..." />
+        </form>
+    </div>
 
-
+    <div class="col-md-6"></div>
+    <div class="row frontPageContent">
+        <h3 id="latestPosts">Latest Posts</h3>
+        <table class="table table-hover" id="latestPostsTable">
+            <tbody>
+                @foreach(var post in Model.LatestPosts)
+            {
+                    <tr>
+                        <td>
+                            <div class="postTitle">
+                                <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">
+                                    @post.Title 
+                                </a>
+                            </div>
+                            <div class="postSubTitle">
+                                @if (post.RepliesCount == 1)
+                                {
+                                    <span>@post.RepliesCount Reply</span>
+                                }
+                                @if (post.RepliesCount == 0)
+                                {
+                                    <span>No Replies</span>
+                                }
+                                else
+                                {
+                                    <span>@post.RepliesCount Replies</span>
+                                }
+                                <span class="postUser"><a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.AuthorId">@post.Author</a></span> (@post.AuthorRating) in <span class="postForum"><a asp-controller="Forum" asp-action="Topic" asp-route-id="@post.ForumId"></a>@post.ForumName</span> on <span class="postDate">@post.DatePosted</span>
+                            </div>
+                        </td>
+                    </tr>
+            }
+            </tbody>
+        </table>
+    </div>
 
 
 </body> 

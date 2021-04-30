@@ -39,7 +39,10 @@ namespace Fan_Website.Service
 
         public IEnumerable<Post> GetAll()
         {
-            throw new NotImplementedException();
+            return context.Posts
+                .Include(post => post.User)
+                .Include(post => post.Replies).ThenInclude(post => post.User)
+                .Include(post => post.Forum); 
         }
 
         public Post GetById(int id)
@@ -58,7 +61,7 @@ namespace Fan_Website.Service
 
         public IEnumerable<Post> GetLatestPosts(int n)
         {
-            throw new NotImplementedException();
+            return GetAll().OrderByDescending(post => post.CreatedOn).Take(n); 
         }
 
         public IEnumerable<Post> GetPostsByForum(int id)

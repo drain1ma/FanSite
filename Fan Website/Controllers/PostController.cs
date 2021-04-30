@@ -34,9 +34,10 @@ namespace Fan_Website.Controllers
             {
                 Id = post.PostId,
                 Title = post.Title, 
-                AuthorId = post.User.Id, 
                 AuthorName = post.User.UserName, 
+                AuthorId = post.User.Id, 
                 AuthorRating = post.User.Rating, 
+                AuthorImageUrl = post.User.ImagePath, 
                 Date = post.CreatedOn, 
                 PostContent = post.Content, 
                 Replies = replies 
@@ -63,12 +64,12 @@ namespace Fan_Website.Controllers
         public async Task<IActionResult> AddPost(NewPostModel model)
         {
             var userId = userManager.GetUserId(User);
-            var user = userManager.FindByIdAsync(userId).Result; 
+            var user = await userManager.FindByIdAsync(userId); 
             var post = BuildPost(model, user);
 
             await postService.Add(post);
 
-            return RedirectToAction("Index", "Post", new { id = post.PostId }); 
+            return RedirectToAction("Index", "Post", new {id = post.PostId}); 
         }
 
         private Post BuildPost(NewPostModel model, ApplicationUser user)
