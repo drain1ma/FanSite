@@ -24,6 +24,13 @@ a {
   border-color: #1861ac;
 }
 
+.btn-forumSearch{
+    background: none !important; 
+    border: none; 
+    padding: 0 !important; 
+    font: inherit; 
+}
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
