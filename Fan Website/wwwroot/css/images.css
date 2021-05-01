@@ -25,3 +25,33 @@
     height: 100px; 
     width: auto; 
 }
+
+.postAuthorImage{
+    height: 80px; 
+    width: 80px; 
+    background-size: 100%; 
+}
+
+.postAuthorContainer{
+    padding: 12px; 
+    color: #444; 
+    font-family: 'Roboto'; 
+    width: 190px;
+}
+
+.postIndexTitle{
+    font-size: 1.4em; 
+}
+
+#postContentContainer{
+    font-family: 'Roboto'; 
+    color: #222; 
+    padding: 22px; 
+    border-left: 1px solid #ddd;  
+}
+
+.postAuthorRating{
+    font-size: 0.9em; 
+    color: #159; 
+    font-family: 'Roboto Mono'; 
+}

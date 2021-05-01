@@ -1,5 +1,25 @@
 ﻿@model Fan_Website.Models.Forum.ForumTopicModel
 
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <span>@Model.Forum.Name Forum</span>
+        @if (Context.User.Identity.IsAuthenticated)
+            {
+                <span id="headingBtn">
+                    <a asp-controller="Post"
+                       asp-action="Create"
+                       asp-route-id="@Model.Forum.Id" class="btn btn-newPost">
+                        Create Post
+                    </a>
+                </span>
+            }
+
+    </div>
+</div>
+
+
+
+
 <h1>Welcome to the @Model.Forum.Name Forum!</h1>
 
 <span id="headingBtn"><a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id" class="btn btn-newPost">Create Post</a></span>
@@ -27,7 +47,7 @@
                     </td>
                 </tr>
             }
-        </tbody>
+        </tbody
     </table>
 
 }

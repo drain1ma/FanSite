@@ -2,7 +2,6 @@
 using Fan_Website.Models.Post;
 using Fan_Website.Models.Reply;
 using Fan_Website.Services;
-using Fan_Website.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
