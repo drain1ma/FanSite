@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNetCore.Identity 
+@model Fan_Website.Models.ProfileModel  
+
+@inject UserManager<ApplicationUser> userManager 
+
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading">
+            User Profile
+        </div>
+    </div>
+    <div class="row userProfile">
+        <div class="col-md-4">
+            <div id="userProfileImage" style="background-image: url(@Model.ProfileImageUrl)">
+                @if(User.Identity.Name == Model.UserName)
+            {
+                <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="Upload">
+                    <div id="upload">
+                        <label class="btn btn-default btn-file">
+                            Browse <input type="file" name="file" style="display: none"/>
+                        </label>
+                    </div>
+                    <button type="submit" id="btn-profile" class="btn btn-default">Submit</button>
+                </form>
+            }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <span id="userName">@Model.UserName</span>
+        <span id="userRating">Current Rating: @Model.UesrRating</span>
+        <span id="userCreatedLabel">Member Since: @Model.MemberSince</span>
+    </div>
+</div>

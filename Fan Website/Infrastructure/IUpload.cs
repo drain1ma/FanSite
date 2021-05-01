@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Fan_Website.Infrastructure
 {
-    interface IUpload
+    public interface IUpload
     {
     }
 }
