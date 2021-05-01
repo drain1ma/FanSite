@@ -109,3 +109,18 @@ body {
     border: none;
     background: none;
 }
+
+.searchBar{
+    padding: 3px, 5px, 2px, 12px; 
+    margin: 8px; 
+    background-color: #333; 
+    width: 10%; 
+    transition: ease .3s; 
+    border: none; 
+}
+
+.searchBar:focus{
+    color: black; 
+    width: 60%; 
+    background-color: #fff; 
+}

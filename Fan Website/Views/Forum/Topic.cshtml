@@ -1,101 +1,110 @@
 ﻿@model Fan_Website.Models.Forum.ForumTopicModel
-@inject SignInManager<ApplicationUser> signInManager 
+@inject SignInManager<ApplicationUser> signInManager
 
-<div class="container body-content">
-    <div class="row sectionHeader">
-        <div class="sectionHeading">
-            <span>@Model.Forum.Name Forum</span>
-            @if (signInManager.IsSignedIn(User))
-            {
-                <span id="headingBtn">
-                    <a asp-controller="Post"
-                       asp-action="Create"
-                       asp-route-id="@Model.Forum.Id" class="btn btn-newPost">
-                        Create Post
-                    </a>
-                </span>
-            }
-            <form asp-controller="Forum" asp-action="Search" method="post">
-                <div class="searchForm">
-                    <input asp-for="SearchQuery" type="text" placeholder="Search..." class="searchBar" onfocus="clearThis(this)" />
-                    <button type="submit" class="btn buttonSearch">
-                        <i class="material-icons">search</i>
-                    </button>
-                </div>
-                <input asp-for="Forum.Id" name="id" type="hidden" />
-            </form>
-        </div>
-        <div class="sectionDescription">
-            <p>Welcome to the @Model.Forum.Name forum</p>
-            @if (!signInManager.IsSignedIn(User))
-            {
-                <span>
-                    You must be a 
-                    <a asp-controller="Account" asp-action="Register">
-                        registered member
-                    </a>
-                    to create a new post.
-                </span>
-            }
-        </div>
-    </div>
-    <div class="row forumIndexContent">
-        @if (Model.Posts.Any())
-        {
-            <table class="table table-hover table-bordered" id="forumIndexTable" style="background-color: white">
-                <tbody>
-                    @foreach(var post in Model.Posts)
+<!DOCTYPE html>
+<html>
+<body>
+    <header>
+        <link href="~/css/site.css" rel="stylesheet" />
+    </header>
+    <div class="container body-content">
+        <div class="row sectionHeader">
+            <div class="sectionHeading">
+                <span>@Model.Forum.Name Forum</span>
+                @if (signInManager.IsSignedIn(User))
                 {
-                    <tr>
-                        <td>
-                            <div class="postData">
-                                <div class="postTitle">
-                                    <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">@post.Title</a>
-                                </div>
-                                <div class="forumSubTitle">
-                                    <div>
-                                        <span class="postAuthor">
-                                            <a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.AuthorId">@post.AuthorName</a>
-                                        </span>
-                                        (@post.AuthorRating) on
-                                        <span class="postData">
-                                            @post.DatePosted 
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="forumPostContent">
-                                Replies: @post.RepliesCount
-                            </div>
-                        </td>
-                        <td>
-                            <div class="postData">@post.DatePosted</div>
-                        </td>
-                    </tr>
+                    <span id="headingBtn">
+                        <a asp-controller="Post"
+                           asp-action="Create"
+                           asp-route-id="@Model.Forum.Id" class="btn btn-newPost">
+                            Create Post
+                        </a>
+                    </span>
                 }
-                </tbody>
-            </table>
-        }
+                <form asp-controller="Forum" asp-action="Search" method="post">
+                    <div class="searchForm">
+                        <input asp-for="SearchQuery" type="text" placeholder="Search..." class="searchBar" onfocus="clearThis(this)" />
+                        <button type="submit" class="btn buttonSearch">
+                            <i class="material-icons">search</i>
+                        </button>
+                    </div>
+                    <input asp-for="Forum.Id" name="id" type="hidden" />
+                </form>
+            </div>
+            <div class="sectionDescription">
+                <p>Welcome to the @Model.Forum.Name Forum</p>
+                @if (!signInManager.IsSignedIn(User))
+                {
+                    <span>
+                        You must be a
+                        <a asp-controller="Account" asp-action="Register">
+                            registered member
+                        </a>
+                        to create a new post.
+                    </span>
+                }
+            </div>
+        </div>
+        <div class="row forumIndexContent">
+            @if (Model.Posts.Any())
+            {
+                <table class="table table-hover table-bordered" id="forumIndexTable" style="background-color: white">
+                    <tbody>
+                        @foreach (var post in Model.Posts)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="postData">
+                                        <div class="postTitle">
+                                            <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">@post.Title</a>
+                                        </div>
+                                        <div class="forumSubTitle">
+                                            <div>
+                                                <span class="postAuthor">
+                                                    <a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.AuthorId">@post.AuthorName</a>
+                                                </span>
+                                                (@post.AuthorRating) on
+                                                <span class="postData">
+                                                    @post.DatePosted
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="forumPostContent">
+                                        Replies: @post.RepliesCount
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="postData">@post.DatePosted</div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
             else
             {
                 <div class="noPosts">
                     <i class="material-icons md-72">question_answer</i>
-                    <h3>It looks like there are no posts to be found.
-                    Why not 
-                    <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">
-                        </a></h3>
+                    <h3>
+                        It looks like there are no posts to be found.
+                        Why not
+                        <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">
+                        </a>
+                    </h3>
                 </div>
 
             }
+        </div>
     </div>
-</div>
-
-@section Scripts{ 
-<script>
-    function clearThis(target) {
-        target.value = ""; 
-    }
-</script>
+</body>
+</html>
+@section Scripts{
+    <script>
+        function clearThis(target) {
+            target.value = "";
+        }
+    </script>
 } 

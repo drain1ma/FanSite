@@ -56,7 +56,8 @@ namespace Fan_Website.Service
 
         public IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery)
         {
-            throw new NotImplementedException();
+            return string.IsNullOrEmpty(searchQuery) ? forum.Posts : 
+                forum.Posts.Where(post => post.Title.ToLower().Contains(searchQuery) || post.Content.ToLower().Contains(searchQuery) || post.Content.Contains(searchQuery) || post.Title.Contains(searchQuery)); 
         }
 
         public IEnumerable<Post> GetLatestPosts(int n)
