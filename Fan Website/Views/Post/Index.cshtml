@@ -1,5 +1,5 @@
 ﻿@model Fan_Website.Models.Post.PostIndexModel
-
+@inject SignInManager<ApplicationUser> signInManager  
  <!DOCTYPE html> 
 <html>
 <body>
@@ -32,7 +32,7 @@
     </div>
 
     <div class="row" id="replyDivider"></div>
-    @if (Context.User.Identity.IsAuthenticated)
+    @if (signInManager.IsSignedIn(User))
     {
         <div class="row" id="replyRow">
             <span><a asp-controller="Reply" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">Post Reply</a></span>

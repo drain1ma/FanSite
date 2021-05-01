@@ -39,7 +39,9 @@ namespace Fan_Website.Controllers
                 AuthorImageUrl = post.User.ImagePath, 
                 Date = post.CreatedOn, 
                 PostContent = post.Content, 
-                Replies = replies 
+                Replies = replies,
+                ForumId = post.Forum.ForumId, 
+                ForumName = post.Forum.PostTitle 
 
             }; 
             return View(model);
