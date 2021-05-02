@@ -74,7 +74,7 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    background-image: url(../images/image0.png);
+    background-image: url(../images/R1d800dcf687b877e84b430edbf06e19e.jpg);
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -89,11 +89,9 @@ body {
 }
 
 .video {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    width: 50%;
+    height: auto;
+    justify-content: left; 
 }
 .delete{
     float: right; 
@@ -110,9 +108,7 @@ body {
     background: none;
 }
 
-.searchBar{
-    padding: 3px, 5px, 2px, 12px; 
-    margin: 8px; 
+.searchBar{ 
     background-color: #333; 
     width: 10%; 
     transition: ease .3s; 
@@ -121,6 +117,55 @@ body {
 
 .searchBar:focus{
     color: black; 
-    width: 60%; 
+    width: 40%; 
     background-color: #fff; 
+}
+
+.userProfile{
+    padding: 32px 0 64px 24px; 
+    background-color: #fff; 
+}
+
+#userEmailLabel, #userBioLabel, #userCreatedLabel, #userRating, #userActiveLabel {
+    display: block; 
+    color: #444; 
+    font-family: 'Roboto'; 
+    padding-top: 3px; 
+}
+
+#userName{
+    display: block; 
+    color: #2569d5; 
+    font-family: 'Roboto';
+    font-size: 1.7em;
+}
+
+.body-content{
+    display: block; 
+    color: #fff; 
+    font-family: 'Roboto'; 
+}
+
+.sectionHeader{
+    display: block; 
+    color: antiquewhite; 
+    padding: 10px; 
+}
+
+.sectionHeading{
+    display: block; 
+    color: #000; 
+    padding: 3px; 
+}
+
+.btn-newPost{
+    display: ruby; 
+    padding: 5px; 
+    background-color: crimson; 
+    text-align: right; 
+    flex: initial; 
+}
+
+.createPostButton{
+    text-align: right; 
 }

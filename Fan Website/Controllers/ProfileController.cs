@@ -1,5 +1,6 @@
 ﻿using Fan_Website.Infrastructure;
 using Fan_Website.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -35,5 +36,12 @@ namespace Fan_Website.Controllers
             }; 
             return View(model);
         }
+
+        public async Task<IActionResult> UploadProfileImage(IFormFile file)
+        {
+            var userId = userManager.GetUserId(User);
+
+            return RedirectToAction("Detail", "Profile"); 
+        } 
     }
 }

@@ -3,36 +3,18 @@
 
 <!DOCTYPE html>
 <html>
+<head>
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
 <body>
-    <header>
-        <link href="~/css/site.css" rel="stylesheet" />
-    </header>
+    
     <div class="container body-content">
         <div class="row sectionHeader">
             <div class="sectionHeading">
                 <span>@Model.Forum.Name Forum</span>
-                @if (signInManager.IsSignedIn(User))
-                {
-                    <span id="headingBtn">
-                        <a asp-controller="Post"
-                           asp-action="Create"
-                           asp-route-id="@Model.Forum.Id" class="btn btn-newPost">
-                            Create Post
-                        </a>
-                    </span>
-                }
-                <form asp-controller="Forum" asp-action="Search" method="post">
-                    <div class="searchForm">
-                        <input asp-for="SearchQuery" type="text" placeholder="Search..." class="searchBar" onfocus="clearThis(this)" />
-                        <button type="submit" class="btn buttonSearch">
-                            <i class="material-icons">search</i>
-                        </button>
-                    </div>
-                    <input asp-for="Forum.Id" name="id" type="hidden" />
-                </form>
             </div>
             <div class="sectionDescription">
-                <p>Welcome to the @Model.Forum.Name Forum</p>
                 @if (!signInManager.IsSignedIn(User))
                 {
                     <span>
@@ -43,6 +25,31 @@
                         to create a new post.
                     </span>
                 }
+               
+                <form asp-controller="Forum" asp-action="Search" method="post">
+                    <div class="searchForm">
+                        <input asp-for="SearchQuery" type="text" placeholder="Search..." class="searchBar" onfocus="clearThis(this)" />
+                        <button type="submit" class="btn buttonSearch">
+                            <i class="material-icons">search</i>
+                        </button>
+                        <div class="createPostButton">
+                            @if (signInManager.IsSignedIn(User))
+                            {
+                                <span id="headingBtn">
+                                    <a asp-controller="Post"
+                                       asp-action="Create"
+                                       asp-route-id="@Model.Forum.Id" class="btn btn-newPost">
+                                        Create Post
+                                    </a>
+                                </span>
+                            }
+                        </div>
+                    </div>
+                    <input asp-for="Forum.Id" name="id" type="hidden" />
+                </form>
+
+                
+                </>
             </div>
         </div>
         <div class="row forumIndexContent">

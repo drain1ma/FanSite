@@ -43,7 +43,10 @@ namespace Fan_Website
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IForum, ForumService>(); ;
-            services.AddScoped<IPost, PostService>(); 
+            services.AddScoped<IPost, PostService>();
+            services.AddScoped<IApplicationUser, ApplicationUserService>();
+            services.AddScoped<IUpload, UploadService>(); 
+
             services.AddControllersWithViews();
         }
 

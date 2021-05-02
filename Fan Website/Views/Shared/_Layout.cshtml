@@ -1,4 +1,5 @@
 ﻿@inject SignInManager<ApplicationUser> signInManager
+@inject UserManager<ApplicationUser> userManager 
 @using System.Web
 
 <!DOCTYPE html>
@@ -50,12 +51,12 @@
                         @if (signInManager.IsSignedIn(User))
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                <a class="nav-link dropdown-togger" href="#" id="navbarDropdownMenuLink"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     My Profile
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" asp-controller="Account" asp-action="AccountInfo">@User.Identity.Name's Account </a>
+                                    <a class="dropdown-item" asp-controller="Profile" asp-action="Detail" asp-route-id="@userManager.GetUserId(User)">My Account </a>
                                     <a class="dropdown-item" asp-controller="Screenshot" asp-action="UserScreenshots">Your Screenshots</a>
                                     <a class="dropdown-item" asp-controller="Post" asp-action="UserPosts">Your Posts</a>
                                     <a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">Change Password</a>
