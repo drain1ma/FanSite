@@ -208,3 +208,12 @@ body {
     height: 200px; 
     background-color: #ddd; 
 }
+
+.postAuthorImage{
+    margin: 10px; 
+    border-top: dotted; 
+}
+
+.postContent{
+    margin: 10px; 
+}
