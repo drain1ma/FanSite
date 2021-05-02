@@ -91,7 +91,7 @@ body {
 .video {
     width: 50%;
     height: auto;
-    justify-content: left; 
+    flex-wrap: wrap; 
 }
 .delete{
     float: right; 
@@ -135,21 +135,20 @@ body {
 
 #userName{
     display: block; 
-    color: #2569d5; 
+    color: crimson; 
     font-family: 'Roboto';
     font-size: 1.7em;
 }
 
 .body-content{
-    display: block; 
-    color: #fff; 
-    font-family: 'Roboto'; 
+    
 }
 
-.sectionHeader{
-    display: block; 
-    color: antiquewhite; 
-    padding: 10px; 
+.sectionHeader {
+    display: block;
+    background-color: lightseagreen;
+    padding: 15px; 
+    font-family: 'Roboto';
 }
 
 .sectionHeading{
@@ -159,13 +158,53 @@ body {
 }
 
 .btn-newPost{
-    display: ruby; 
     padding: 5px; 
     background-color: crimson; 
-    text-align: right; 
+    text-align: center; 
     flex: initial; 
+    border-color: white; 
 }
 
 .createPostButton{
     text-align: right; 
+}
+
+.postHeader{
+    display: block; 
+    background-color: aquamarine; 
+    padding: 15px; 
+}
+
+.postAuthorContainer {
+    background-color: white;
+}
+
+.postContentContainer{
+    background-color: white; 
+    border-left: medium; 
+    padding: 10px; 
+}
+.btn-back {
+    padding: 5px; 
+}
+
+
+.btn-newReply {
+    padding: 5px;
+    background-color: crimson;
+    text-align: center;
+    flex: initial;
+    border-color: white;
+}
+
+.postReplyContent{
+    background-color: grey; 
+    padding: 30px; 
+}
+
+#userProfileImage{
+    display: inline-block; 
+    width: 200px; 
+    height: 200px; 
+    background-color: #ddd; 
 }
