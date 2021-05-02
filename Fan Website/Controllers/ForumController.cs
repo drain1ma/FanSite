@@ -80,6 +80,25 @@ namespace Fan_Website.Controllers
             return BuildForumListing(forum); 
         }
 
+        public IActionResult Create()
+        {
+            var model = new AddForumModel();
+            return View(model); 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddForum(AddForumModel model)
+        {
+            var forum = new Forum
+            {
+                PostTitle = model.Title,
+                Description = model.Description,
+                CreatedOn = DateTime.Now
+            };
+
+            await forumService.Create(forum);
+            return RedirectToAction("Index", "Forum"); 
+        }
         private ForumListingModel BuildForumListing(Forum forum)
         {
             return new ForumListingModel

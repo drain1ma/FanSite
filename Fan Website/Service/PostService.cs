@@ -22,9 +22,10 @@ namespace Fan_Website.Service
             await context.SaveChangesAsync(); 
         }
 
-        public Task AddReply(PostReply reply)
+        public async Task AddReply(PostReply reply)
         {
-            throw new NotImplementedException();
+            context.Add(reply);
+            await context.SaveChangesAsync();
         }
 
         public Task Delete(int id)

@@ -92,7 +92,8 @@ namespace Fan_Website.Controllers
             return replies.Select(reply => new PostReplyModel
             {
                 Id = reply.Id, 
-                AuthorName = reply.User.Id, 
+                AuthorImageUrl = reply.User.ImagePath, 
+                AuthorName = reply.User.UserName, 
                 AuthorId = reply.User.Id, 
                 AuthorRating = reply.User.Rating, 
                 Date = reply.CreateOn, 
