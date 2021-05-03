@@ -8,7 +8,11 @@ using Fan_Website.ViewModel;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-
+using Fan_Website.Infrastructure;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using System.Net.Http.Headers;
+using Fan_Website.Models.Screenshot;
 
 namespace Fan_Website.Controllers
 {
@@ -17,17 +21,31 @@ namespace Fan_Website.Controllers
         private AppDbContext context { get; set; }
 
         private readonly IHostingEnvironment hostingEnvironment;
-        
-        public ScreenshotController(AppDbContext ctx, IHostingEnvironment hostingEnvironment)
+        private readonly IApplicationUser userService;
+        private readonly IConfiguration configuration;
+        private readonly IUpload uploadService;
+        private readonly IScreenshot screenshotService; 
+        private readonly UserManager<ApplicationUser> userManager; 
+        public ScreenshotController(AppDbContext ctx, IHostingEnvironment hostingEnvironment, IApplicationUser _userService, 
+            IConfiguration _configuration, IUpload _uploadService, IScreenshot _screenshotService, UserManager<ApplicationUser> _userManager)
         {
             context = ctx;
             this.hostingEnvironment = hostingEnvironment;
-
+            userService = _userService;
+            configuration = _configuration;
+            uploadService = _uploadService;
+            screenshotService = _screenshotService;
+            userManager = _userManager; 
         }
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            var screenshot = context.Screenshots.ToList();
-            return View(screenshot);
+            var screenshot = screenshotService.GetById(id);
+
+            var model = new ScreenshotListModel()
+            {
+                
+            };
+            return View(model);
         }
         public IActionResult UserScreenshots()
         {
@@ -35,52 +53,45 @@ namespace Fan_Website.Controllers
             return View(screenshot); 
         }
 
-        public IActionResult Add()
+        public async Task<IActionResult> AddScreenshot(NewScreenshotModel model)
         {
-            ViewBag.Action = "Create";
-            return View("Edit", new ScreenshotViewModel());
+            var userId = userManager.GetUserId(User);
+            var user = await userManager.FindByIdAsync(userId);
+            var screenshot = BuildScreenshot(model, user);
+
+            
+            return RedirectToAction("Index", "Screenshot", new { id = screenshot.ScreenshotId }); 
         }
-        public IActionResult Create(ScreenshotViewModel model)
+
+        private Screenshot BuildScreenshot(NewScreenshotModel model, ApplicationUser user)
         {
-            ViewBag.Action = "Add";
-            if (ModelState.IsValid)
+            return new Screenshot
             {
-                string uniqueFileName = null;
-                // If the Photo property on the incoming model object is not null, then the user
-                // has selected an image to upload.
-                if (model.Image != null)
-                {
-                    // The image must be uploaded to the images folder in wwwroot
-                    // To get the path of the wwwroot folder we are using the inject
-                    // HostingEnvironment service provided by ASP.NET Core
-                    string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
-                    // To make sure the file name is unique we are appending a new
-                    // GUID value and and an underscore to the file name
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    // Use CopyTo() method provided by IFormFile interface to
-                    // copy the file to wwwroot/images folder
-                    model.Image.CopyTo(new FileStream(filePath, FileMode.Create));
-                }
+                ScreenshotId = model.Id, 
+                ScreenshotTitle = model.Title, 
+                ScreenshotDescription = model.Content, 
+                ImagePath = model.ScreenshotImageUrl, 
+                CreatedOn = DateTime.Now, 
+                User = user
+            }; 
+        }
 
-                Screenshot newScreenshot = new Screenshot
-                {
-                    ScreenshotTitle = model.ScreenshotTitle,
-                    ScreenshotDescription = model.ScreenshotDescription,
-                    // Store the file name in PhotoPath property of the employee object
-                    // which gets saved to the Employees database table
-                    ImagePath = uniqueFileName,
-                    UserName = User.Identity.Name 
-                };
+        public async Task<IActionResult> UploadScreenshotImage(IFormFile file, int id)
+        {
+            var screenshot = screenshotService.GetById(id);
+            var screenshotId = screenshot.ScreenshotId; 
+            var connectionString = configuration.GetConnectionString("AzureStorageAccount");
+            var container = uploadService.GetBlobContainer(connectionString);
 
-                context.Screenshots.Add(newScreenshot);
+            var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+            var filename = Path.Combine(parsedContentDisposition.FileName.Trim('"'));
 
-                context.SaveChanges();
-                return RedirectToAction("Index", "Screenshot");
+            var blockBlob = container.GetBlockBlobReference(filename);
 
-            }
+            await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
+            await screenshotService.SetScreenshotImage(screenshotId, blockBlob.Uri);
 
-            return View();
+            return RedirectToAction("Index", "Screenshot", new { id = screenshotId });
         }
 
         [HttpGet]

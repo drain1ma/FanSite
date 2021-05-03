@@ -41,6 +41,7 @@ namespace Fan_Website
             services.AddScoped<IPost, PostService>();
             services.AddScoped<IApplicationUser, ApplicationUserService>();
             services.AddScoped<IUpload, UploadService>();
+            services.AddScoped<IScreenshot, ScreenshotService>(); 
             services.AddSingleton(Configuration); 
             services.AddControllersWithViews();
         }

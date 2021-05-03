@@ -101,7 +101,7 @@
 
     @foreach (var screenshot in Model)
     {
-        @if (signInManager.IsSignedIn(User) && screenshot.UserName == User.Identity.Name)
+        @if (signInManager.IsSignedIn(User) && screenshot.User.UserName == User.Identity.Name)
         {
             var photoPath = "~/images/" + (screenshot.ImagePath);
 

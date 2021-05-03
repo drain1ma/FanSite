@@ -1,4 +1,5 @@
-﻿using Fan_Website.Models;
+﻿using Fan_Website.Infrastructure;
+using Fan_Website.Models;
 using Fan_Website.Models.Reply;
 using Fan_Website.Services;
 using Microsoft.AspNetCore.Identity;
@@ -13,10 +14,12 @@ namespace Fan_Website.Controllers
     public class ReplyController : Controller
     {
         private readonly IPost postService;
+        private readonly IApplicationUser userService; 
         private readonly UserManager<ApplicationUser> userManager; 
-        public ReplyController(IPost _postService, UserManager<ApplicationUser> _userManager)
+        public ReplyController(IPost _postService, IApplicationUser _userService, UserManager<ApplicationUser> _userManager)
         {
             postService = _postService;
+            userService = _userService; 
             userManager = _userManager; 
         }
         public async Task<IActionResult> Create(int id)
@@ -48,8 +51,8 @@ namespace Fan_Website.Controllers
 
             var reply = BuildReply(model, user);
 
-            await postService.AddReply((PostReply)reply); 
-
+            await postService.AddReply((PostReply)reply);
+            await userService.UpdateUserRating(userId, typeof(PostReply)); 
             return RedirectToAction("Index", "Post", new { id = model.PostId }); 
         }
 

@@ -1,4 +1,5 @@
-﻿using Fan_Website.Models;
+﻿using Fan_Website.Infrastructure;
+using Fan_Website.Models;
 using Fan_Website.Models.Post;
 using Fan_Website.Models.Reply;
 using Fan_Website.Services;
@@ -13,14 +14,16 @@ namespace Fan_Website.Controllers
 {
     public class PostController : Controller
     {
-        private IPost postService { get; set; }
-        private IForum forumService { get; set; }
+        private  IPost postService { get; set; }
+        private  IForum forumService { get; set; }
+        private  IApplicationUser userService { get; set; }
         private static UserManager<ApplicationUser> userManager; 
 
-        public PostController(IPost _postService, IForum _forumService, UserManager<ApplicationUser> _userManager)
+        public PostController(IPost _postService, IForum _forumService, IApplicationUser _userService, UserManager<ApplicationUser> _userManager)
         {
             postService = _postService;
             forumService = _forumService;
+            userService = _userService; 
             userManager = _userManager; 
         }
         [HttpGet]
@@ -69,7 +72,7 @@ namespace Fan_Website.Controllers
             var post = BuildPost(model, user);
 
             await postService.Add(post);
-
+            await userService.UpdateUserRating(userId, typeof(Post)); 
             return RedirectToAction("Index", "Post", new {id = post.PostId}); 
         }
 

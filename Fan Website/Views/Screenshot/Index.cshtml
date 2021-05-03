@@ -1,4 +1,4 @@
-﻿@model List<Screenshot>
+﻿@model Fan_Website.Models.Screenshot.ScreenshotModel
 @inject SignInManager<ApplicationUser> signInManager
 
 
@@ -21,8 +21,7 @@
         <a class="btn btn-primary" asp-controller="Screenshot" asp-action="Create">Upload Screenshot</a><br />
     }
 
-    @foreach (var screenshot in Model)
-    {
+
 <style>
             .myImg {
                 border-radius: 5px;
@@ -107,24 +106,19 @@
         }
 }
 </style>
+<div class="card-body card-img-bottom bg-white">
 
-        var photoPath = "~/images/" + (screenshot.ImagePath);
-
-
-        <div class="card-body card-img-bottom bg-white">
-
-            <h1><b>@screenshot.ScreenshotTitle</b></h1>
+    <h1><b>@Model.Title</b></h1>
 
 
-            <img id="myImg" alt="@screenshot.ScreenshotTitle" class="screenshots myImg" src="@photoPath" asp-append-version="true" /><br />
+    <div id="myImg" style="background-image: url(@Model.); background-size:100%;"></div>
 
-            @screenshot.ScreenshotDescription @if (signInManager.IsSignedIn(User) && screenshot.UserName == User.Identity.Name)
-            {
-                <a class="delete" style="text-align: right" asp-controller="Screenshot" asp-action="Delete"
-                   asp-route-id="@screenshot.ScreenshotId"
-                   asp-route-slug="@screenshot.Slug">Delete</a>
-            }<br />
-        </div>
+    @Model.Content @if (signInManager.IsSignedIn(User) && Model.AuthorName == User.Identity.Name)
+    {
+        <a class="delete" style="text-align: right" asp-controller="Screenshot" asp-action="Delete"
+           asp-route-id="@Model.ScreenshotId">Delete</a>
+    }<br />
+</div>
     }
     <div id="myModal" class="modal">
         <span class="close">&times;</span>
