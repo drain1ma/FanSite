@@ -210,10 +210,13 @@ body {
 }
 
 .postAuthorImage{
-    margin: 10px; 
-    border-top: dotted; 
+    margin: 10px;
 }
 
 .postContent{
     margin: 10px; 
+}
+
+#headingBtn{
+    text-align: right; 
 }

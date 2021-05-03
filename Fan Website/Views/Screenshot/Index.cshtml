@@ -1,4 +1,4 @@
-﻿@model Fan_Website.Models.Screenshot.ScreenshotModel
+﻿@model IEnumerable<Screenshot> 
 @inject SignInManager<ApplicationUser> signInManager
 
 
@@ -18,7 +18,14 @@
 
     @if (signInManager.IsSignedIn(User))
     {
-        <a class="btn btn-primary" asp-controller="Screenshot" asp-action="Create">Upload Screenshot</a><br />
+       <form method="post" enctype="multipart/form-data" asp-controller="Screenshot" asp-action="UploadScreenshotImage">
+                            <div id="upload">
+                                <label class="btn btn-default btn-file">
+                                    Browse <input type="file" name="file" style="display: none;">
+                                </label>
+                            </div>
+                            <button type="submit" id="btn-profile" class="btn btn-default">Submit</button>
+                        </form>
     }
 
 
@@ -106,19 +113,20 @@
         }
 }
 </style>
-<div class="card-body card-img-bottom bg-white">
-
-    <h1><b>@Model.Title</b></h1>
 
 
-    <div id="myImg" style="background-image: url(@Model.); background-size:100%;"></div>
+    @foreach (var screenshot in Model)
+    {<div class="card-body card-img-bottom bg-white">
+    <h1><b>@screenshot.ScreenshotTitle</b></h1>
 
-    @Model.Content @if (signInManager.IsSignedIn(User) && Model.AuthorName == User.Identity.Name)
+    <div id="myImg" style="background-image: url(@screenshot.ImagePath); background-size:100%;"></div>
+
+    @screenshot.ScreenshotDescription @if (signInManager.IsSignedIn(User) && screenshot.User.UserName == User.Identity.Name)
     {
         <a class="delete" style="text-align: right" asp-controller="Screenshot" asp-action="Delete"
-           asp-route-id="@Model.ScreenshotId">Delete</a>
+           asp-route-id="@screenshot.ScreenshotId">Delete</a>
     }<br />
-</div>
+    </div>
     }
     <div id="myModal" class="modal">
         <span class="close">&times;</span>
@@ -126,7 +134,7 @@
         <div id="caption"></div>
     </div>
     <script>
-       
+
         // Get the modal
         var modal = document.getElementById('myModal');
 

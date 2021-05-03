@@ -46,6 +46,7 @@ namespace Fan_Website.Service
         public Screenshot GetById(int id)
         {
             return context.Screenshots.Where(screenshot => screenshot.ScreenshotId == id)
+                .Include(screenshot => screenshot.User)
                 .FirstOrDefault();
         }
 

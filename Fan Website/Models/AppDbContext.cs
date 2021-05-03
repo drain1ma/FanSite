@@ -19,7 +19,6 @@ namespace Fan_Website
         public DbSet<Forum> Forums { get; set; }
         public DbSet<Screenshot> Screenshots { get; set; }
         public DbSet<PostReply> Replies { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -66,7 +65,7 @@ namespace Fan_Website
                 ScreenshotTitle = "Sephiroth from Final Fantasy VII",
                 ImagePath = "Final-Fantasy-VII-Remake-Sephiroth.png",
                 ScreenshotDescription = "This is my favorite game of all time",
-                CreatedOn = DateTime.Now 
+                CreatedOn = DateTime.Now
             }
          );
         }

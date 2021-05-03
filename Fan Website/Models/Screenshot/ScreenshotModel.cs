@@ -15,6 +15,7 @@ namespace Fan_Website.Models.Screenshot
         public int ScreenshotId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
+        public string DatePosted { get; set; }
         public IFormFile ScreenshotUpload { get; set; }
     }
 }

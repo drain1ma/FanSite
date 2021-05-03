@@ -22,8 +22,10 @@
 }
 
 .pfp {
+    display: inline-block; 
+    width: 100px; 
     height: 100px; 
-    width: auto; 
+    background-color: #ddd; 
 }
 
 .postAuthorImage{

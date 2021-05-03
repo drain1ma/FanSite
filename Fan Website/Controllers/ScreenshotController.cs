@@ -37,15 +37,11 @@ namespace Fan_Website.Controllers
             screenshotService = _screenshotService;
             userManager = _userManager; 
         }
-        public IActionResult Index(int id)
+        public IActionResult Index()
         {
-            var screenshot = screenshotService.GetById(id);
+            var screenshot = screenshotService.GetAll();
 
-            var model = new ScreenshotListModel()
-            {
-                
-            };
-            return View(model);
+            return View(screenshot);
         }
         public IActionResult UserScreenshots()
         {
@@ -76,10 +72,8 @@ namespace Fan_Website.Controllers
             }; 
         }
 
-        public async Task<IActionResult> UploadScreenshotImage(IFormFile file, int id)
+        public async Task<IActionResult> UploadScreenshotImage(IFormFile file)
         {
-            var screenshot = screenshotService.GetById(id);
-            var screenshotId = screenshot.ScreenshotId; 
             var connectionString = configuration.GetConnectionString("AzureStorageAccount");
             var container = uploadService.GetBlobContainer(connectionString);
 
@@ -89,9 +83,9 @@ namespace Fan_Website.Controllers
             var blockBlob = container.GetBlockBlobReference(filename);
 
             await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
-            await screenshotService.SetScreenshotImage(screenshotId, blockBlob.Uri);
+          //  await screenshotService.SetScreenshotImage(screenshotId, blockBlob.Uri);
 
-            return RedirectToAction("Index", "Screenshot", new { id = screenshotId });
+            return RedirectToAction("Index", "Screenshot");
         }
 
         [HttpGet]
