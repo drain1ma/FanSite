@@ -17,5 +17,6 @@ namespace Fan_Website.Models.Screenshot
         public int AuthorRating { get; set; }
         public string AuthorId { get; set; }
         public string DatePosted { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

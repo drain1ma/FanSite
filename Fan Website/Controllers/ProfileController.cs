@@ -45,7 +45,7 @@ namespace Fan_Website.Controllers
         {
             var userId = userManager.GetUserId(User);
             var connectionString = configuration.GetConnectionString("AzureStorageAccount");
-            var container = uploadService.GetBlobContainer(connectionString);
+            var container = uploadService.GetBlobContainer(connectionString, "profile-images");
 
             var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
             var filename = Path.Combine(parsedContentDisposition.FileName.Trim('"'));

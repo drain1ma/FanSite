@@ -1,14 +1,41 @@
-﻿@model Fan_Website.ViewModel.ScreenshotListModel 
+﻿@model Fan_Website.Models.Screenshot.AddScreenshotModel
 @inject UserManager<ApplicationUser> userManager
 
 
-    @section Scripts {
-        <script>
-            $(document).ready(function () {
-                $('.custom-file-input').on("change", function () {
-                    var fileName = $(this).val().split("\\").pop();
-                    $(this).next('.custom-file-label').html(fileName);
-                });
+
+
+<h1>New Screenshot</h1>
+
+<form asp-action="AddScreenshot" method="post" id="addPostForm" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+    <div id="upload">
+        <label>Upload Screenshot </label>
+        <br />
+        <label class="btn btn-default btn-file">
+            Browse <input asp-for="ImageFile" type="file" style="display: none;">
+        </label>
+    </div>
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" class="form-control"></textarea>
+    </div>
+    <button type="submit" id="registerBtn" class="btn btn-primary">Submit Screenshot</button>
+</form>
+
+
+
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
             });
-        </script>
-    }
+        });
+    </script>
+}

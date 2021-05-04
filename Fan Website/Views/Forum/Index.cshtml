@@ -2,6 +2,8 @@
 
 <h1>Forums</h1>
 
+
+<a asp-controller="Forum" asp-action="Create">Create Forum</a>
 <table class="table table-hover" id="forumIndexTable" style="background-color: white">
     <tbody>
         @foreach(var forum in Model.ForumList)

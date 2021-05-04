@@ -8,6 +8,6 @@ namespace Fan_Website.Infrastructure
 {
     public interface IUpload
     {
-        CloudBlobContainer GetBlobContainer(string connectionString); 
+        CloudBlobContainer GetBlobContainer(string connectionString, string containerName); 
     }
 }

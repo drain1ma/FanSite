@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http.Headers;
 using Fan_Website.Models.Screenshot;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace Fan_Website.Controllers
 {
@@ -20,17 +21,15 @@ namespace Fan_Website.Controllers
     {
         private AppDbContext context { get; set; }
 
-        private readonly IHostingEnvironment hostingEnvironment;
         private readonly IApplicationUser userService;
         private readonly IConfiguration configuration;
         private readonly IUpload uploadService;
         private readonly IScreenshot screenshotService; 
         private readonly UserManager<ApplicationUser> userManager; 
-        public ScreenshotController(AppDbContext ctx, IHostingEnvironment hostingEnvironment, IApplicationUser _userService, 
+        public ScreenshotController(AppDbContext ctx, IApplicationUser _userService, 
             IConfiguration _configuration, IUpload _uploadService, IScreenshot _screenshotService, UserManager<ApplicationUser> _userManager)
         {
             context = ctx;
-            this.hostingEnvironment = hostingEnvironment;
             userService = _userService;
             configuration = _configuration;
             uploadService = _uploadService;
@@ -39,9 +38,25 @@ namespace Fan_Website.Controllers
         }
         public IActionResult Index()
         {
-            var screenshot = screenshotService.GetAll();
+            var screenshots = screenshotService.GetAll()
+                .Select(screenshot => new ScreenshotListingModel
+                {
+                    Id = screenshot.ScreenshotId,
+                    Content = screenshot.ScreenshotDescription,
+                    Title = screenshot.ScreenshotTitle,
+                    AuthorId = screenshot.User.Id,
+                    AuthorName = screenshot.User.UserName,
+                    AuthorRating = screenshot.User.Rating,
+                    DatePosted = screenshot.CreatedOn.ToString(), 
+                    ImageUrl = screenshot.ImagePath
 
-            return View(screenshot);
+                });
+
+            var model = new ScreenshotIndexModel
+            {
+                ScreenshotList = screenshots
+            };
+            return View(model);
         }
         public IActionResult UserScreenshots()
         {
@@ -49,14 +64,32 @@ namespace Fan_Website.Controllers
             return View(screenshot); 
         }
 
-        public async Task<IActionResult> AddScreenshot(NewScreenshotModel model)
+        public IActionResult Create()
         {
+            var model = new AddScreenshotModel();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddScreenshot(AddScreenshotModel model)
+        {
+            var imageUri = model.ImageFile.FileName;
+
+            var blockBlob = UploadScreenshotImage(model.ImageFile);
+            imageUri = blockBlob.Uri.AbsoluteUri;
+            
             var userId = userManager.GetUserId(User);
             var user = await userManager.FindByIdAsync(userId);
-            var screenshot = BuildScreenshot(model, user);
-
-            
-            return RedirectToAction("Index", "Screenshot", new { id = screenshot.ScreenshotId }); 
+            var screenshot = new Screenshot
+            {
+                ScreenshotTitle = model.Title,
+                ScreenshotDescription = model.Content,
+                CreatedOn = DateTime.Now,
+                ImagePath = imageUri,
+                User = user 
+            }; 
+            await screenshotService.Add(screenshot); 
+            await userService.UpdateUserRating(userId, typeof(Screenshot));
+            return RedirectToAction("Index", "Screenshot"); 
         }
 
         private Screenshot BuildScreenshot(NewScreenshotModel model, ApplicationUser user)
@@ -72,20 +105,19 @@ namespace Fan_Website.Controllers
             }; 
         }
 
-        public async Task<IActionResult> UploadScreenshotImage(IFormFile file)
+        private CloudBlockBlob UploadScreenshotImage(IFormFile file)
         {
             var connectionString = configuration.GetConnectionString("AzureStorageAccount");
-            var container = uploadService.GetBlobContainer(connectionString);
+            var container = uploadService.GetBlobContainer(connectionString, "screenshot-images");
 
             var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
             var filename = Path.Combine(parsedContentDisposition.FileName.Trim('"'));
 
             var blockBlob = container.GetBlockBlobReference(filename);
 
-            await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
-          //  await screenshotService.SetScreenshotImage(screenshotId, blockBlob.Uri);
+            blockBlob.UploadFromStreamAsync(file.OpenReadStream()).Wait();
 
-            return RedirectToAction("Index", "Screenshot");
+            return blockBlob; 
         }
 
         [HttpGet]

@@ -16,14 +16,17 @@ namespace Fan_Website.Service
         {
             context = ctx; 
         }
-        public Task Create(Forum forum)
+        public async Task Create(Forum forum)
         {
-            throw new NotImplementedException();
+            context.Add(forum);
+            await context.SaveChangesAsync(); 
         }
 
-        public Task Delete(int forumId)
+        public async Task Delete(int forumId)
         {
-            throw new NotImplementedException();
+            var forum = GetById(forumId);
+            context.Remove(forum);
+            await context.SaveChangesAsync(); 
         }
 
         public IEnumerable<Forum> GetAll()
