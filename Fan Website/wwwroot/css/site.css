@@ -74,7 +74,7 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    background-image: url(../images/R1d800dcf687b877e84b430edbf06e19e.jpg);
+    background-image: url(../images/Ra9b34e28bcaac3c6c79fa8782fce737c.jfif);
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -141,7 +141,7 @@ body {
 .sectionHeader {
     display: block;
     background-color: lightseagreen;
-    padding: 15px; 
+    padding: 15px;
     font-family: 'Roboto';
 }
 
@@ -163,10 +163,10 @@ body {
     text-align: right; 
 }
 
-.postHeader{
-    display: block; 
-    background-color: aquamarine; 
-    padding: 15px; 
+.postHeader {
+    display: block;
+    background-color: lightseagreen;
+    padding: 15px;
 }
 
 .postAuthorContainer {
@@ -213,4 +213,10 @@ body {
 
 #headingBtn{
     text-align: right; 
+}
+
+#addPostForm {
+    display: block;
+    background-color: lightseagreen;
+    padding: 15px;
 }
