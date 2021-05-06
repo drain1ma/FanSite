@@ -169,8 +169,12 @@ body {
     padding: 15px;
 }
 
-.postAuthorContainer {
+#postIndexContent {
     background-color: white;
+}
+.postAuthorContainer {
+    padding: 10px; 
+    border-right: thin; 
 }
 
 .postContentContainer{
@@ -219,4 +223,8 @@ body {
     display: block;
     background-color: lightseagreen;
     padding: 15px;
+}
+
+#replyDivider{
+    background-color: aqua; 
 }
