@@ -48,14 +48,20 @@ namespace Fan_Website.Service
             return forum; 
         }
 
-        public Task UpdateForumDescription(int forumId, string newDescription)
+        public async Task UpdateForumDescription(int forumId, string newDescription)
         {
-            throw new NotImplementedException();
+            var forum = GetById(forumId);
+            forum.Description = newDescription;
+            context.Forums.Update(forum);
+            await context.SaveChangesAsync(); 
         }
 
-        public Task UpdateForumTitle(int forumId, string newTitle)
+        public async Task UpdateForumTitle(int forumId, string newTitle)
         {
-            throw new NotImplementedException();
+            var forum = GetById(forumId);
+            forum.PostTitle = newTitle;
+            context.Forums.Update(forum);
+            await context.SaveChangesAsync();
         }
     }
 }

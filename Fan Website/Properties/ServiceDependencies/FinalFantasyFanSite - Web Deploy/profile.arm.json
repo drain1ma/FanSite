@@ -7,7 +7,7 @@
   "parameters": {
     "resourceGroupName": {
       "type": "string",
-      "defaultValue": "FanWebsite20210425232124ResourceGroup",
+      "defaultValue": "FanWebsite20210503233913ResourceGroup",
       "metadata": {
         "description": "Name of the resource group for the resource. It is recommended to put resources under same resource group for better tracking."
       }
@@ -21,7 +21,7 @@
     },
     "resourceName": {
       "type": "string",
-      "defaultValue": "FinalFantasyFanSite",
+      "defaultValue": "finalfantasyfansite",
       "metadata": {
         "description": "Name of the main resource to be created by this template."
       }

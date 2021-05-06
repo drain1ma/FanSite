@@ -28,9 +28,11 @@ namespace Fan_Website.Service
             await context.SaveChangesAsync();
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var post = GetById(id);
+            context.Remove(post);
+            await context.SaveChangesAsync();
         }
 
         public Task EditPostContent(int id, string newContent)

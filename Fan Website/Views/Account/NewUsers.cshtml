@@ -3,6 +3,9 @@
 
 <!DOCTYPE html>
 <html>
+<head>
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
 <body>
     <link href="~/css/images.css" rel="stylesheet" />
 
@@ -11,11 +14,11 @@
         @user.UserName<br />
         if (user.ImagePath == null)
         {
-            <img src="~/images/blankpicture.png" class="img-thumbnail pfp" /><br />
+            <img src="~/images/blankpicture.png" id="userProfileImage" style="background-size: 100%;"><br />
             break;
         }
 
-        <img src="@user.ImagePath" class="img-thumbnail pfp" /><br />
+        <div id="userProfileImage" style="background-image: url(@user.ImagePath); background-size:100%;"></div><br />
 
     }
 </body>

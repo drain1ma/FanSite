@@ -17,14 +17,15 @@ namespace Fan_Website.Controllers
         private readonly IUnitOfWork unitOfWork; 
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-
+        private readonly IApplicationUser userService; 
         public AccountController(UserManager<ApplicationUser> userManager,
-           SignInManager<ApplicationUser> signInManager, IUnitOfWork unitOfWork)
+           SignInManager<ApplicationUser> signInManager, IUnitOfWork unitOfWork, IApplicationUser _userService)
         {
 
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.unitOfWork = unitOfWork; 
+            this.unitOfWork = unitOfWork;
+            userService = _userService;
         }
         public IActionResult AccountInfo()
         {
@@ -34,8 +35,8 @@ namespace Fan_Website.Controllers
 
         public IActionResult NewUsers()
         {
-            var users = userManager.Users;
-            return View(users);
+            var latestUsers = userService.GetLatestUsers(10); 
+            return View(latestUsers);
         }
 
 

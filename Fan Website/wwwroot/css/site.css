@@ -91,15 +91,9 @@ body {
 .video {
     width: 50%;
     height: auto;
-    flex-wrap: wrap; 
 }
 .delete{
     float: right; 
-}
-
-.bg-image {
-    
-    filter: blur(8px); 
 }
 
 .logoutbutton {
@@ -206,7 +200,7 @@ body {
     display: inline-block; 
     width: 200px; 
     height: 200px; 
-    background-color: #ddd; 
+    background-image: url(../images/blankpicture.png); 
 }
 
 .postAuthorImage{

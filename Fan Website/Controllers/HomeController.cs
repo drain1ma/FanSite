@@ -40,7 +40,7 @@ namespace Fan_Website.Controllers
                 AuthorId = post.User.Id, 
                 AuthorRating = post.User.Rating, 
                 DatePosted = post.CreatedOn.ToString(), 
-                RepliesCount = post.Replies.Count(), 
+                RepliesCount = post.Replies.Count(),   
                 Forum = GetForumListingForPost(post)
             });
 

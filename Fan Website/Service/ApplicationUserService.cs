@@ -60,5 +60,10 @@ namespace Fan_Website.Service
             context.Update(user);
             await context.SaveChangesAsync(); 
         }
+
+        public IEnumerable<ApplicationUser> GetLatestUsers(int n)
+        {
+            return GetAll().OrderByDescending(user => user.MemberSince).Take(n);
+        }
     }
 }

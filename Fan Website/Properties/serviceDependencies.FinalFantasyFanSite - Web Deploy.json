@@ -1,9 +1,15 @@
 {
   "dependencies": {
+    "storage1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/fanwebsitestorage",
+      "type": "storage.azure",
+      "connectionId": "AzureStorageAccount",
+      "secretStore": "AzureAppSettings"
+    },
     "mssql1": {
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/fansite/databases/Fan Website_db",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/fanwebsitedbserver/databases/fansitedb",
       "type": "mssql.azure",
-      "connectionId": "AppDbContext",
+      "connectionId": "Fansite",
       "secretStore": "AzureAppSettings"
     }
   }
