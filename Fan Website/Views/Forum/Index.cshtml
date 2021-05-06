@@ -1,23 +1,31 @@
-﻿@model Fan_Website.Models.Forum.ForumIndexModel 
+﻿@model Fan_Website.Models.Forum.ForumIndexModel
+@inject SignInManager<ApplicationUser> signInManager
 
-<h1>Forums</h1>
+<div class="sectionHeader">
+    <h1>Forums</h1>
+    @if (signInManager.IsSignedIn(User))
+    {
+        <a asp-controller="Forum" asp-action="Create">Create Forum</a>
+
+    }
+</div>
 
 
-<a asp-controller="Forum" asp-action="Create">Create Forum</a>
+
 <table class="table table-hover" id="forumIndexTable" style="background-color: white">
     <tbody>
-        @foreach(var forum in Model.ForumList)
-            {
-                <tr>
-                    <td>
-                        <a asp-controller="Forum" asp-action="Topic" asp-route-id="@forum.Id">
-                            @forum.Name
-                        </a>    
-                    </td>
-                    <td>
-                        @forum.Description
-                    </td>
-                </tr>
-            }
+        @foreach (var forum in Model.ForumList)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Forum" asp-action="Topic" asp-route-id="@forum.Id">
+                        @forum.Name
+                    </a>
+                </td>
+                <td>
+                    @forum.Description
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
