@@ -88,10 +88,6 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
-.video {
-    width: 50%;
-    height: auto;
-}
 .delete{
     float: right; 
 }
@@ -227,4 +223,24 @@ body {
 
 #replyDivider{
     background-color: aqua; 
+}
+
+#latestPostsTable {
+    width: 50%; 
+    height: auto; 
+    float: left; 
+}
+
+.noPosts{
+    display: block;
+    color: white; 
+    padding: 15px; 
+}
+
+.video {
+    left: 50%;
+    min-height: 100%;
+    min-width: 100%;
+    position: absolute;
+    top: 50%;
 }

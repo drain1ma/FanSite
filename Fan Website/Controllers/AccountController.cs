@@ -136,6 +136,7 @@ namespace Fan_Website.Controllers
                 {
                     UserName = model.UserName,
                     Email = model.Email,
+                    MemberSince = DateTime.Now 
                 };
                 var result = await userManager.CreateAsync(user, model.Password);
 
