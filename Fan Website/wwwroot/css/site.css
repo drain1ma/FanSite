@@ -151,6 +151,12 @@ body {
     padding: 3px; 
 }
 
+.homeSectionHeading {
+    display: inline-block;
+    color: #000;
+    padding: 3px;
+}
+
 .btn-newPost{
     padding: 5px; 
     background-color: crimson; 
@@ -208,7 +214,7 @@ body {
 }
 
 .postAuthorImage{
-    margin: 10px;
+    padding-bottom: 10px;
 }
 
 .postContent{
@@ -230,22 +236,20 @@ body {
 }
 
 #latestPostsTable {
-    width: 60%; 
+    width: 100%; 
     height: auto; 
-    float: left; 
     background-color: white; 
 }
 
 .noPosts{
+    width: 100%; 
     display: block;
-    color: white; 
+    background-color: white; 
     padding: 15px; 
 }
 
-.video {
-    left: 50%;
-    min-height: 100%;
-    min-width: 100%;
-    position: absolute;
-    top: 50%;
+.videoTrailer {
+    display: inline;
+    width: 60%;
+    height: auto;
 }
