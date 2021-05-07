@@ -15,8 +15,7 @@
                 User Profile
             </div>
         </div>
-        @if (Context.User.Identity.IsAuthenticated)
-        {
+
             <div class="row userProfile">
                 <div class="col-md-4">
                     @if (Model.ProfileImageUrl == null)
@@ -50,7 +49,7 @@
                     </span>
                 </div>
             </div>
-        }
+        
     </div>
 </body>
 </html>

@@ -8,18 +8,41 @@
 </head>
 <body>
     <link href="~/css/images.css" rel="stylesheet" />
-
+    <div class="sectionHeader">
+        <h3>New Users</h3>
+    </div>
+    
     @foreach (var user in Model)
     {
-        @user.UserName<br />
-        if (user.ImagePath == null)
-        {
-            <img src="~/images/blankpicture.png" id="userProfileImage" style="background-size: 100%;"><br />
-            break;
-        }
 
-        <div id="userProfileImage" style="background-image: url(@user.ImagePath); background-size:100%;"></div><br />
+        <div class="container body-content border-bottom">
+            
 
+            <div class="row userProfile">
+                <div class="col-md-4">
+                    @if (user.ImagePath == null)
+                    {
+                        <img src="~/images/blankpicture.png" id="userProfileImage" style="background-size: 100%;"><br />
+                        break;
+                    }
+                    else
+                    {
+
+                        <div id="userProfileImage" style="background-image: url(@user.ImagePath); background-size:100%;"></div>
+                    }
+                </div>
+                <div class="col-md-8">
+                    <span id="userName">@user.UserName</span>
+
+                    <span id="userRating">Current Rating: @user.Rating</span>
+                    <span id="userCreatedLabel">Member Since: @user.MemberSince</span>
+                    <span id="userActiveLabel">
+                    </span>
+                </div>
+            </div>
+        </div>
     }
+
+
 </body>
 </html>
