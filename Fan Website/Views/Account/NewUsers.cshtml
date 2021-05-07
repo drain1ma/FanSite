@@ -32,9 +32,11 @@
                     }
                 </div>
                 <div class="col-md-8">
-                    <span id="userName">@user.UserName</span>
+                    <a id="userName" asp-controller="Profile" asp-action="Detail" asp-route-id="@user.Id">@user.UserName</a>
+                    <div>
 
-                    <span id="userRating">Current Rating: @user.Rating</span>
+                    </div>
+                    <span id="userRating">Current Rating: </span><span class="badge rounded-circle" style="background-color: skyblue"> @user.Rating </span>
                     <span id="userCreatedLabel">Member Since: @user.MemberSince</span>
                     <span id="userActiveLabel">
                     </span>

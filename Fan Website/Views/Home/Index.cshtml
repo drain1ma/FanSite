@@ -8,6 +8,7 @@
 <!DOCTYPE html> 
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/css/site.css" rel="stylesheet" />
 </head>
@@ -15,50 +16,54 @@
     <div class="row frontPageContent">
         <div>
 
-            <h3 id="latestPosts">Latest Posts</h3>
-            <form asp-controller="Search" asp-action="Search" method="post">
-                <input asp-for="SearchQuery" type="text" class="homeSearch" placeholder="Search..."/>
-            </form>
-
-            <table class="table table-hover" id="latestPostsTable">
-                <tbody>
-
-                    @foreach (var post in Model.LatestPosts)
-                    {
-                        <tr>
-                            <td>
-                                <div class="postTitle">
-                                    <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">
-                                        @post.Title
-                                    </a>
-                                </div>
-                                <div class="postSubTitle">
-                                    @if (post.RepliesCount == 1)
-                                    {
-                                        <span>@post.RepliesCount Reply</span>
-                                    }
-                                    @if (post.RepliesCount == 0)
-                                    {
-                                        <span>No Replies</span>
-                                    }
-                                    @if (post.RepliesCount > 1)
-                                    {
-                                        <span>@post.RepliesCount Replies</span>
-                                    }
-                                    <span class="postUser"><a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.AuthorId">@post.AuthorName</a></span> (@post.AuthorRating) in <span class="postForum"><a asp-controller="Forum" asp-action="Topic" asp-route-id="@post.ForumId"></a>@post.Forum.Name</span> on <span class="postDate">@post.DatePosted</span>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-
-                </tbody>
-            </table>
         </div>
+        <h3 id="latestPosts">Latest Posts</h3>
+
+        <form asp-controller="Forum" asp-action="Search" method="post">
+            <div class="searchForm">
+                <input asp-for="SearchQuery" type="text" placeholder="Search..." class="searchBar" onfocus="clearThis(this)" />
+                <button type="submit" class="btn buttonSearch">
+                    <i class="material-icons">search</i>
+                </button>  
+            </div>
+        </form>
+
+
+        <table class="table table-hover" id="latestPostsTable">
+            <tbody>
+
+                @foreach (var post in Model.LatestPosts)
+                {
+                    <tr>
+                        <td>
+                            <div class="postTitle">
+                                <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">
+                                    @post.Title
+                                </a>
+                            </div>
+                            <div class="postSubTitle">
+                                @if (post.RepliesCount == 1)
+                                {
+                                    <span>@post.RepliesCount Reply</span>
+                                }
+                                @if (post.RepliesCount == 0)
+                                {
+                                    <span>No Replies</span>
+                                }
+                                @if (post.RepliesCount > 1)
+                                {
+                                    <span>@post.RepliesCount Replies</span>
+                                }
+                                <span class="postUser"><a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.AuthorId">@post.AuthorName </a></span><span class="badge rounded-circle" style="background-color: skyblue"> @post.AuthorRating </span> in <span class="postForum"><a asp-controller="Forum" asp-action="Topic" asp-route-id="@post.ForumId"></a> @post.Forum.Name</span> on <span class="postDate">@post.DatePosted</span>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
         <br />
-
     </div>
-
-
     <!-- <video width="1000" controls="controls" class="video">
          <source src="~/videos/Final%20Fantasy%20XVI%20-%20Awakening%20Trailer%20PS5.mp4" type="video/mp4" />
      </video>-->

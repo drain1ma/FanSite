@@ -13,13 +13,13 @@
     <link href="~/css/images.css" rel="stylesheet" />
     <script src="~/js/site.js"></script>
     <style>
-#myImg {
+.myImg {
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
 }
 
-#myImg:hover {opacity: 0.7;}
+.myImg:hover {opacity: 0.7;}
 
 /* The Modal (background) */
 .modal {
@@ -124,7 +124,7 @@
     {<div class="card-body card-img-bottom bg-white">
             <h1><b>@screenshot.Title</b></h1>
 
-            <img id="myImg" src="@screenshot.ImageUrl" alt="@screenshot.Content" class="screenshots" /><br />
+            <img class="myImg screenshots" src="@screenshot.ImageUrl" alt="@screenshot.Content" /><br />
 
             @screenshot.Content @if (signInManager.IsSignedIn(User) && screenshot.AuthorName == User.Identity.Name)
             {
@@ -140,19 +140,19 @@
 
 <script>
     // Get the modal
-    var modal = document.getElementById("myModal");
+    // Get the modal
+    var modal = document.getElementById('myModal');
 
     // Get the image and insert it inside the modal - use its "alt" text as a caption
-    var img = $('#myImg');
+    var img = $('.myImg');
     var modalImg = $("#img01");
     var captionText = document.getElementById("caption");
-    $('#myImg').click(function () {
+    $('.myImg').click(function () {
         modal.style.display = "block";
         var newSrc = this.src;
         modalImg.attr('src', newSrc);
         captionText.innerHTML = this.alt;
     });
-
 
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];

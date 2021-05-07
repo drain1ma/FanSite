@@ -70,7 +70,7 @@
                                                 <span class="postAuthor">
                                                     <a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.AuthorId">@post.AuthorName</a>
                                                 </span>
-                                                (@post.AuthorRating) on
+                                                <span class="badge rounded-circle" style="background-color: skyblue"> @post.AuthorRating </span> on
                                                 <span class="postData">
                                                     @post.DatePosted
                                                 </span>
