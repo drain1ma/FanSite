@@ -11,10 +11,17 @@
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-    <link rel="shortcut icon" type="image/x-icon" href="~/images/chocobo2.ico"/>
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/chocobo2.ico" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/css/images.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+
+
 </head>
 <body>
     <div class="text-center" style="background: skyblue">
@@ -33,19 +40,16 @@
                 <div class="navbar-collapse collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Index"><i class='fas fa-home'></i> Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-controller="Screenshot" asp-action="Index"><i class="fas fa-camera"></i> Screenshots</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Screenshot" asp-action="Index">Screenshots</a>
+                            <a class="nav-link" asp-controller="Forum" asp-action="Index"><i class="fas fa-comment-alt"></i> Forum</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Forum" asp-action="Index">Forum</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Account" asp-action="NewUsers">New Users</a>
+                            <a class="nav-link" asp-controller="Account" asp-action="NewUsers"><i class="fas fa-user-alt"></i> New Users</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
@@ -54,7 +58,8 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    My Profile
+                                    <i class="fas fa-user-circle">
+                                    </i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" asp-controller="Profile" asp-action="Detail" asp-route-id="@userManager.GetUserId(User)">My Account </a>
