@@ -60,8 +60,26 @@ namespace Fan_Website.Controllers
         }
         public IActionResult UserScreenshots()
         {
-            var screenshot = context.Screenshots.ToList();
-            return View(screenshot); 
+            var screenshots = screenshotService.GetAll()
+                .Select(screenshot => new ScreenshotListingModel
+            {
+                Id = screenshot.ScreenshotId,
+                Content = screenshot.ScreenshotDescription,
+                Title = screenshot.ScreenshotTitle,
+                AuthorId = screenshot.User.Id,
+                AuthorName = screenshot.User.UserName,
+                AuthorRating = screenshot.User.Rating,
+                DatePosted = screenshot.CreatedOn.ToString(),
+                ImageUrl = screenshot.ImagePath
+
+            }); ;
+
+            var model = new ScreenshotIndexModel
+            {
+                ScreenshotList = screenshots 
+            };
+
+            return View(model); 
         }
 
         public IActionResult Create()
