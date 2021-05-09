@@ -144,18 +144,19 @@ body {
     padding: 15px;
     font-family: 'Roboto';
 }
-
+.homeSectionHeader {
+    display: block;
+    background-color: orangered; 
+    padding: 15px; 
+    font-family: 'Roboto'; 
+}
 .sectionHeading{
     display: block; 
     color: #000; 
     padding: 3px; 
 }
 
-.homeSectionHeading {
-    display: inline-block;
-    color: #000;
-    padding: 3px;
-}
+
 
 .btn-newPost{
     padding: 5px; 
@@ -241,6 +242,11 @@ body {
     background-color: white; 
 }
 
+.inline-icon {
+    vertical-align: bottom;
+    font-size: 18px !important;
+}
+
 .noPosts{
     width: 100%; 
     display: block;
@@ -249,7 +255,23 @@ body {
 }
 
 .videoTrailer {
+    width: 50%; 
+    height: auto; 
     display: inline;
-    width: 60%;
-    height: auto;
+}
+video{
+    display: inline-block; 
+    margin: 0 auto; 
+    width: 50%; 
+    height: auto; 
+
+}
+
+.clive{
+   height: 200px; 
+}
+
+.responsive{
+    height: 100%; 
+    width: auto; 
 }

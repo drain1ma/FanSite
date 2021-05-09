@@ -9,23 +9,38 @@
 <html>
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
-    <div style="text-align: center">
-        <div style="background-color: white">
+    
+    <div class="frontPageContent">
+        <div class="container body-content">
+            <div style="text-align: center">
 
-            <div class="sectionHeader">
-                <h3>Final Fantasy XVI Trailer</h3>
+                <div class="row sectionHeading">
+                    <div class="sectionHeader" style="background-color: coral">
+                        <h3>Final Fantasy XVI Trailer</h3>
+                    </div>
+                    
+                    <div style="background-color: black; padding: 30px">
+
+
+                        <img src="~/images/clive.png" style="width: 25%; display: inline-block; height: auto; float: left;" />
+
+                        <video autoplay controls="controls" class="videoTrailer" style="width: 40%; height: auto;">
+                            <source src="~/videos/Final%20Fantasy%20XVI%20-%20Awakening%20Trailer%20PS5.mp4" type="video/mp4" />
+                        </video>
+                        <img src="~/images/joshua.png" style="width: 18%; display: inline-block; height: auto; float: right; padding-right: 50px" />
+                    </div>
+                </div>
             </div>
-            <video autoplay controls="controls" class="videoTrailer">
-                <source src="~/videos/Final%20Fantasy%20XVI%20-%20Awakening%20Trailer%20PS5.mp4" type="video/mp4" />
-            </video>
         </div>
+
     </div>
-    
-    
+
+
+
     <div class="row frontPageContent">
         <div class="container body-content">
 
@@ -77,7 +92,7 @@
                 </table>
             </div>
         </div>
-        
+
     </div>
     <br />
 
