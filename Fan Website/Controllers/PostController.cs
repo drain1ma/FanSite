@@ -50,6 +50,25 @@ namespace Fan_Website.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult UserPosts()
+        {
+            var posts = postService.GetAll().Select(post => new PostListingModel
+            {
+                Id = post.PostId, 
+                Title = post.Title, 
+                AuthorId = post.User.Id, 
+                AuthorName = post.User.UserName, 
+                AuthorRating = post.User.Rating, 
+                DatePosted = post.CreatedOn.ToString(),  
+                ForumId = post.Forum.ForumId, 
+                ForumName = post.Forum.PostTitle, 
+                RepliesCount = post.Replies.Count() 
+            }); 
+
+            return View(posts);
+        }
+
         public IActionResult Create(int id)
         {
             var forum = forumService.GetById(id);
