@@ -84,6 +84,15 @@
                                 </td>
                                 <td>
                                     <div class="postData">@post.DatePosted</div>
+                                    @if (post.AuthorName == User.Identity.Name)
+                                    {
+                                <div style="float: right">
+                                    <a class="btn btn-link" asp-action="Delete" asp-controller="Post" asp-route-id="@post.Id">
+                                        Delete
+                                    </a>
+                                </div>
+                                       
+                                    }
                                 </td>
                             </tr>
                         }

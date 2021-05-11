@@ -28,9 +28,8 @@ namespace Fan_Website.Service
             await context.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(Post post)
         {
-            var post = GetById(id);
             context.Remove(post);
             await context.SaveChangesAsync();
         }

@@ -23,9 +23,11 @@ namespace Fan_Website.Service
             await context.SaveChangesAsync();
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var screenshot = GetById(id);
+            context.Remove(screenshot);
+            await context.SaveChangesAsync();
         }
 
         public Task EditScreenshotContext(int id, string newContent)

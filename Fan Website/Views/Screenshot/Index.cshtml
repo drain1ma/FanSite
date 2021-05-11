@@ -125,7 +125,8 @@
             <h1><b>@screenshot.Title</b></h1>
 
             <img class="myImg screenshots" src="@screenshot.ImageUrl" alt="@screenshot.Content" /><br />
-
+            <span>@screenshot.DatePosted</span>
+            <span>@screenshot.AuthorName</span>
             @screenshot.Content @if (signInManager.IsSignedIn(User) && screenshot.AuthorName == User.Identity.Name)
             {
                 <a class="delete" style="text-align: right" asp-controller="Screenshot" asp-action="Delete"

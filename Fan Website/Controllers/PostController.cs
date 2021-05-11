@@ -17,14 +17,16 @@ namespace Fan_Website.Controllers
         private  IPost postService { get; set; }
         private  IForum forumService { get; set; }
         private  IApplicationUser userService { get; set; }
+        private AppDbContext context; 
         private static UserManager<ApplicationUser> userManager; 
 
-        public PostController(IPost _postService, IForum _forumService, IApplicationUser _userService, UserManager<ApplicationUser> _userManager)
+        public PostController(IPost _postService, IForum _forumService, IApplicationUser _userService, UserManager<ApplicationUser> _userManager, AppDbContext ctx)
         {
             postService = _postService;
             forumService = _forumService;
             userService = _userService; 
-            userManager = _userManager; 
+            userManager = _userManager;
+            context = ctx; 
         }
         [HttpGet]
         public IActionResult Index(int id)
@@ -121,6 +123,20 @@ namespace Fan_Website.Controllers
                 Date = reply.CreateOn, 
                 ReplyContent = reply.Content
             }); 
+        }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var post = context.Posts.Find(id); 
+            return View(post);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Post post)
+        {
+            context.Posts.Remove(post);
+            context.SaveChanges(); 
+            return RedirectToAction("Index", "Forum");
         }
     }
 }
