@@ -28,8 +28,9 @@ namespace Fan_Website.Service
             await context.SaveChangesAsync();
         }
 
-        public async Task Delete(Post post)
+        public async Task Delete(int id)
         {
+            var post = GetById(id); 
             context.Remove(post);
             await context.SaveChangesAsync();
         }
@@ -50,10 +51,11 @@ namespace Fan_Website.Service
         public Post GetById(int id)
         {
             return context.Posts.Where(post => post.PostId == id)
-                .Include(post => post.User)
-                .Include(post => post.Replies).ThenInclude(reply => reply.User)
-                .Include(post => post.Forum)
-                .First(); 
+               .Include(post => post.Forum)
+               .Include(post => post.User)
+               .Include(post => post.Replies)
+               .ThenInclude(reply => reply.User)
+               .FirstOrDefault();
         }
 
         public IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery)

@@ -15,7 +15,7 @@ namespace Fan_Website.Services
         IEnumerable<Post> GetPostsByForum(int id);
         IEnumerable<Post> GetLatestPosts(int n);
         Task Add(Post post);
-        Task Delete(Post post);
+        Task Delete(int id);
         Task EditPostContent(int id, string newContent);
         Task AddReply(PostReply reply);
     }

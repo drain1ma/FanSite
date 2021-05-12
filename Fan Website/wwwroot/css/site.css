@@ -228,7 +228,7 @@ body {
 
 #addPostForm {
     display: block;
-    background-color: lightseagreen;
+    background-color: white;
     padding: 15px;
 }
 
@@ -274,4 +274,10 @@ video{
 .responsive{
     height: 100%; 
     width: auto; 
+}
+
+.changePassword{
+    display: block; 
+    background-color: #6cffce; 
+    padding: 15px; 
 }

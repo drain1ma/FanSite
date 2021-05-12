@@ -124,19 +124,24 @@ namespace Fan_Website.Controllers
                 ReplyContent = reply.Content
             }); 
         }
-        [HttpGet]
         public IActionResult Delete(int id)
         {
-            var post = context.Posts.Find(id); 
-            return View(post);
-        }
+            var post = postService.GetById(id);
+            var model = new DeletePostModel
+            {
+                PostId = post.PostId,
+                PostAuthor = post.User.UserName,
+                PostContent = post.Content
+            };
 
+            return View(model);
+        }
         [HttpPost]
-        public IActionResult Delete(Post post)
+        public IActionResult ConfirmDelete(int id)
         {
-            context.Posts.Remove(post);
-            context.SaveChanges(); 
-            return RedirectToAction("Index", "Forum");
+            var post = postService.GetById(id);
+            postService.Delete(id); 
+            return RedirectToAction("Index", "Forum", new { id = post.Forum.ForumId });
         }
     }
 }
