@@ -37,15 +37,17 @@ namespace Fan_Website.Service
 
         public Forum GetById(int id)
         {
-            var forum = context.Forums.Where(forum => forum.ForumId == id)
+            var forum = context.Forums
+                .Where(f => f.ForumId == id)
                 .Include(f => f.Posts)
-                    .ThenInclude(p => p.User)
+                .ThenInclude(f => f.User)
                 .Include(f => f.Posts)
-                    .ThenInclude(p => p.Replies)
-                        .ThenInclude(r => r.User)
-                        .FirstOrDefault();
-
-            return forum; 
+                .ThenInclude(f => f.Replies)
+                .ThenInclude(f => f.User)
+                .Include(f => f.Posts)
+                .ThenInclude(p => p.Forum)
+                .FirstOrDefault();
+            return forum;
         }
 
         public async Task UpdateForumDescription(int forumId, string newDescription)

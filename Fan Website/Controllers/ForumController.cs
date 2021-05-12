@@ -28,7 +28,8 @@ namespace Fan_Website.Controllers
                 {
                     Id = forum.ForumId,
                     Name = forum.PostTitle,
-                    Description = forum.Description 
+                    Description = forum.Description,
+                    UserName = forum.UserName 
 
                 });
 
@@ -107,6 +108,19 @@ namespace Fan_Website.Controllers
                 Name = forum.PostTitle,
                 Description = forum.Description
             };
+        }
+        public IActionResult Delete(int id)
+        {
+            var forum = forumService.GetById(id);
+            return View(forum);
+        }
+
+        [HttpPost]
+        public IActionResult ConfirmDelete(int id)
+        {
+            var forum = forumService.GetById(id); 
+            forumService.Delete(id); 
+            return RedirectToAction("Index", "Forum", new { id = forum.ForumId });
         }
     }
 }

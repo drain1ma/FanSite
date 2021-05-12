@@ -56,7 +56,9 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="postData">@post.DatePosted</div>
+                                <div class="postData">@post.DatePosted</div> 
+                                <a class="delete" asp-controller="Post" asp-action="Delete"
+                                asp-route-id="@post.Id">Delete</a>
                             </td>
                         </tr>
                     }

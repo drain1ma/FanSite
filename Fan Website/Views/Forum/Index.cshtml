@@ -24,6 +24,12 @@
                 </td>
                 <td>
                     @forum.Description
+                    @if(User.Identity.Name == forum.UserName)
+                {
+                        <a asp-controller="Forum" asp-action="Delete" asp-route-id="@forum.Id" class="delete btn btn-link">
+                            Delete
+                        </a>
+                }
                 </td>
             </tr>
         }

@@ -51,11 +51,10 @@ namespace Fan_Website.Service
         public Post GetById(int id)
         {
             return context.Posts.Where(post => post.PostId == id)
-               .Include(post => post.Forum)
-               .Include(post => post.User)
-               .Include(post => post.Replies)
-               .ThenInclude(reply => reply.User)
-               .FirstOrDefault();
+                .Include(post => post.Forum)
+                .Include(post => post.User)
+                .Include(post => post.Replies).ThenInclude(reply => reply.User)
+                .FirstOrDefault();
         }
 
         public IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery)
