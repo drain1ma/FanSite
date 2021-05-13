@@ -5,6 +5,12 @@
 <head>
     <link href="~/css/images.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
 </head>
 <body>
     <div class="container body-content">
@@ -22,7 +28,7 @@
                 <div class="postAuthorImage" style="background-image: url(@Model.AuthorImageUrl); background-size: 100%;"></div>
                 <a asp-controller="Profile" asp-action="Detail" asp-route-id="@Model.AuthorId">
                     <strong>@Model.AuthorName</strong>
-                </a> (<span class="postAuthorRating">@Model.AuthorRating</span>) <br />
+                </a> <span class="badge rounded-circle" style="background-color: skyblue"> @Model.AuthorRating </span> <br />
                 <span class="postDate">@Model.Date</span>
             </div>
             <div class="col-md-9 postContentContainer">
@@ -33,11 +39,11 @@
         </div>
 
         <div class="row" id="replyDivider"></div>
-        <div class="postReplyContent">
+        <div class="row postReplyContent">
             @if (signInManager.IsSignedIn(User))
             {
                 <div class="row" id="replyRow">
-                    <span><a asp-controller="Reply" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">Post Reply</a></span>
+                    <span><a asp-controller="Reply" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-reply btn-4 btn-sep icon-reply">Reply</a></span>
                 </div>
             }
 
@@ -50,7 +56,7 @@
                             <div class="postAuthorImage" style="background-image: url(@reply.AuthorImageUrl); background-size: 100%;"></div>
                             <a asp-controller="Profile" asp-action="Detail" asp-route-id="@reply.AuthorId">
                                 <strong>@reply.AuthorName</strong>
-                            </a> (<span class="postAuthorRating">@reply.AuthorRating</span>) <br />
+                            </a> <span class="badge rounded-circle" style="background-color: skyblue"> @reply.AuthorRating </span> <br />
                             <span class="postDate">@reply.Date</span>
                         </div>
                         <div class="col-md-9 replyContentContainer">

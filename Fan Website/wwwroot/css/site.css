@@ -12,6 +12,43 @@ a.navbar-brand {
   text-align: center;
   word-break: break-all;
 }
+.btn-reply {
+  border: none;
+  font-size: 12px;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  display: inline-block;
+  letter-spacing: 1px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.btn-reply:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+/* Pseudo elements for icons */
+.btn-reply:before {
+  font-family: 'FontAwesome';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
 
 /* Provide sufficient contrast against white background */
 a {
@@ -203,8 +240,10 @@ body {
 }
 
 .postReplyContent{
-    background-color: grey; 
-    padding: 30px; 
+    border-top: thick; 
+    display: block; 
+    background-color: white; 
+    padding: 15px; 
 }
 
 #userProfileImage{
@@ -215,7 +254,8 @@ body {
 }
 
 .postAuthorImage{
-    padding-bottom: 10px;
+    padding-top: 30px; 
+    padding-bottom: 30px;
 }
 
 .postContent{
@@ -232,8 +272,14 @@ body {
     padding: 15px;
 }
 
-#replyDivider{
-    background-color: aqua; 
+#replyDivider {
+    display: block;
+    background-color: #0033bf;
+    padding: 15px; 
+}
+
+#replyRow{
+    padding: 15px; 
 }
 
 #latestPostsTable {
@@ -280,4 +326,54 @@ video{
     display: block; 
     background-color: #6cffce; 
     padding: 15px; 
+}
+
+
+.btn-4 {
+    background: #34495e;
+    color: #fff;
+}
+.btn-4:hover {
+    background: #2c3e50;
+
+}
+.btn-4:active {
+    background: #2c3e50;
+    top: 2px;
+}
+
+.btn-4:before {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    font-size: 140%;
+    width: 45px;
+    }
+/* Icon separator */
+.btn-sep {
+    padding: 10px 15px 10px 60px;
+}
+
+.btn-sep:before {
+    background: rgba(0,0,0,0.15);
+}
+
+.icon-reply:before {
+    content: "\f112";
+}
+.icon-cart:before {
+    content: "\f07a";
+}
+
+.icon-heart:before {
+    content: "\f55a";
+}
+
+.icon-info:before {
+    content: "\f05a";
+}
+
+.icon-send:before {
+    content: "\f1d8";
 }
