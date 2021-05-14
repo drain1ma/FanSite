@@ -347,12 +347,12 @@ video{
     height: 100%;
     left: 0;
     top: 0;
-    font-size: 140%;
+    font-size: 200%;
     width: 45px;
     }
 /* Icon separator */
 .btn-sep {
-    padding: 10px 15px 10px 60px;
+    padding: 10px 15px 10px 50px;
 }
 
 .btn-sep:before {
