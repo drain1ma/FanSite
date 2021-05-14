@@ -22,9 +22,9 @@ namespace Fan_Website.Service
             await context.SaveChangesAsync(); 
         }
 
-        public async Task Delete(int forumId)
+        public async Task Delete(int id)
         {
-            var forum = GetById(forumId);
+            var forum = GetById(id);
             context.Remove(forum);
             await context.SaveChangesAsync(); 
         }
@@ -38,29 +38,35 @@ namespace Fan_Website.Service
         public Forum GetById(int id)
         {
             var forum = context.Forums
-                .Where(f => f.ForumId == id)
-                .Include(f => f.Posts)
-                .ThenInclude(f => f.User)
-                .Include(f => f.Posts)
-                .ThenInclude(f => f.Replies)
-                .ThenInclude(f => f.User)
-                .Include(f => f.Posts)
-                .ThenInclude(p => p.Forum)
-                .FirstOrDefault();
+               .Where(f => f.ForumId == id)
+               .Include(f => f.Posts)
+               .ThenInclude(f => f.User)
+               .Include(f => f.Posts)
+               .ThenInclude(f => f.Replies)
+               .ThenInclude(f => f.User)
+               .Include(f => f.Posts)
+               .ThenInclude(p => p.Forum)
+               .FirstOrDefault();
+
+            if (forum.Posts == null)
+            {
+                forum.Posts = new List<Post>();
+            }
+
             return forum;
         }
 
-        public async Task UpdateForumDescription(int forumId, string newDescription)
+        public async Task UpdateForumDescription(int id, string newDescription)
         {
-            var forum = GetById(forumId);
+            var forum = GetById(id);
             forum.Description = newDescription;
             context.Forums.Update(forum);
             await context.SaveChangesAsync(); 
         }
 
-        public async Task UpdateForumTitle(int forumId, string newTitle)
+        public async Task UpdateForumTitle(int id, string newTitle)
         {
-            var forum = GetById(forumId);
+            var forum = GetById(id);
             forum.PostTitle = newTitle;
             context.Forums.Update(forum);
             await context.SaveChangesAsync();

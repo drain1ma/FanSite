@@ -109,6 +109,7 @@ namespace Fan_Website.Controllers
                 Description = forum.Description
             };
         }
+        [HttpGet]
         public IActionResult Delete(int id)
         {
             var forum = forumService.GetById(id);
@@ -116,11 +117,10 @@ namespace Fan_Website.Controllers
         }
 
         [HttpPost]
-        public IActionResult ConfirmDelete(int id)
+        public IActionResult Delete(Forum forum)
         {
-            var forum = forumService.GetById(id); 
-            forumService.Delete(id); 
-            return RedirectToAction("Index", "Forum", new { id = forum.ForumId });
+            postService.Delete(forum.ForumId);
+            return RedirectToAction("Index", "Forum");
         }
     }
 }

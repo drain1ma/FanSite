@@ -28,11 +28,11 @@ namespace Fan_Website.Service
             await context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             var post = GetById(id);
             context.Remove(post);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         public Task EditPostContent(int id, string newContent)
