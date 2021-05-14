@@ -117,9 +117,9 @@ namespace Fan_Website.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(Forum forum)
+        public async Task<IActionResult> Delete(Forum forum)
         {
-            postService.Delete(forum.ForumId);
+            await forumService.Delete(forum.ForumId);
             return RedirectToAction("Index", "Forum");
         }
     }
