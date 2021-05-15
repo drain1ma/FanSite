@@ -101,9 +101,16 @@
                     <i class="material-icons md-72">question_answer</i>
                     <h3>
                         It looks like there are no posts to be found.
-                        Why not
-                        <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">create one
-                        </a>
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                        <partial>
+                            Why not
+                            <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">
+                                create one
+                            </a>
+                        </partial>
+                        }
+                        
                     </h3>
                 </div>
 
