@@ -46,8 +46,7 @@ namespace Fan_Website
                         ForumId = 1,
                         PostTitle = "Final Fantasy IX",
                         Description = "A place to discuss Final Fantasy IX!",
-                        CreatedOn = DateTime.UtcNow,
-                        UserName = "linguisticgamer98"
+                        CreatedOn = DateTime.UtcNow 
                     }
                  );
             modelBuilder.Entity<Screenshot>().HasData(

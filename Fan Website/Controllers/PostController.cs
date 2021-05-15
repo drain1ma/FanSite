@@ -17,16 +17,14 @@ namespace Fan_Website.Controllers
         private  IPost postService { get; set; }
         private  IForum forumService { get; set; }
         private  IApplicationUser userService { get; set; }
-        private AppDbContext context; 
         private static UserManager<ApplicationUser> userManager; 
 
-        public PostController(IPost _postService, IForum _forumService, IApplicationUser _userService, UserManager<ApplicationUser> _userManager, AppDbContext ctx)
+        public PostController(IPost _postService, IForum _forumService, IApplicationUser _userService, UserManager<ApplicationUser> _userManager)
         {
             postService = _postService;
             forumService = _forumService;
             userService = _userService; 
             userManager = _userManager;
-            context = ctx; 
         }
         [HttpGet]
         public IActionResult Index(int id)

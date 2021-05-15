@@ -32,6 +32,7 @@ namespace Fan_Website.Service
         public IEnumerable<Forum> GetAll()
         {
             return context.Forums
+                .Include(forum => forum.User)
                 .Include(forum => forum.Posts); 
         }
 
@@ -47,11 +48,6 @@ namespace Fan_Website.Service
                .Include(f => f.Posts)
                .ThenInclude(p => p.Forum)
                .FirstOrDefault();
-
-            if (forum.Posts == null)
-            {
-                forum.Posts = new List<Post>();
-            }
 
             return forum;
         }

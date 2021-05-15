@@ -34,18 +34,22 @@ namespace Fan_Website.Service
 
         private int CalculateUserRating(Type type, int userRating)
         {
-            var inc = 0; 
+            var inc = 0;
 
             if (type == typeof(Post))
             {
-                inc = 1; 
+                inc = 1;
             }
-            
+
             if (type == typeof(PostReply))
             {
-                inc = 3; 
+                inc = 3;
             }
             if (type == typeof(Screenshot))
+            {
+                inc = 2;
+            }
+            if (type == typeof(Forum))
             {
                 inc = 2; 
             }

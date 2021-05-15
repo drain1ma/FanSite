@@ -1,7 +1,9 @@
-﻿using Fan_Website.Models;
+﻿using Fan_Website.Infrastructure;
+using Fan_Website.Models;
 using Fan_Website.Models.Forum;
 using Fan_Website.Services;
 using Fan_Website.ViewModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,12 +16,14 @@ namespace Fan_Website.Controllers
     {
         private IForum forumService { get; set; }
         private IPost postService { get; set; }
-
-
-        public ForumController(IForum _forumService, IPost _postService)
+        private IApplicationUser userService { get; set; }
+        private static UserManager<ApplicationUser> userManager;
+        public ForumController(IForum _forumService, IPost _postService, IApplicationUser _userService, UserManager<ApplicationUser> _userManager)
         {
             forumService = _forumService;
-            postService = _postService; 
+            postService = _postService;
+            userService = _userService;
+            userManager = _userManager; 
         }
         public IActionResult Index()
         {
@@ -29,8 +33,9 @@ namespace Fan_Website.Controllers
                     Id = forum.ForumId,
                     Name = forum.PostTitle,
                     Description = forum.Description,
-                    UserName = forum.UserName 
-
+                    AuthorId = forum.User.Id, 
+                    AuthorName = User.Identity.Name, 
+                    AuthorRating = forum.User.Rating.ToString() 
                 });
 
             var model = new ForumIndexModel
@@ -90,15 +95,19 @@ namespace Fan_Website.Controllers
         [HttpPost]
         public async Task<IActionResult> AddForum(AddForumModel model)
         {
+            var userId = userManager.GetUserId(User);
+            var user = await userManager.FindByIdAsync(userId);
             var forum = new Forum
             {
                 PostTitle = model.Title,
                 Description = model.Description,
-                CreatedOn = DateTime.Now
+                CreatedOn = DateTime.Now,
+                User = user 
             };
 
             await forumService.Create(forum);
-            return RedirectToAction("Index", "Forum"); 
+            await userService.UpdateUserRating(userId, typeof(Forum));
+            return RedirectToAction("Index", "Forum", new { id = forum.ForumId }); 
         }
         private ForumListingModel BuildForumListing(Forum forum)
         {
@@ -106,7 +115,10 @@ namespace Fan_Website.Controllers
             {
                 Id = forum.ForumId,
                 Name = forum.PostTitle,
-                Description = forum.Description
+                Description = forum.Description, 
+                AuthorId = forum.User.Id, 
+                AuthorName = forum.User.UserName, 
+                AuthorRating = forum.User.Rating.ToString() 
             };
         }
         [HttpGet]
