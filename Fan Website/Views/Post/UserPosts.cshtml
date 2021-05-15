@@ -29,8 +29,14 @@
 
             <table class="table table-hover table-bordered" id="forumIndexTable" style="background-color: white">
                 <tbody>
+
+              
                     @foreach (var post in Model)
                     {
+                        @if(User.Identity.Name == post.AuthorName)
+                {
+
+                
                         <tr>
                             <td>
                                 <div class="postData">
@@ -62,9 +68,10 @@
                             </td>
                         </tr>
                     }
+                    }
                 </tbody>
             </table>
-
+                   
         </div>
         </div>
 
