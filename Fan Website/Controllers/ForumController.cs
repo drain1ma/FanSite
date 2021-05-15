@@ -34,7 +34,7 @@ namespace Fan_Website.Controllers
                     Name = forum.PostTitle,
                     Description = forum.Description,
                     AuthorId = forum.User.Id, 
-                    AuthorName = User.Identity.Name, 
+                    AuthorName = forum.User.UserName, 
                     AuthorRating = forum.User.Rating.ToString() 
                 });
 
@@ -102,7 +102,7 @@ namespace Fan_Website.Controllers
                 PostTitle = model.Title,
                 Description = model.Description,
                 CreatedOn = DateTime.Now,
-                User = user 
+                User = user  
             };
 
             await forumService.Create(forum);

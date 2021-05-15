@@ -40,6 +40,7 @@ namespace Fan_Website.Service
         {
             var forum = context.Forums
                .Where(f => f.ForumId == id)
+               .Include(f => f.User)
                .Include(f => f.Posts)
                .ThenInclude(f => f.User)
                .Include(f => f.Posts)
