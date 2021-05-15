@@ -227,6 +227,11 @@ body {
     padding: 10px; 
 }
 .btn-back {
+    display: inline-block; 
+    border: ridge; 
+    float: right; 
+    background: #333; 
+    color: #fff; 
     padding: 5px; 
 }
 
@@ -274,7 +279,7 @@ body {
 
 #replyDivider {
     display: block;
-    background-color: #0033bf;
+    background-color: #333;
     padding: 15px; 
 }
 
@@ -347,12 +352,12 @@ video{
     height: 100%;
     left: 0;
     top: 0;
-    font-size: 200%;
-    width: 45px;
+    font-size: 140%;
+    width: 30px;
     }
 /* Icon separator */
 .btn-sep {
-    padding: 10px 15px 10px 50px;
+    padding: 10px 5px 10px 35px;
 }
 
 .btn-sep:before {
@@ -377,3 +382,34 @@ video{
 .icon-send:before {
     content: "\f1d8";
 }
+
+.form-control {
+    display: block;
+    background-color: #c6ffff;
+    transition: ease .3s;
+    padding: 15px;
+}
+
+.form-control:focus{
+    color: black; 
+    background-color: white; 
+}
+
+.replyOriginalPost { 
+    display: block; 
+    background-color: white;
+    padding: 15px;
+}
+
+.authorBlock{
+    display: block; 
+    padding-left: 15px; 
+    padding-top: 15px; 
+}
+
+.btn-submitPost{
+    background: #cb0a31; 
+    color: #333; 
+}
+
+
