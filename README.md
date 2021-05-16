@@ -6,8 +6,8 @@ The current state of the site includes user authentication, where users can uplo
 This page is capable of displaying the images the users store from the sql database as well as uses Azure Blob storage to store the images. Currently, users are able to look at their own uploaded screenshots with the "Your Screenshots" page. The goal is to also have a upvote/downvote system for the screenshots which is currently being worked on as well. 
 
 
-![Enlarging Image](https://user-images.githubusercontent.com/56358612/115103316-fdc03700-9f1e-11eb-9908-54f63a2e43c6.png)
-Currently, the code that I have within the project is now capable of enlarging all the images within the database. It currently allows users to do that using javascript and jQuery within the html document. Users are also able to add profile pictures to their profiles, and I am currently working on having the profile picture display with whatever the user posts to the site. 
+![Enlarging Image](https://user-images.githubusercontent.com/56358612/118382721-25f69080-b5c6-11eb-922e-c3b201402183.png)
+Currently, the code that I have within the project is now capable of enlarging all the images within the database. It currently allows users to do that using javascript and jQuery within the html document. Users are also able to add profile pictures to their profiles, as well as have their profile pictures display with the posts they post in the forum. 
 
 - [x] User authentication
 - [x] Images uploaded to database and stored with username
