@@ -1,5 +1,5 @@
 ## Project Overview 
-The current goal of this project is to provide a fun environment for those interested in the Final Fantasy franchise. As of right now, there is user authentication and users are capable of adding screenshots, or really, any images onto the site as long as they are logged in.
+The current state of the site includes user authentication, where users can upload screenshots to the screenshot page as well as an interactive forum between users. 
 
 ## Website Functionality 
 ![Screenshot Page](https://user-images.githubusercontent.com/56358612/115103247-7377d300-9f1e-11eb-8b8e-3936fb01612a.png)
@@ -14,6 +14,11 @@ Currently, the code that I have within the project is now capable of enlarging a
 - [x] Users capable of deleting only the images they upload
 - [x] Adding user profile pictures
 - [x] A forum for users to interact with one another
-- [ ] Layout that looks appealing to the users
+- [x] Layout that looks appealing to the users
 - [x] Adding a dropdownlist 
 - [x] Forums should link to specific posts related to that topic
+- [ ] Upvoting system for forum posts
+- [ ] Display most popular posts
+- [ ] Allow users to update a user bio 
+- [ ] A page where users can rate the game from the series
+- [ ] A star rating system 
