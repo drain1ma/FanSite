@@ -15,7 +15,9 @@ Currently, the code that I have within the project is now capable of enlarging a
 ![Forum](https://user-images.githubusercontent.com/56358612/118382818-ff852500-b5c6-11eb-801d-fc00db192d27.png)
 The forum on the site allows users to create their own forums for other users to post in. The ultimate goal is to have users not create duplicate forums which should be easy to implement once I actually get to it. Each forum leads to a specific list of posts that relate to that forum. Users can also delete the forums they create after the forum has been made. 
 
-
+##Posts
+![Posts](https://user-images.githubusercontent.com/56358612/118382931-cf8a5180-b5c7-11eb-9b70-f34245043a50.png)
+Users are able to upload posts into the forum topic that they click on. They are also able to view their own posts by clicking on the "Your Posts" section where they can also look at their profile. The only functionality for posts that currently needs to be added an upvote/downvote system as well as an edit feature. 
 
 - [x] User authentication
 - [x] Images uploaded to database and stored with username
