@@ -2,8 +2,8 @@
 The current state of the site includes user authentication, where users can upload screenshots to the screenshot page as well as an interactive forum between users. 
 
 ## Website Functionality 
-![Screenshot Page](https://user-images.githubusercontent.com/56358612/115103247-7377d300-9f1e-11eb-8b8e-3936fb01612a.png)
-This page is capable of displaying the images the users store from the sql database. Currently, users are able to look at their own uploaded screenshots with the "Your Screenshots" page. The goal is to also have a upvote/downvote system for the screenshots which is currently being worked on as well. 
+![Screenshot Page](https://user-images.githubusercontent.com/56358612/118382611-61448f80-b5c5-11eb-8d12-464108377fe8.png)
+This page is capable of displaying the images the users store from the sql database as well as uses Azure Blob storage to store the images. Currently, users are able to look at their own uploaded screenshots with the "Your Screenshots" page. The goal is to also have a upvote/downvote system for the screenshots which is currently being worked on as well. 
 
 
 ![Enlarging Image](https://user-images.githubusercontent.com/56358612/115103316-fdc03700-9f1e-11eb-9908-54f63a2e43c6.png)
