@@ -19,6 +19,10 @@ The forum on the site allows users to create their own forums for other users to
 ![Posts](https://user-images.githubusercontent.com/56358612/118382931-cf8a5180-b5c7-11eb-9b70-f34245043a50.png)
 Users are able to upload posts into the forum topic that they click on. They are also able to view their own posts by clicking on the "Your Posts" section where they can also look at their profile. The only functionality for posts that currently needs to be added an upvote/downvote system as well as an edit feature. 
 
+## Replies
+![Replies](https://user-images.githubusercontent.com/56358612/118384100-758e8980-b5d1-11eb-9e26-297b9e091258.png)
+Users are able to post replies to the posts that are in the forum. Currently what needs to be done is allowing users to delete and edit their replies which should be easy to implement since there are no instances of the reply within any other tables in the sql database. 
+
 - [x] User authentication
 - [x] Images uploaded to database and stored with username
 - [x] Users capable of deleting only the images they upload
