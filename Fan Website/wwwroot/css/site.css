@@ -197,14 +197,21 @@ body {
 
 .btn-newPost{
     padding: 5px; 
-    background-color: crimson; 
-    text-align: center; 
-    flex: initial; 
-    border-color: white; 
+    background: crimson; 
+    color: white; 
+    border: ridge; 
+}
+
+btn-newPost:hover{
+    padding: 4px; 
+    background: darkred; 
+    color: #333; 
+    border: ridge; 
 }
 
 .createPostButton{
-    text-align: right; 
+    display: inline-block; 
+    float: right; 
 }
 
 .postHeader {
@@ -357,7 +364,7 @@ video{
     }
 /* Icon separator */
 .btn-sep {
-    padding: 10px 5px 10px 35px;
+    padding: 10px 5px 10px 40px;
 }
 
 .btn-sep:before {
@@ -413,3 +420,33 @@ video{
 }
 
 
+.btn-newScreenshot {
+    display: inline-block; 
+    float: right; 
+    padding: 5px;
+    background: crimson;
+    color: white;
+    border: ridge;
+}
+
+.btn-newScreenshot:hover{
+    padding: 5px; 
+    background: #be0c30; 
+    color: #333; 
+    transition: ease 0.3s; 
+    border: ridge; 
+}
+
+#screenshotRow{
+    text-align: right; 
+}
+
+.createScreenshotButton{
+    display: inline-block;  
+    float: right; 
+}
+.screenshotContent {
+    display: block;
+    padding: 15px;
+    background-color: white;
+}
