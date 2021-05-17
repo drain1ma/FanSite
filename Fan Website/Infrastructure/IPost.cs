@@ -18,5 +18,7 @@ namespace Fan_Website.Services
         Task Delete(int id);
         Task EditPostContent(int id, string newContent);
         Task AddReply(PostReply reply);
+        Task DeleteReply(int id);
+        PostReply GetReplyById(int id); 
     }
 }

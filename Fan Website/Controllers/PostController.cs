@@ -142,5 +142,26 @@ namespace Fan_Website.Controllers
             await postService.Delete(post.PostId); 
             return RedirectToAction("Index", "Forum");
         }
+
+        [HttpGet] 
+        public IActionResult DeleteReply(int id)
+        {
+            var reply = postService.GetReplyById(id);
+
+            var model = new PostReply
+            {
+                Id = reply.Id, 
+                Content = reply.Content 
+            };
+
+            return View(model); 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteReply(PostReply reply)
+        {
+            await postService.DeleteReply(reply.Id);
+            return RedirectToAction("Index", "Forum"); 
+        }
     }
 }

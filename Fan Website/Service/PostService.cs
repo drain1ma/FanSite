@@ -35,6 +35,12 @@ namespace Fan_Website.Service
             await context.SaveChangesAsync();
         }
 
+        public async Task DeleteReply(int id)
+        {
+            var reply = GetReplyById(id);
+            context.Remove(reply); 
+            await context.SaveChangesAsync(); 
+        }
         public Task EditPostContent(int id, string newContent)
         {
             throw new NotImplementedException();
@@ -76,6 +82,13 @@ namespace Fan_Website.Service
         public IEnumerable<Post> GetPostsByForum(int id)
         {
             return context.Forums.Where(forum => forum.ForumId == id).First().Posts; 
+        }
+
+        public PostReply GetReplyById(int id)
+        {
+            return context.Replies.Where(reply => reply.Id == id)
+                .Include(reply => reply.User)
+                .FirstOrDefault(); 
         }
     }
 }

@@ -63,6 +63,11 @@
                             <div class="postContent">
                                 @Html.Raw(@reply.ReplyContent)
                             </div>
+                            @if (User.Identity.Name == reply.AuthorName)
+                            {
+                                <a asp-controller="Post" asp-action="DeleteReply" asp-route-id="@reply.Id" class="btn btn-link" style="float: right">Delete</a>
+                            }
+
                         </div>
                     </div>
                 }
