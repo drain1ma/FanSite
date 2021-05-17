@@ -450,3 +450,9 @@ video{
     padding: 15px;
     background-color: white;
 }
+
+.register{
+    display: block; 
+    padding: 15px; 
+    background-color: white; 
+}
