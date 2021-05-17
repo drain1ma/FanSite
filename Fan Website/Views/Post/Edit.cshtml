@@ -1,0 +1,33 @@
+﻿@model Fan_Website.Models.Post.PostEditModel
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="sectionHeader">
+        <h1>Edit Post | @Model.ForumName</h1>
+    </div>
+
+
+    <form asp-action="Edit" method="post" id="addPostForm">
+
+        <div class="addPost">
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Content"></label>
+                <textarea asp-for="Content" class="form-control"></textarea>
+            </div>
+            <input asp-for="Id" type="hidden" />
+            <button type="submit" id="submitPostBtn" class="btn btn-primary">Edit Post</button>
+        </div>
+    </form>
+
+</body>
+</html>

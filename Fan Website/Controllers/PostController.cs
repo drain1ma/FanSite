@@ -14,16 +14,16 @@ namespace Fan_Website.Controllers
 {
     public class PostController : Controller
     {
-        private  IPost postService { get; set; }
-        private  IForum forumService { get; set; }
-        private  IApplicationUser userService { get; set; }
-        private static UserManager<ApplicationUser> userManager; 
+        private IPost postService { get; set; }
+        private IForum forumService { get; set; }
+        private IApplicationUser userService { get; set; }
+        private static UserManager<ApplicationUser> userManager;
 
         public PostController(IPost _postService, IForum _forumService, IApplicationUser _userService, UserManager<ApplicationUser> _userManager)
         {
             postService = _postService;
             forumService = _forumService;
-            userService = _userService; 
+            userService = _userService;
             userManager = _userManager;
         }
         [HttpGet]
@@ -31,22 +31,22 @@ namespace Fan_Website.Controllers
         {
 
             var post = postService.GetById(id);
-            var replies = BuildPostReplies(post.Replies); 
+            var replies = BuildPostReplies(post.Replies);
             var model = new PostIndexModel
             {
                 Id = post.PostId,
-                Title = post.Title, 
-                AuthorName = post.User.UserName, 
-                AuthorId = post.User.Id, 
-                AuthorRating = post.User.Rating, 
-                AuthorImageUrl = post.User.ImagePath, 
-                Date = post.CreatedOn, 
-                PostContent = post.Content, 
+                Title = post.Title,
+                AuthorName = post.User.UserName,
+                AuthorId = post.User.Id,
+                AuthorRating = post.User.Rating,
+                AuthorImageUrl = post.User.ImagePath,
+                Date = post.CreatedOn,
+                PostContent = post.Content,
                 Replies = replies,
-                ForumId = post.Forum.ForumId, 
-                ForumName = post.Forum.PostTitle 
+                ForumId = post.Forum.ForumId,
+                ForumName = post.Forum.PostTitle
 
-            }; 
+            };
             return View(model);
         }
 
@@ -55,16 +55,16 @@ namespace Fan_Website.Controllers
         {
             var posts = postService.GetAll().Select(post => new PostListingModel
             {
-                Id = post.PostId, 
-                Title = post.Title, 
-                AuthorId = post.User.Id, 
-                AuthorName = post.User.UserName, 
-                AuthorRating = post.User.Rating, 
-                DatePosted = post.CreatedOn.ToString(),  
-                ForumId = post.Forum.ForumId, 
-                ForumName = post.Forum.PostTitle, 
-                RepliesCount = post.Replies.Count() 
-            }); 
+                Id = post.PostId,
+                Title = post.Title,
+                AuthorId = post.User.Id,
+                AuthorName = post.User.UserName,
+                AuthorRating = post.User.Rating,
+                DatePosted = post.CreatedOn.ToString(),
+                ForumId = post.Forum.ForumId,
+                ForumName = post.Forum.PostTitle,
+                RepliesCount = post.Replies.Count()
+            });
 
             return View(posts);
         }
@@ -75,29 +75,29 @@ namespace Fan_Website.Controllers
 
             var model = new NewPostModel
             {
-                ForumName = forum.PostTitle, 
-                ForumId = forum.ForumId, 
-                AuthorName = User.Identity.Name 
+                ForumName = forum.PostTitle,
+                ForumId = forum.ForumId,
+                AuthorName = User.Identity.Name
             };
 
-            return View(model); 
+            return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddPost(NewPostModel model)
         {
             var userId = userManager.GetUserId(User);
-            var user = await userManager.FindByIdAsync(userId); 
+            var user = await userManager.FindByIdAsync(userId);
             var post = BuildPost(model, user);
 
             await postService.Add(post);
-            await userService.UpdateUserRating(userId, typeof(Post)); 
-            return RedirectToAction("Index", "Post", new {id = post.PostId}); 
+            await userService.UpdateUserRating(userId, typeof(Post));
+            return RedirectToAction("Index", "Post", new { id = post.PostId });
         }
 
         private Post BuildPost(NewPostModel model, ApplicationUser user)
         {
-            var forum = forumService.GetById(model.ForumId); 
+            var forum = forumService.GetById(model.ForumId);
 
             return new Post
             {
@@ -106,21 +106,21 @@ namespace Fan_Website.Controllers
                 CreatedOn = DateTime.Now,
                 User = user,
                 Forum = forum
-            }; 
+            };
         }
 
         private IEnumerable<PostReplyModel> BuildPostReplies(IEnumerable<PostReply> replies)
         {
             return replies.Select(reply => new PostReplyModel
             {
-                Id = reply.Id, 
-                AuthorImageUrl = reply.User.ImagePath, 
-                AuthorName = reply.User.UserName, 
-                AuthorId = reply.User.Id, 
-                AuthorRating = reply.User.Rating, 
-                Date = reply.CreateOn, 
+                Id = reply.Id,
+                AuthorImageUrl = reply.User.ImagePath,
+                AuthorName = reply.User.UserName,
+                AuthorId = reply.User.Id,
+                AuthorRating = reply.User.Rating,
+                Date = reply.CreateOn,
                 ReplyContent = reply.Content
-            }); 
+            });
         }
         [HttpGet]
         public IActionResult Delete(int id)
@@ -130,37 +130,61 @@ namespace Fan_Website.Controllers
             var model = new DeletePostModel
             {
                 PostId = post.PostId,
-                PostContent = post.Content, 
-                PostAuthor = post.User.UserName 
-            }; 
+                PostContent = post.Content,
+                PostAuthor = post.User.UserName
+            };
             return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(Post post)
         {
-            await postService.Delete(post.PostId); 
+            await postService.Delete(post.PostId);
             return RedirectToAction("Index", "Forum");
         }
 
-        [HttpGet] 
+        [HttpGet]
         public IActionResult DeleteReply(int id)
         {
             var reply = postService.GetReplyById(id);
 
             var model = new PostReply
             {
-                Id = reply.Id, 
-                Content = reply.Content 
+                Id = reply.Id,
+                Content = reply.Content
             };
 
-            return View(model); 
+            return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> DeleteReply(PostReply reply)
         {
             await postService.DeleteReply(reply.Id);
+            return RedirectToAction("Index", "Forum");
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var post = postService.GetById(id);
+
+            var model = new PostEditModel
+            {
+                Id = post.PostId,
+                Title = post.Title,
+                Content = post.Content,
+                ForumId = post.Forum.ForumId, 
+                ForumName = post.Forum.PostTitle, 
+                Created = DateTime.Now
+            };
+            return View(model); 
+        }
+
+        [HttpPost] 
+        public async Task<IActionResult> Edit(PostEditModel post)
+        {
+            await postService.EditPost(post.Id, post.Content, post.Title); 
             return RedirectToAction("Index", "Forum"); 
         }
     }

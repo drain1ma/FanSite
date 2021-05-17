@@ -16,7 +16,7 @@ namespace Fan_Website.Services
         IEnumerable<Post> GetLatestPosts(int n);
         Task Add(Post post);
         Task Delete(int id);
-        Task EditPostContent(int id, string newContent);
+        Task EditPost(int id, string newContent, string newTitle);
         Task AddReply(PostReply reply);
         Task DeleteReply(int id);
         PostReply GetReplyById(int id); 

@@ -41,9 +41,14 @@ namespace Fan_Website.Service
             context.Remove(reply); 
             await context.SaveChangesAsync(); 
         }
-        public Task EditPostContent(int id, string newContent)
+        public async Task EditPost(int id, string newContent, string newTitle)
         {
-            throw new NotImplementedException();
+            var post = GetById(id);
+            post.Content = newContent;
+            post.Title = newTitle;
+            context.Posts.Update(post); 
+            await context.SaveChangesAsync(); 
+
         }
 
         public IEnumerable<Post> GetAll()

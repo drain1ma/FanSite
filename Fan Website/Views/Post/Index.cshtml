@@ -35,6 +35,13 @@
                 <div class="postContent">
                     @Html.Raw(@Model.PostContent)
                 </div>
+                @if (User.Identity.Name == Model.AuthorName)
+                {
+                    <a asp-controller="Post" asp-action="Edit" asp-route-id="@Model.Id" style="float: right">
+                        Edit
+                    </a>
+                }
+
             </div>
         </div>
 
