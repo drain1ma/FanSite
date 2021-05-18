@@ -1,0 +1,27 @@
+﻿@model EditReplyModel 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="sectionHeader">
+        <h1>Edit Reply</h1>
+    </div>
+
+
+    <form asp-action="EditReply" method="post" id="addPostForm">
+
+        <div class="addPost">
+            <div class="form-group">
+                <label asp-for="Content"></label>
+                <input asp-for="Content" class="form-control" />
+            </div>
+            <input asp-for="Id" type="hidden" />
+            <button type="submit" id="submitPostBtn" class="btn btn-primary">Edit Reply</button>
+        </div>
+    </form>
+
+</body>
+</html>

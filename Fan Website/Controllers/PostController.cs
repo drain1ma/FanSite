@@ -119,7 +119,10 @@ namespace Fan_Website.Controllers
                 AuthorId = reply.User.Id,
                 AuthorRating = reply.User.Rating,
                 Date = reply.CreateOn,
-                ReplyContent = reply.Content
+                ReplyContent = reply.Content,
+                PostId = reply.Post.PostId, 
+                PostContent = reply.Post.Content,
+                PostTitle = reply.Post.Title 
             });
         }
         [HttpGet]
@@ -186,6 +189,31 @@ namespace Fan_Website.Controllers
         {
             await postService.EditPost(post.Id, post.Content, post.Title); 
             return RedirectToAction("Index", "Forum"); 
+        }
+
+        [HttpGet] 
+        public IActionResult EditReply(int id)
+        {
+            var reply = postService.GetReplyById(id);
+
+            var model = new EditReplyModel
+            {
+                Id = reply.Id,
+                Content = reply.Content,
+                CreateOn = DateTime.Now,
+                Post = reply.Post 
+            };
+
+            return View(model); 
+        }
+
+        [HttpPost] 
+        public async Task<IActionResult> EditReply(EditReplyModel reply)
+        {
+            var post = postService.GetById(reply.Post.PostId);
+            await postService.EditReply(reply.Id, reply.Content);
+            
+            return RedirectToAction("Index", "Post", post.PostId); 
         }
     }
 }

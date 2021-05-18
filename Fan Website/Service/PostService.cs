@@ -46,9 +46,19 @@ namespace Fan_Website.Service
             var post = GetById(id);
             post.Content = newContent;
             post.Title = newTitle;
+            post.CreatedOn = DateTime.Now; 
             context.Posts.Update(post); 
             await context.SaveChangesAsync(); 
 
+        }
+
+        public async Task EditReply(int id, string newContent)
+        {
+            var reply = GetReplyById(id);
+            reply.Content = newContent;
+            reply.CreateOn = DateTime.Now; 
+            context.Replies.Update(reply);
+            await context.SaveChangesAsync(); 
         }
 
         public IEnumerable<Post> GetAll()
@@ -67,7 +77,6 @@ namespace Fan_Website.Service
                 .Include(post => post.Replies).ThenInclude(reply => reply.User)
                 .FirstOrDefault();
         }
-
         public IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery)
         {
             return string.IsNullOrEmpty(searchQuery) ? forum.Posts : 
@@ -93,6 +102,7 @@ namespace Fan_Website.Service
         {
             return context.Replies.Where(reply => reply.Id == id)
                 .Include(reply => reply.User)
+                .Include(reply => reply.Post)
                 .FirstOrDefault(); 
         }
     }

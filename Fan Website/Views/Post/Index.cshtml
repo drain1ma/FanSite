@@ -72,6 +72,7 @@
                             </div>
                             @if (User.Identity.Name == reply.AuthorName)
                             {
+                                <a asp-controller="Post" asp-action="EditReply" asp-route-id="@reply.Id" class="btn btn-link" style="float: right">Edit</a>
                                 <a asp-controller="Post" asp-action="DeleteReply" asp-route-id="@reply.Id" class="btn btn-link" style="float: right">Delete</a>
                             }
 
