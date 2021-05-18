@@ -188,7 +188,7 @@ namespace Fan_Website.Controllers
         public async Task<IActionResult> Edit(PostEditModel post)
         {
             await postService.EditPost(post.Id, post.Content, post.Title); 
-            return RedirectToAction("Index", "Forum"); 
+            return RedirectToAction("Index", "Post", new { id = post.Id }); 
         }
 
         [HttpGet] 
