@@ -210,10 +210,8 @@ namespace Fan_Website.Controllers
         [HttpPost] 
         public async Task<IActionResult> EditReply(EditReplyModel reply)
         {
-            var post = postService.GetById(reply.Post.PostId);
             await postService.EditReply(reply.Id, reply.Content);
-            
-            return RedirectToAction("Index", "Post", post.PostId); 
+            return RedirectToAction("Index", "Post", new { id = reply.Post.PostId }); 
         }
     }
 }

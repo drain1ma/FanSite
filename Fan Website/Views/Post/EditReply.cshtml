@@ -19,6 +19,7 @@
                 <input asp-for="Content" class="form-control" />
             </div>
             <input asp-for="Id" type="hidden" />
+            <input asp-for="@Model.Post.PostId" type="hidden" />
             <button type="submit" id="submitPostBtn" class="btn btn-primary">Edit Reply</button>
         </div>
     </form>
