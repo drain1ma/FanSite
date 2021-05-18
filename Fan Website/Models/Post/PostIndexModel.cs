@@ -14,6 +14,8 @@ namespace Fan_Website.Models.Post
         public string AuthorName { get; set; }
         public string AuthorImageUrl { get; set; }
         public int AuthorRating { get; set; }
+        public bool IsLiked { get; set; }
+        public int Likes { get; set; }
         public DateTime Date { get; set; }
         public string PostContent { get; set; }
         public int ForumId { get; set; }

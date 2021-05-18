@@ -14,7 +14,9 @@ namespace Fan_Website
         [Required(ErrorMessage = "Please enter a title.")]
         public string Title { get; set; }
         [Required(ErrorMessage = "Please enter content.")]
-        public string Content { get; set; }
+        public string Content { get; set; } 
+        public int Likes { get; set; }
+        public bool IsLiked { get; set; }
         public DateTime CreatedOn { get; set; }
         public ApplicationUser User { get; set; }
         public Forum Forum { get; set; }

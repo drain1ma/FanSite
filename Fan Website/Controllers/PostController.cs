@@ -41,6 +41,8 @@ namespace Fan_Website.Controllers
                 AuthorRating = post.User.Rating,
                 AuthorImageUrl = post.User.ImagePath,
                 Date = post.CreatedOn,
+                IsLiked = false, 
+                Likes = post.Likes, 
                 PostContent = post.Content,
                 Replies = replies,
                 ForumId = post.Forum.ForumId,
@@ -60,6 +62,7 @@ namespace Fan_Website.Controllers
                 AuthorId = post.User.Id,
                 AuthorName = post.User.UserName,
                 AuthorRating = post.User.Rating,
+                Likes = post.Likes, 
                 DatePosted = post.CreatedOn.ToString(),
                 ForumId = post.Forum.ForumId,
                 ForumName = post.Forum.PostTitle,
@@ -95,6 +98,7 @@ namespace Fan_Website.Controllers
             return RedirectToAction("Index", "Post", new { id = post.PostId });
         }
 
+       
         private Post BuildPost(NewPostModel model, ApplicationUser user)
         {
             var forum = forumService.GetById(model.ForumId);

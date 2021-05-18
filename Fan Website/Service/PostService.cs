@@ -105,5 +105,20 @@ namespace Fan_Website.Service
                 .Include(reply => reply.Post)
                 .FirstOrDefault(); 
         }
+        public async Task UpdatePostLikes(int id, bool isLiked)
+        {
+            var post = context.Posts.Find(id);
+            post.Likes = CalculatePostLikes(post.Likes, true);
+            await context.SaveChangesAsync(); 
+        }
+        private int CalculatePostLikes(int likes, bool isLiked)
+        {
+            var inc = 0;
+            if (isLiked)
+            {
+                inc = 1; 
+            }
+            return likes + inc; 
+        }
     }
 }

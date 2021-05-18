@@ -32,6 +32,8 @@
                 <span class="postDate">@Model.Date</span>
             </div>
             <div class="col-md-9 postContentContainer">
+                <i id="likeBtn" class="material-icons" style="float: right; cursor: pointer">favorite_border</i>
+               
                 <div class="postContent">
                     @Html.Raw(@Model.PostContent)
                 </div>
@@ -43,6 +45,8 @@
                 }
 
             </div>
+               
+            
         </div>
 
         <div class="row" id="replyDivider"></div>
@@ -90,5 +94,24 @@
             }
         </div>
     </div>
+
+    <script>
+        var isLiked = false; 
+
+        document.getElementById("likeBtn").addEventListener("click",
+            function () {
+                if (!isLiked) {
+                    isLiked = true;
+                    document.getElementById("likeBtn").style.color = "red"; 
+                    document.getElementById("likeBtn").innerHTML = "favorite";
+                }
+                else {
+                    isLiked = false;
+                    document.getElementById("likeBtn").style.color = "black"; 
+                    document.getElementById("likeBtn").innerHTML = "favorite_border"; 
+                }
+            }); 
+
+    </script>
 </body>
 </html>

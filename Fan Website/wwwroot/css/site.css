@@ -460,3 +460,11 @@ video{
     background-color: white;
     padding: 15px;
 }
+
+.like{
+
+}
+
+.like:hover{
+    cursor: pointer; 
+}
