@@ -134,16 +134,17 @@ namespace Fan_Website.Controllers
             {
                 PostId = post.PostId,
                 PostContent = post.Content,
-                PostAuthor = post.User.UserName
+                PostAuthor = post.User.UserName,
+                ForumId = post.Forum.ForumId 
             };
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(Post post)
+        public async Task<IActionResult> Delete(DeletePostModel post)
         {
             await postService.Delete(post.PostId);
-            return RedirectToAction("Index", "Forum");
+            return RedirectToAction("Topic", "Forum", new { id = post.ForumId});
         }
 
         [HttpGet]
