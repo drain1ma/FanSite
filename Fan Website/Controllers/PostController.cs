@@ -151,10 +151,11 @@ namespace Fan_Website.Controllers
         {
             var reply = postService.GetReplyById(id);
 
-            var model = new PostReply
+            var model = new DeletePostReply
             {
                 Id = reply.Id,
-                Content = reply.Content
+                Content = reply.Content,
+                Post = reply.Post 
             };
 
             return View(model);
@@ -164,7 +165,7 @@ namespace Fan_Website.Controllers
         public async Task<IActionResult> DeleteReply(PostReply reply)
         {
             await postService.DeleteReply(reply.Id);
-            return RedirectToAction("Index", "Forum");
+            return RedirectToAction("Index", "Post", new { id = reply.Post.PostId });
         }
 
         [HttpGet]
