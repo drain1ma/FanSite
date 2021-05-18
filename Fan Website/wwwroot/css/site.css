@@ -179,13 +179,11 @@ body {
     display: block;
     background-color: lightseagreen;
     padding: 15px;
-    font-family: 'Roboto';
 }
 .homeSectionHeader {
     display: block;
     background-color: orangered; 
     padding: 15px; 
-    font-family: 'Roboto'; 
 }
 .sectionHeading{
     display: block; 
@@ -455,4 +453,10 @@ video{
     display: block; 
     padding: 15px; 
     background-color: white; 
+}
+
+#createForumForm {
+    display: block;
+    background-color: white;
+    padding: 15px;
 }
