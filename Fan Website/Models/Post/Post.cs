@@ -15,12 +15,11 @@ namespace Fan_Website
         public string Title { get; set; }
         [Required(ErrorMessage = "Please enter content.")]
         public string Content { get; set; } 
-        public int Likes { get; set; }
-        public bool IsLiked { get; set; }
         public DateTime CreatedOn { get; set; }
         public ApplicationUser User { get; set; }
         public Forum Forum { get; set; }
         public IEnumerable<PostReply> Replies { get; set; }
+        public Like Like { get; set; }
         public string Slug =>
             Title?.Replace(' ', '-').ToLower();
 

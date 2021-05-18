@@ -19,10 +19,10 @@ namespace Fan_Website
         public DbSet<Forum> Forums { get; set; }
         public DbSet<Screenshot> Screenshots { get; set; }
         public DbSet<PostReply> Replies { get; set; }
+        public DbSet<Like> Likes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<Account>().HasData(
                 new Account
                 {

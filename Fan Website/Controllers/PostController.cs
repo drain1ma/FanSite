@@ -41,13 +41,10 @@ namespace Fan_Website.Controllers
                 AuthorRating = post.User.Rating,
                 AuthorImageUrl = post.User.ImagePath,
                 Date = post.CreatedOn,
-                IsLiked = false, 
-                Likes = post.Likes, 
                 PostContent = post.Content,
                 Replies = replies,
                 ForumId = post.Forum.ForumId,
                 ForumName = post.Forum.PostTitle
-
             };
             return View(model);
         }
@@ -62,7 +59,6 @@ namespace Fan_Website.Controllers
                 AuthorId = post.User.Id,
                 AuthorName = post.User.UserName,
                 AuthorRating = post.User.Rating,
-                Likes = post.Likes, 
                 DatePosted = post.CreatedOn.ToString(),
                 ForumId = post.Forum.ForumId,
                 ForumName = post.Forum.PostTitle,

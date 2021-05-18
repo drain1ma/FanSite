@@ -45,7 +45,8 @@ namespace Fan_Website
             services.AddScoped<IPost, PostService>();
             services.AddScoped<IApplicationUser, ApplicationUserService>();
             services.AddScoped<IUpload, UploadService>();
-            services.AddScoped<IScreenshot, ScreenshotService>(); 
+            services.AddScoped<IScreenshot, ScreenshotService>();
+            services.AddScoped<ILike, LikeService>(); 
             services.AddSingleton(Configuration); 
             services.AddControllersWithViews();
             services.AddAzureClients(builder =>
