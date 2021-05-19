@@ -32,12 +32,10 @@
                 <span class="postDate">@Model.Date</span>
             </div>
             <div class="col-md-9 postContentContainer">
-                @if (!Model.Like.IsLiked)
-                {
-                    <a id="likeBtn" class="material-icons" style="float: right; cursor: pointer">favorite_border</a>
-                }
-                <div id="likes" style="float: right">0</div>
-
+                <a id="likeBtn" class="material-icons" style="float: right; cursor: pointer">favorite_border</a>
+                <div id="postLikes" style="float: right">@Html.Raw(@Model.Likes)</div>
+                <input id="getLikes" type="hidden" asp-for="@Model.Likes" />
+                <input id="likes" type="hidden" asp-for="@Model.Id" />
                 <div class="postContent">
                     @Html.Raw(@Model.PostContent)
                 </div>
@@ -98,5 +96,31 @@
             }
         </div>
     </div>
+
+    <script>
+
+        $(document).ready(function () {
+            $("#likeBtn").click(function () {
+                $.ajax({
+                    //base address/controller/Action
+                    url: "/Post/UpdateLikes",
+                    type: 'POST',
+                    data: {
+                        //Passing Input parameter
+                        id: $('#likes').val()
+                    },
+                    success: function (result) {
+                        $("#postLikes").html(result.success); 
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                return false;
+            });
+
+            
+        });
+    </script>
 </body>
 </html>

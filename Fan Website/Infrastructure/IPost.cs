@@ -13,12 +13,14 @@ namespace Fan_Website.Services
         IEnumerable<Post> GetFilteredPosts(string searchQuery);
         IEnumerable<Post> GetPostsByForum(int id);
         IEnumerable<Post> GetLatestPosts(int n);
+        IEnumerable<Post> GetTopPosts(int likes); 
         Task Add(Post post);
         Task Delete(int id);
         Task EditPost(int id, string newContent, string newTitle);
         Task AddReply(PostReply reply);
         Task EditReply(int id, string newContent); 
         Task DeleteReply(int id);
+        Task UpdatePostLikes(int likes); 
         PostReply GetReplyById(int id); 
 
 

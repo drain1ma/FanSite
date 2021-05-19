@@ -31,7 +31,7 @@ namespace Fan_Website.Controllers
         private HomeIndexModel BuildHomeIndexModel()
         {
             var latestPosts = postService.GetLatestPosts(10);
-
+            
             var posts = latestPosts.Select(post => new PostListingModel
             {
                 Id = post.PostId, 
@@ -39,8 +39,10 @@ namespace Fan_Website.Controllers
                 AuthorName = post.User.UserName,
                 AuthorId = post.User.Id, 
                 AuthorRating = post.User.Rating, 
+                Likes = post.Likes, 
                 DatePosted = post.CreatedOn.ToString(), 
-                RepliesCount = post.Replies.Count(),   
+                RepliesCount = post.Replies.Count(),  
+                
                 Forum = GetForumListingForPost(post)
             });
 

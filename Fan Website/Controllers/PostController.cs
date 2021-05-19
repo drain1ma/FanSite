@@ -27,11 +27,14 @@ namespace Fan_Website.Controllers
             userManager = _userManager;
         }
         [HttpGet]
-        public IActionResult Index(int id)
+        public async Task<IActionResult> Index(int id)
         {
 
             var post = postService.GetById(id);
             var replies = BuildPostReplies(post.Replies);
+            var userId = userManager.GetUserId(User);
+            var user = await userManager.FindByIdAsync(userId);
+
             var model = new PostIndexModel
             {
                 Id = post.PostId,
@@ -43,12 +46,12 @@ namespace Fan_Website.Controllers
                 Date = post.CreatedOn,
                 PostContent = post.Content,
                 Replies = replies,
+                Likes = post.Likes, 
                 ForumId = post.Forum.ForumId,
                 ForumName = post.Forum.PostTitle
             };
             return View(model);
         }
-
         [HttpGet]
         public IActionResult UserPosts()
         {
@@ -62,12 +65,12 @@ namespace Fan_Website.Controllers
                 DatePosted = post.CreatedOn.ToString(),
                 ForumId = post.Forum.ForumId,
                 ForumName = post.Forum.PostTitle,
+                Likes = post.Likes, 
                 RepliesCount = post.Replies.Count()
             });
 
             return View(posts);
         }
-
         public IActionResult Create(int id)
         {
             var forum = forumService.GetById(id);
@@ -80,6 +83,19 @@ namespace Fan_Website.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult GetLikes(int id)
+        {
+            var post = postService.GetById(id);
+            return Json(new { data = post.Likes }, new Newtonsoft.Json.JsonSerializerSettings()); 
+        }
+        [HttpPost]
+        public async Task UpdateLikes(int id)
+        {
+            var post = postService.GetById(id); 
+            await postService.UpdatePostLikes(post.PostId); 
         }
 
         [HttpPost]
@@ -98,7 +114,6 @@ namespace Fan_Website.Controllers
         private Post BuildPost(NewPostModel model, ApplicationUser user)
         {
             var forum = forumService.GetById(model.ForumId);
-
             return new Post
             {
                 Title = model.Title,

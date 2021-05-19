@@ -299,8 +299,7 @@ btn-newPost:hover{
 }
 
 .inline-icon {
-    vertical-align: central;
-    font-size: 18px !important;
+    vertical-align: text-bottom;
 }
 
 .noPosts{

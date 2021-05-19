@@ -88,7 +88,12 @@
                                     {
                                     <a class="delete"asp-controller="Post" asp-action="Delete"
                                        asp-route-id="@post.Id">Delete</a>
+
                                     }
+                                <span style="float: right">@post.Likes</span>
+                                    <div style="float: right" class="material-icons">
+                                        favorite
+                                    </div>
                                 </td>
                             </tr>
                         }

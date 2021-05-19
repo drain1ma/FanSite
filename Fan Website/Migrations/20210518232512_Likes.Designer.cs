@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fan_Website.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210518050332_Likes")]
+    [Migration("20210518232512_Likes")]
     partial class Likes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,7 +52,7 @@ namespace Fan_Website.Migrations
                         new
                         {
                             ForumId = 1,
-                            CreatedOn = new DateTime(2021, 5, 18, 5, 3, 31, 777, DateTimeKind.Utc).AddTicks(9648),
+                            CreatedOn = new DateTime(2021, 5, 18, 23, 25, 11, 617, DateTimeKind.Utc).AddTicks(2410),
                             Description = "A place to discuss Final Fantasy IX!",
                             PostTitle = "Final Fantasy IX"
                         });
@@ -179,9 +179,6 @@ namespace Fan_Website.Migrations
                     b.Property<int?>("ForumId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsLiked")
-                        .HasColumnType("bit");
-
                     b.Property<int>("Likes")
                         .HasColumnType("int");
 
@@ -205,8 +202,7 @@ namespace Fan_Website.Migrations
                         {
                             PostId = 1,
                             Content = "Like I said in the title, this is my favorite game and nothing can change my mind about that.",
-                            CreatedOn = new DateTime(2021, 5, 18, 5, 3, 31, 777, DateTimeKind.Utc).AddTicks(8293),
-                            IsLiked = false,
+                            CreatedOn = new DateTime(2021, 5, 18, 23, 25, 11, 617, DateTimeKind.Utc).AddTicks(1052),
                             Likes = 0,
                             Title = "This is my favorite game!"
                         });
@@ -273,7 +269,7 @@ namespace Fan_Website.Migrations
                         new
                         {
                             ScreenshotId = 6,
-                            CreatedOn = new DateTime(2021, 5, 18, 1, 3, 31, 778, DateTimeKind.Local).AddTicks(1181),
+                            CreatedOn = new DateTime(2021, 5, 18, 19, 25, 11, 617, DateTimeKind.Local).AddTicks(3929),
                             ImagePath = "Final_Fantasy_XV_Chocobo-1.png",
                             ScreenshotDescription = "I finally managed to find a chocobo",
                             ScreenshotTitle = "Final Fantasy XV Chocobo"
@@ -281,7 +277,7 @@ namespace Fan_Website.Migrations
                         new
                         {
                             ScreenshotId = 9,
-                            CreatedOn = new DateTime(2021, 5, 18, 1, 3, 31, 779, DateTimeKind.Local).AddTicks(9296),
+                            CreatedOn = new DateTime(2021, 5, 18, 19, 25, 11, 619, DateTimeKind.Local).AddTicks(1777),
                             ImagePath = "Final-Fantasy-VII-Remake-Sephiroth.png",
                             ScreenshotDescription = "This is my favorite game of all time",
                             ScreenshotTitle = "Sephiroth from Final Fantasy VII"

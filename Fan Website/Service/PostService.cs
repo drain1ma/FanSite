@@ -105,5 +105,23 @@ namespace Fan_Website.Service
                 .Include(reply => reply.Post)
                 .FirstOrDefault(); 
         }
+
+        public IEnumerable<Post> GetTopPosts(int n)
+        {
+            return GetAll().OrderByDescending(post => post.Likes).Take(n);
+        }
+
+        public async Task UpdatePostLikes(int id)
+        {
+            var post = GetById(id); 
+            post.Likes = CalculatePostLikes(post.Likes);
+            await context.SaveChangesAsync(); 
+        }
+
+        private int CalculatePostLikes(int likes)
+        {
+            var inc = 1; 
+            return likes + inc; 
+        }
     }
 }
