@@ -18,13 +18,14 @@ namespace Fan_Website.Controllers
         private IForum forumService { get; set; }
         private IApplicationUser userService { get; set; }
         private static UserManager<ApplicationUser> userManager;
-
-        public PostController(IPost _postService, IForum _forumService, IApplicationUser _userService, UserManager<ApplicationUser> _userManager)
+        private AppDbContext context; 
+        public PostController(IPost _postService, IForum _forumService, IApplicationUser _userService, UserManager<ApplicationUser> _userManager, AppDbContext ctx)
         {
             postService = _postService;
             forumService = _forumService;
             userService = _userService;
             userManager = _userManager;
+            context = ctx; 
         }
         [HttpGet]
         public async Task<IActionResult> Index(int id)
@@ -92,12 +93,19 @@ namespace Fan_Website.Controllers
             return Json(new { data = post.Likes }, new Newtonsoft.Json.JsonSerializerSettings()); 
         }
         [HttpPost]
-        public async Task UpdateLikes(int id)
+        public int UpdateLikes(int id)
         {
-            var post = postService.GetById(id); 
-            await postService.UpdatePostLikes(post.PostId); 
-        }
 
+            var post = postService.GetById(id);
+            post.Likes = CalculatePostLikes(post.Likes);
+            context.SaveChangesAsync();
+            return post.Likes; 
+        }
+        public int CalculatePostLikes(int likes)
+        {
+            var inc = 1;
+            return likes + inc;
+        }
         [HttpPost]
         public async Task<IActionResult> AddPost(NewPostModel model)
         {

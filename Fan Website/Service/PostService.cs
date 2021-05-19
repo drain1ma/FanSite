@@ -118,7 +118,7 @@ namespace Fan_Website.Service
             await context.SaveChangesAsync(); 
         }
 
-        private int CalculatePostLikes(int likes)
+        public int CalculatePostLikes(int likes)
         {
             var inc = 1; 
             return likes + inc; 
