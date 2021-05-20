@@ -122,7 +122,7 @@
     <script>
 
         $(document).ready(function () {
-            $("#likeBtn").click(function () {
+            $("#likeBtn").one('click', function () {
                 $.ajax({
                     //base address/controller/Action
                     url: '@Url.Action("UpdateLikes", "Post")',
@@ -148,7 +148,7 @@
         });
 
         $(document).ready(function () {
-            $("#unlikeBtn").click(function () {
+            $("#unlikeBtn").one('click', function () {
                 $.ajax({
                     //base address/controller/Action
                     url: '@Url.Action("RemoveLike", "Post")',
