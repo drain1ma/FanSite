@@ -101,7 +101,6 @@ namespace Fan_Website.Controllers
                 User = user,
                 Post = post
             };
-
             context.Add(like);
             context.SaveChanges();
             post.TotalLikes = likes.Count();
@@ -110,13 +109,18 @@ namespace Fan_Website.Controllers
             return likes.Count();
         }
         [HttpPost] 
-        public int RemoveLike(int id)
+        public int RemoveLike(int id, int postId)
         {
-            var post = postService.GetById(id);
-            var likes = post.Likes;
-            var userId = userManager.GetUserId(User);
-            var user = userService.GetById(userId);
 
+            var like = postService.GetLikeById(id);
+            var post = postService.GetById(postId);
+            var likes = post.Likes; 
+
+            context.Remove(like);
+            context.SaveChanges();
+            post.TotalLikes = likes.Count();
+            context.Posts.Update(post);
+            context.SaveChanges(); 
             return likes.Count(); 
         }
         [HttpPost]
