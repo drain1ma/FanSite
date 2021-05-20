@@ -32,11 +32,22 @@
                 <span class="postDate">@Model.Date</span>
             </div>
             <div class="col-md-9 postContentContainer">
-                <a id="likeBtn" class="material-icons" style="float: right; cursor: pointer">favorite_border</a>
-                
-                <div id="postLikes" style="float: right">@Html.Raw(@Model.TotalLikes)</div>
-                <input id="getLikes" type="hidden" asp-for="@Model.TotalLikes" />
-                <input id="likes" type="hidden" asp-for="@Model.Id" />
+
+
+                         <a id="likeBtn" class="material-icons" style="float: right; cursor: pointer">favorite_border</a>
+                        <div id="postLikes" style="float: right">@Html.Raw(@Model.TotalLikes)</div>
+                        <input id="getLikes" type="hidden" asp-for="@Model.TotalLikes" />
+                        <input id="likes" type="hidden" asp-for="@Model.Id" />
+
+
+
+
+
+
+
+
+
+
                 <div class="postContent">
                     @Html.Raw(@Model.PostContent)
                 </div>
@@ -111,7 +122,8 @@
                         id: $('#likes').val()
                     },
                     success: function (result) {
-                        $("#postLikes").html(result); 
+                        $("#postLikes").html(result);
+                        document.getElementById("likeBtn").innerHTML = "favorite";
                     },
                     error: function () {
                         alert("error");
@@ -120,7 +132,31 @@
                 return false;
             });
 
-            
+
+        });
+
+        $(document).ready(function () {
+            $("#unlikeBtn").click(function () {
+                $.ajax({
+                    //base address/controller/Action
+                    url: '@Url.Action("RemoveLike", "Post")',
+                    type: 'POST',
+                    data: {
+                        //Passing Input parameter
+                        id: $('#likes').val()
+                    },
+                    success: function (result) {
+                        $("#postLikes").html(result);
+                        document.getElementById("unlikeBtn").innerHTML = "favorite_border";
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                return false;
+            });
+
+
         });
     </script>
 </body>
