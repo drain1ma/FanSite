@@ -47,9 +47,11 @@ namespace Fan_Website.Controllers
                 Date = post.CreatedOn,
                 PostContent = post.Content,
                 Replies = replies,
+                TotalLikes = post.Likes.Count(), 
                 Likes = post.Likes, 
                 ForumId = post.Forum.ForumId,
                 ForumName = post.Forum.PostTitle
+
             };
             return View(model);
         }
@@ -66,7 +68,7 @@ namespace Fan_Website.Controllers
                 DatePosted = post.CreatedOn.ToString(),
                 ForumId = post.Forum.ForumId,
                 ForumName = post.Forum.PostTitle,
-                Likes = post.Likes, 
+                TotalLikes = post.Likes.Count(), 
                 RepliesCount = post.Replies.Count()
             });
 
@@ -86,25 +88,34 @@ namespace Fan_Website.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public IActionResult GetLikes(int id)
-        {
-            var post = postService.GetById(id);
-            return Json(new { data = post.Likes }, new Newtonsoft.Json.JsonSerializerSettings()); 
-        }
         [HttpPost]
         public int UpdateLikes(int id)
         {
-
             var post = postService.GetById(id);
-            post.Likes = CalculatePostLikes(post.Likes);
+            var likes = post.Likes;
+            var userId = userManager.GetUserId(User);
+            var user = userService.GetById(userId);
+
+            var like = new Like
+            {
+                User = user,
+                Post = post
+            };
+            post.Likes.Append(like);
+            post.TotalLikes = post.Likes.Count(); 
+            context.Likes.Add(like); 
             context.SaveChangesAsync();
-            return post.Likes; 
+            return likes.Count(); 
         }
-        public int CalculatePostLikes(int likes)
+        [HttpPost] 
+        public int RemoveLike(int id)
         {
-            var inc = 1;
-            return likes + inc;
+            var post = postService.GetById(id);
+            var likes = post.Likes;
+            var userId = userManager.GetUserId(User);
+            var user = userService.GetById(userId);
+
+            return likes.Count(); 
         }
         [HttpPost]
         public async Task<IActionResult> AddPost(NewPostModel model)
@@ -128,7 +139,8 @@ namespace Fan_Website.Controllers
                 Content = model.Content,
                 CreatedOn = DateTime.Now,
                 User = user,
-                Forum = forum
+                Forum = forum,
+                TotalLikes = 0 
             };
         }
 

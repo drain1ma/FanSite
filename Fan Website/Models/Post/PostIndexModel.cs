@@ -18,7 +18,8 @@ namespace Fan_Website.Models.Post
         public string PostContent { get; set; }
         public int ForumId { get; set; }
         public string ForumName { get; set; }
-        public int Likes { get; set; }
+        public int TotalLikes { get; set; }
         public IEnumerable<PostReplyModel> Replies { get; set; }
+        public IEnumerable<Like> Likes { get; set; }
     }
 }

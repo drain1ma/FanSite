@@ -60,7 +60,7 @@ namespace Fan_Website.Controllers
                 AuthorRating = post.User.Rating,
                 AuthorName = post.User.UserName, 
                 Title = post.Title,
-                Likes = post.Likes, 
+                TotalLikes = post.TotalLikes, 
                 DatePosted = post.CreatedOn.ToString(),
                 RepliesCount = post.Replies.Count(),
                 Forum = BuildForumListing(post) 

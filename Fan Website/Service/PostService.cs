@@ -75,6 +75,7 @@ namespace Fan_Website.Service
                 .Include(post => post.Forum).ThenInclude(forum => forum.User)
                 .Include(post => post.User)
                 .Include(post => post.Replies).ThenInclude(reply => reply.User)
+                .Include(post => post.Likes).ThenInclude(like => like.User)
                 .FirstOrDefault();
         }
         public IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery)
@@ -114,7 +115,7 @@ namespace Fan_Website.Service
         public async Task UpdatePostLikes(int id)
         {
             var post = GetById(id); 
-            post.Likes = CalculatePostLikes(post.Likes);
+            post.TotalLikes = CalculatePostLikes(post.TotalLikes);
             await context.SaveChangesAsync(); 
         }
 
@@ -122,6 +123,21 @@ namespace Fan_Website.Service
         {
             var inc = 1; 
             return likes + inc; 
+        }
+
+        public Like GetLikeById(int id)
+        {
+            return context.Likes.Where(like => like.Id == id)
+                .Include(like => like.User)
+                .FirstOrDefault(); 
+        }
+
+        public Post GetAllLikes(int id)
+        {
+            return context.Posts.Where(post => post.PostId == id)
+                .Include(post => post.Likes).ThenInclude(like => like.User)
+                .FirstOrDefault(); 
+                
         }
     }
 }

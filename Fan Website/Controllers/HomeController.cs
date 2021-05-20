@@ -39,7 +39,7 @@ namespace Fan_Website.Controllers
                 AuthorName = post.User.UserName,
                 AuthorId = post.User.Id, 
                 AuthorRating = post.User.Rating, 
-                Likes = post.Likes, 
+                TotalLikes = post.TotalLikes, 
                 DatePosted = post.CreatedOn.ToString(), 
                 RepliesCount = post.Replies.Count(),  
                 

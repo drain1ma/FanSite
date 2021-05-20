@@ -86,14 +86,14 @@
                                     </div>
                                 </td>
                                 <td>
-                                    @if (post.Likes == 1)
+                                    @if (post.TotalLikes == 1)
                                     {
-                                        <span style="float: right">@post.Likes </span> <div style="float: right" class="material-icons">favorite</div>
+                                        <span style="float: right">@post.TotalLikes </span> <div style="float: right" class="material-icons">favorite</div>
                                     }
-                                    @if (post.Likes > 1)
+                                    @if (post.TotalLikes > 1)
                                     {
                                         <span style="float: right">
-                                            @post.Likes
+                                            @post.TotalLikes
                                         </span><div style="float: right"class="material-icons">favorite</div>
                                     }
 

@@ -21,8 +21,9 @@ namespace Fan_Website.Services
         Task EditReply(int id, string newContent); 
         Task DeleteReply(int id);
         Task UpdatePostLikes(int likes); 
-        PostReply GetReplyById(int id); 
-
+        PostReply GetReplyById(int id);
+        Like GetLikeById(int id);
+        Post GetAllLikes(int id); 
 
     }
 }
