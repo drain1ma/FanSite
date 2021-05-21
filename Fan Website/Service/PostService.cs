@@ -66,7 +66,8 @@ namespace Fan_Website.Service
             return context.Posts
                 .Include(post => post.User)
                 .Include(post => post.Replies).ThenInclude(post => post.User)
-                .Include(post => post.Forum); 
+                .Include(post => post.Forum)
+                .Include(post => post.Likes).ThenInclude(like => like.User); 
         }
 
         public Post GetById(int id)
