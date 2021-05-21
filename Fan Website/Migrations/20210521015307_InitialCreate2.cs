@@ -3,89 +3,68 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Fan_Website.Migrations
 {
-    public partial class ChangeLikesToTotalLikes : Migration
+    public partial class InitialCreate2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "IsLiked",
-                table: "Likes");
-
-            migrationBuilder.RenameColumn(
-                name: "Likes",
-                table: "Posts",
-                newName: "TotalLikes");
-
             migrationBuilder.UpdateData(
                 table: "Forums",
                 keyColumn: "ForumId",
                 keyValue: 1,
                 column: "CreatedOn",
-                value: new DateTime(2021, 5, 20, 0, 44, 24, 919, DateTimeKind.Utc).AddTicks(7622));
+                value: new DateTime(2021, 5, 21, 1, 53, 7, 10, DateTimeKind.Utc).AddTicks(6452));
 
             migrationBuilder.UpdateData(
                 table: "Posts",
                 keyColumn: "PostId",
                 keyValue: 1,
                 column: "CreatedOn",
-                value: new DateTime(2021, 5, 20, 0, 44, 24, 919, DateTimeKind.Utc).AddTicks(6191));
+                value: new DateTime(2021, 5, 21, 1, 53, 7, 10, DateTimeKind.Utc).AddTicks(5126));
 
             migrationBuilder.UpdateData(
                 table: "Screenshots",
                 keyColumn: "ScreenshotId",
                 keyValue: 6,
                 column: "CreatedOn",
-                value: new DateTime(2021, 5, 19, 20, 44, 24, 919, DateTimeKind.Local).AddTicks(9161));
+                value: new DateTime(2021, 5, 20, 21, 53, 7, 10, DateTimeKind.Local).AddTicks(8014));
 
             migrationBuilder.UpdateData(
                 table: "Screenshots",
                 keyColumn: "ScreenshotId",
                 keyValue: 9,
                 column: "CreatedOn",
-                value: new DateTime(2021, 5, 19, 20, 44, 24, 921, DateTimeKind.Local).AddTicks(6509));
+                value: new DateTime(2021, 5, 20, 21, 53, 7, 12, DateTimeKind.Local).AddTicks(5545));
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "TotalLikes",
-                table: "Posts",
-                newName: "Likes");
-
-            migrationBuilder.AddColumn<bool>(
-                name: "IsLiked",
-                table: "Likes",
-                type: "bit",
-                nullable: false,
-                defaultValue: false);
-
             migrationBuilder.UpdateData(
                 table: "Forums",
                 keyColumn: "ForumId",
                 keyValue: 1,
                 column: "CreatedOn",
-                value: new DateTime(2021, 5, 19, 23, 19, 55, 613, DateTimeKind.Utc).AddTicks(7904));
+                value: new DateTime(2021, 5, 21, 1, 31, 56, 74, DateTimeKind.Utc).AddTicks(4880));
 
             migrationBuilder.UpdateData(
                 table: "Posts",
                 keyColumn: "PostId",
                 keyValue: 1,
                 column: "CreatedOn",
-                value: new DateTime(2021, 5, 19, 23, 19, 55, 613, DateTimeKind.Utc).AddTicks(6514));
+                value: new DateTime(2021, 5, 21, 1, 31, 56, 74, DateTimeKind.Utc).AddTicks(3474));
 
             migrationBuilder.UpdateData(
                 table: "Screenshots",
                 keyColumn: "ScreenshotId",
                 keyValue: 6,
                 column: "CreatedOn",
-                value: new DateTime(2021, 5, 19, 19, 19, 55, 613, DateTimeKind.Local).AddTicks(9465));
+                value: new DateTime(2021, 5, 20, 21, 31, 56, 74, DateTimeKind.Local).AddTicks(6407));
 
             migrationBuilder.UpdateData(
                 table: "Screenshots",
                 keyColumn: "ScreenshotId",
                 keyValue: 9,
                 column: "CreatedOn",
-                value: new DateTime(2021, 5, 19, 19, 19, 55, 615, DateTimeKind.Local).AddTicks(8910));
+                value: new DateTime(2021, 5, 20, 21, 31, 56, 76, DateTimeKind.Local).AddTicks(4439));
         }
     }
 }

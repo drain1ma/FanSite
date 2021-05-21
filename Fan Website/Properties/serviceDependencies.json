@@ -1,12 +1,12 @@
 {
   "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "Fanwebsite"
+    },
     "storage1": {
       "type": "storage",
       "connectionId": "AzureStorageAccount"
-    },
-    "mssql1": {
-      "type": "mssql",
-      "connectionId": "Fansite"
     }
   }
 }

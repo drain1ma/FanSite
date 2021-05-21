@@ -50,10 +50,32 @@ namespace Fan_Website.Migrations
                         new
                         {
                             ForumId = 1,
-                            CreatedOn = new DateTime(2021, 5, 20, 0, 44, 24, 919, DateTimeKind.Utc).AddTicks(7622),
+                            CreatedOn = new DateTime(2021, 5, 21, 1, 53, 7, 10, DateTimeKind.Utc).AddTicks(6452),
                             Description = "A place to discuss Final Fantasy IX!",
                             PostTitle = "Final Fantasy IX"
                         });
+                });
+
+            modelBuilder.Entity("Fan_Website.Like", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("Fan_Website.Models.Account", b =>
@@ -160,28 +182,6 @@ namespace Fan_Website.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Fan_Website.Models.Like.Like", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("PostId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Likes");
-                });
-
             modelBuilder.Entity("Fan_Website.Post", b =>
                 {
                     b.Property<int>("PostId")
@@ -222,7 +222,7 @@ namespace Fan_Website.Migrations
                         {
                             PostId = 1,
                             Content = "Like I said in the title, this is my favorite game and nothing can change my mind about that.",
-                            CreatedOn = new DateTime(2021, 5, 20, 0, 44, 24, 919, DateTimeKind.Utc).AddTicks(6191),
+                            CreatedOn = new DateTime(2021, 5, 21, 1, 53, 7, 10, DateTimeKind.Utc).AddTicks(5126),
                             Title = "This is my favorite game!",
                             TotalLikes = 0
                         });
@@ -289,7 +289,7 @@ namespace Fan_Website.Migrations
                         new
                         {
                             ScreenshotId = 6,
-                            CreatedOn = new DateTime(2021, 5, 19, 20, 44, 24, 919, DateTimeKind.Local).AddTicks(9161),
+                            CreatedOn = new DateTime(2021, 5, 20, 21, 53, 7, 10, DateTimeKind.Local).AddTicks(8014),
                             ImagePath = "Final_Fantasy_XV_Chocobo-1.png",
                             ScreenshotDescription = "I finally managed to find a chocobo",
                             ScreenshotTitle = "Final Fantasy XV Chocobo"
@@ -297,7 +297,7 @@ namespace Fan_Website.Migrations
                         new
                         {
                             ScreenshotId = 9,
-                            CreatedOn = new DateTime(2021, 5, 19, 20, 44, 24, 921, DateTimeKind.Local).AddTicks(6509),
+                            CreatedOn = new DateTime(2021, 5, 20, 21, 53, 7, 12, DateTimeKind.Local).AddTicks(5545),
                             ImagePath = "Final-Fantasy-VII-Remake-Sephiroth.png",
                             ScreenshotDescription = "This is my favorite game of all time",
                             ScreenshotTitle = "Sephiroth from Final Fantasy VII"
@@ -444,15 +444,17 @@ namespace Fan_Website.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Fan_Website.Models.Like.Like", b =>
+            modelBuilder.Entity("Fan_Website.Like", b =>
                 {
-                    b.HasOne("Fan_Website.Post", null)
+                    b.HasOne("Fan_Website.Post", "Post")
                         .WithMany("Likes")
                         .HasForeignKey("PostId");
 
                     b.HasOne("Fan_Website.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Post");
 
                     b.Navigation("User");
                 });

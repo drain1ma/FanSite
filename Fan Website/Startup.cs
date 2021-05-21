@@ -36,7 +36,7 @@ namespace Fan_Website
            services.AddIdentity<ApplicationUser, IdentityRole>()
                .AddEntityFrameworkStores<AppDbContext>();
             services.AddDbContext<AppDbContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("Fansite")));
+               options.UseSqlServer(Configuration.GetConnectionString("Fanwebsite")));
 
             services.AddIdentityCore<ApplicationUser>().AddRoles<IdentityRole>().AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 

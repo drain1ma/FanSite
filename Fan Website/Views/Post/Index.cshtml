@@ -37,25 +37,32 @@
             <div class="col-md-9 postContentContainer">
 
 
-                @if (userLike != null)
+                @if (signInManager.IsSignedIn(User))
                 {
-                    if (userLike.User.UserName == User.Identity.Name)
+                    @if (userLike != null)
                     {
-                        <a id="unlikeBtn" class="material-icons" style="float: right; cursor: pointer">favorite</a>
-                        <div id="postLikes" style="float: right">@Html.Raw(@Model.TotalLikes)</div>
-                        <input id="getPostId" type="hidden" asp-for="@Model.Id" />
-                        <input id="unlike" type="hidden" asp-for="@userLike.Id" />
+                        if (userLike.User.UserName == User.Identity.Name)
+                        {
+                            <a id="unlikeBtn" class="material-icons" style="float: right; cursor: pointer">favorite</a>
+                            <div id="postLikes" style="float: right">@Html.Raw(@Model.TotalLikes)</div>
+                            <input id="getPostId" type="hidden" asp-for="@Model.Id" />
+                            <input id="unlike" type="hidden" asp-for="@userLike.Id" />
 
+                        }
+                    }
+                    else if (userLike == null)
+                    {
+                        <a id="likeBtn" class="material-icons" style="float: right; cursor: pointer">favorite_border</a>
+                        <div id="postLikes" style="float: right">@Html.Raw(@Model.TotalLikes)</div>
+                        <input id="likes" type="hidden" asp-for="@Model.Id" />
+                        <input id="unlike" type="hidden" asp-for="@userLike.Id" />
                     }
                 }
-                else if (userLike == null)
+                @if (!signInManager.IsSignedIn(User))
                 {
-                    <a id="likeBtn" class="material-icons" style="float: right; cursor: pointer">favorite_border</a>
+                    <a id="notSignedIn" class="material-icons" style="float: right; cursor: pointer">favorite_border</a>
                     <div id="postLikes" style="float: right">@Html.Raw(@Model.TotalLikes)</div>
-                    <input id="likes" type="hidden" asp-for="@Model.Id" />
                 }
-
-
 
 
                 <div class="postContent">
@@ -135,6 +142,7 @@
                         $("#postLikes").html(result);
                         document.getElementById("likeBtn").innerHTML = "favorite";
                         
+                       
                     },
                     error: function () {
                         alert("error");
@@ -161,6 +169,7 @@
                     success: function (result) {
                         $("#postLikes").html(result);
                         document.getElementById("unlikeBtn").innerHTML = "favorite_border";
+
                     },
                     error: function () {
                         alert("error");

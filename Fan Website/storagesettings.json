@@ -1,5 +1,5 @@
 {
   "ConnectionStrings": {
-    "AzureStorageAccount": "DefaultEndpointsProtocol=https;AccountName=fanwebsitestorage;AccountKey=XSpMtLpsCtRCz4tQY7eD9rr/reL/J+Vz/Pu7jD1xNINkXHgd7fKjtN0zhVnLri6Oz87cxQus2Zvm+ztx9whhyg==;EndpointSuffix=core.windows.net"
+    "AzureStorageAccount": "DefaultEndpointsProtocol=https;AccountName=fanwebsitestorage;AccountKey=dJhHbeSG7V8aLsb/JqNfQe6jg0qbmL54sXnmvF+JiT0zk5ZH8FyckLj96ulzRAsi7zwSgd5xR/894I70kbnIyw==;EndpointSuffix=core.windows.net"
   }
 }

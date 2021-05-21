@@ -40,7 +40,10 @@ namespace Fan_Website.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: false),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MemberSince = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -59,38 +62,6 @@ namespace Fan_Website.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Forums",
-                columns: table => new
-                {
-                    ForumId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PostTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Forums", x => x.ForumId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Screenshots",
-                columns: table => new
-                {
-                    ScreenshotId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ScreenshotTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ScreenshotDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Screenshots", x => x.ScreenshotId);
                 });
 
             migrationBuilder.CreateTable(
@@ -200,6 +171,51 @@ namespace Fan_Website.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Forums",
+                columns: table => new
+                {
+                    ForumId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PostTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Forums", x => x.ForumId);
+                    table.ForeignKey(
+                        name: "FK_Forums_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Screenshots",
+                columns: table => new
+                {
+                    ScreenshotId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ScreenshotTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ScreenshotDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Screenshots", x => x.ScreenshotId);
+                    table.ForeignKey(
+                        name: "FK_Screenshots_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Posts",
                 columns: table => new
                 {
@@ -209,7 +225,8 @@ namespace Fan_Website.Migrations
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ForumId = table.Column<int>(type: "int", nullable: true)
+                    ForumId = table.Column<int>(type: "int", nullable: true),
+                    TotalLikes = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -225,6 +242,32 @@ namespace Fan_Website.Migrations
                         column: x => x.ForumId,
                         principalTable: "Forums",
                         principalColumn: "ForumId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Likes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    PostId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Likes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Likes_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Likes_Posts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Posts",
+                        principalColumn: "PostId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -263,21 +306,21 @@ namespace Fan_Website.Migrations
 
             migrationBuilder.InsertData(
                 table: "Forums",
-                columns: new[] { "ForumId", "CreatedOn", "Description", "PostTitle", "UserName" },
-                values: new object[] { 1, new DateTime(2021, 4, 30, 18, 14, 24, 832, DateTimeKind.Utc).AddTicks(1152), "A place to discuss Final Fantasy IX!", "Final Fantasy IX", "linguisticgamer98" });
+                columns: new[] { "ForumId", "CreatedOn", "Description", "PostTitle", "UserId" },
+                values: new object[] { 1, new DateTime(2021, 5, 21, 1, 31, 56, 74, DateTimeKind.Utc).AddTicks(4880), "A place to discuss Final Fantasy IX!", "Final Fantasy IX", null });
 
             migrationBuilder.InsertData(
                 table: "Posts",
-                columns: new[] { "PostId", "Content", "CreatedOn", "ForumId", "Title", "UserId" },
-                values: new object[] { 1, "Like I said in the title, this is my favorite game and nothing can change my mind about that.", new DateTime(2021, 4, 30, 18, 14, 24, 831, DateTimeKind.Utc).AddTicks(9619), null, "This is my favorite game!", null });
+                columns: new[] { "PostId", "Content", "CreatedOn", "ForumId", "Title", "TotalLikes", "UserId" },
+                values: new object[] { 1, "Like I said in the title, this is my favorite game and nothing can change my mind about that.", new DateTime(2021, 5, 21, 1, 31, 56, 74, DateTimeKind.Utc).AddTicks(3474), null, "This is my favorite game!", 0, null });
 
             migrationBuilder.InsertData(
                 table: "Screenshots",
-                columns: new[] { "ScreenshotId", "ImagePath", "ScreenshotDescription", "ScreenshotTitle", "UserName" },
+                columns: new[] { "ScreenshotId", "CreatedOn", "ImagePath", "ScreenshotDescription", "ScreenshotTitle", "UserId" },
                 values: new object[,]
                 {
-                    { 6, "Final_Fantasy_XV_Chocobo-1.png", "I finally managed to find a chocobo", "Final Fantasy XV Chocobo", "mattdrain98" },
-                    { 9, "Final-Fantasy-VII-Remake-Sephiroth.png", "This is my favorite game of all time", "Sephiroth from Final Fantasy VII", "mattdrain98" }
+                    { 6, new DateTime(2021, 5, 20, 21, 31, 56, 74, DateTimeKind.Local).AddTicks(6407), "Final_Fantasy_XV_Chocobo-1.png", "I finally managed to find a chocobo", "Final Fantasy XV Chocobo", null },
+                    { 9, new DateTime(2021, 5, 20, 21, 31, 56, 76, DateTimeKind.Local).AddTicks(4439), "Final-Fantasy-VII-Remake-Sephiroth.png", "This is my favorite game of all time", "Sephiroth from Final Fantasy VII", null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -320,6 +363,21 @@ namespace Fan_Website.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Forums_UserId",
+                table: "Forums",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Likes_PostId",
+                table: "Likes",
+                column: "PostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Likes_UserId",
+                table: "Likes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Posts_ForumId",
                 table: "Posts",
                 column: "ForumId");
@@ -337,6 +395,11 @@ namespace Fan_Website.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Replies_UserId",
                 table: "Replies",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Screenshots_UserId",
+                table: "Screenshots",
                 column: "UserId");
         }
 
@@ -361,6 +424,9 @@ namespace Fan_Website.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Likes");
+
+            migrationBuilder.DropTable(
                 name: "Replies");
 
             migrationBuilder.DropTable(
@@ -373,10 +439,10 @@ namespace Fan_Website.Migrations
                 name: "Posts");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Forums");
 
             migrationBuilder.DropTable(
-                name: "Forums");
+                name: "AspNetUsers");
         }
     }
 }

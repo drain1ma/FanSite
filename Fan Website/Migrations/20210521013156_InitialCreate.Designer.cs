@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fan_Website.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210430181425_InitialCreate")]
+    [Migration("20210521013156_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,10 +39,12 @@ namespace Fan_Website.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ForumId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Forums");
 
@@ -50,11 +52,32 @@ namespace Fan_Website.Migrations
                         new
                         {
                             ForumId = 1,
-                            CreatedOn = new DateTime(2021, 4, 30, 18, 14, 24, 832, DateTimeKind.Utc).AddTicks(1152),
+                            CreatedOn = new DateTime(2021, 5, 21, 1, 31, 56, 74, DateTimeKind.Utc).AddTicks(4880),
                             Description = "A place to discuss Final Fantasy IX!",
-                            PostTitle = "Final Fantasy IX",
-                            UserName = "linguisticgamer98"
+                            PostTitle = "Final Fantasy IX"
                         });
+                });
+
+            modelBuilder.Entity("Fan_Website.Like", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("Fan_Website.Models.Account", b =>
@@ -106,11 +129,17 @@ namespace Fan_Website.Migrations
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTime>("MemberSince")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -128,6 +157,9 @@ namespace Fan_Website.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -152,49 +184,6 @@ namespace Fan_Website.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Fan_Website.Models.Screenshot", b =>
-                {
-                    b.Property<int>("ScreenshotId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ScreenshotDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ScreenshotTitle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ScreenshotId");
-
-                    b.ToTable("Screenshots");
-
-                    b.HasData(
-                        new
-                        {
-                            ScreenshotId = 6,
-                            ImagePath = "Final_Fantasy_XV_Chocobo-1.png",
-                            ScreenshotDescription = "I finally managed to find a chocobo",
-                            ScreenshotTitle = "Final Fantasy XV Chocobo",
-                            UserName = "mattdrain98"
-                        },
-                        new
-                        {
-                            ScreenshotId = 9,
-                            ImagePath = "Final-Fantasy-VII-Remake-Sephiroth.png",
-                            ScreenshotDescription = "This is my favorite game of all time",
-                            ScreenshotTitle = "Sephiroth from Final Fantasy VII",
-                            UserName = "mattdrain98"
-                        });
-                });
-
             modelBuilder.Entity("Fan_Website.Post", b =>
                 {
                     b.Property<int>("PostId")
@@ -216,6 +205,9 @@ namespace Fan_Website.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TotalLikes")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -232,8 +224,9 @@ namespace Fan_Website.Migrations
                         {
                             PostId = 1,
                             Content = "Like I said in the title, this is my favorite game and nothing can change my mind about that.",
-                            CreatedOn = new DateTime(2021, 4, 30, 18, 14, 24, 831, DateTimeKind.Utc).AddTicks(9619),
-                            Title = "This is my favorite game!"
+                            CreatedOn = new DateTime(2021, 5, 21, 1, 31, 56, 74, DateTimeKind.Utc).AddTicks(3474),
+                            Title = "This is my favorite game!",
+                            TotalLikes = 0
                         });
                 });
 
@@ -263,6 +256,54 @@ namespace Fan_Website.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Replies");
+                });
+
+            modelBuilder.Entity("Fan_Website.Screenshot", b =>
+                {
+                    b.Property<int>("ScreenshotId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ScreenshotDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ScreenshotTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ScreenshotId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Screenshots");
+
+                    b.HasData(
+                        new
+                        {
+                            ScreenshotId = 6,
+                            CreatedOn = new DateTime(2021, 5, 20, 21, 31, 56, 74, DateTimeKind.Local).AddTicks(6407),
+                            ImagePath = "Final_Fantasy_XV_Chocobo-1.png",
+                            ScreenshotDescription = "I finally managed to find a chocobo",
+                            ScreenshotTitle = "Final Fantasy XV Chocobo"
+                        },
+                        new
+                        {
+                            ScreenshotId = 9,
+                            CreatedOn = new DateTime(2021, 5, 20, 21, 31, 56, 76, DateTimeKind.Local).AddTicks(4439),
+                            ImagePath = "Final-Fantasy-VII-Remake-Sephiroth.png",
+                            ScreenshotDescription = "This is my favorite game of all time",
+                            ScreenshotTitle = "Sephiroth from Final Fantasy VII"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -396,6 +437,30 @@ namespace Fan_Website.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Fan_Website.Forum", b =>
+                {
+                    b.HasOne("Fan_Website.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Fan_Website.Like", b =>
+                {
+                    b.HasOne("Fan_Website.Post", "Post")
+                        .WithMany("Likes")
+                        .HasForeignKey("PostId");
+
+                    b.HasOne("Fan_Website.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Fan_Website.Post", b =>
                 {
                     b.HasOne("Fan_Website.Forum", "Forum")
@@ -414,7 +479,7 @@ namespace Fan_Website.Migrations
             modelBuilder.Entity("Fan_Website.PostReply", b =>
                 {
                     b.HasOne("Fan_Website.Post", "Post")
-                        .WithMany()
+                        .WithMany("Replies")
                         .HasForeignKey("PostId");
 
                     b.HasOne("Fan_Website.Models.ApplicationUser", "User")
@@ -422,6 +487,15 @@ namespace Fan_Website.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Fan_Website.Screenshot", b =>
+                {
+                    b.HasOne("Fan_Website.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
@@ -480,6 +554,13 @@ namespace Fan_Website.Migrations
             modelBuilder.Entity("Fan_Website.Forum", b =>
                 {
                     b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("Fan_Website.Post", b =>
+                {
+                    b.Navigation("Likes");
+
+                    b.Navigation("Replies");
                 });
 #pragma warning restore 612, 618
         }
