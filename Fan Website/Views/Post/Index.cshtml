@@ -36,15 +36,27 @@
             </div>
             <div class="col-md-9 postContentContainer">
                 @if (signInManager.IsSignedIn(User))
-                { 
-                    <a id="likeBtn" class="material-icons" style="float: right; cursor: pointer">favorite_border</a>
-                    <div id="postLikes" style="float: right">@Html.Raw(@Model.TotalLikes)</div>
-                    <input id="likes" type="hidden" asp-for="@Model.Id" />
-                    <input id="unlike" type="hidden" asp-for="@userLike.Id" />
+                {
+                    if (userLike != null)
+                    {
+                        <a id="likeBtn" class="material-icons" style="float: right; cursor: pointer">favorite</a>
+                        <div id="postLikes" style="float: right">@Html.Raw(@Model.TotalLikes)</div>
+                        <input id="likes" type="hidden" asp-for="@Model.Id" />
+                        <input id="unlike" type="hidden" asp-for="@userLike.Id" />
+                    }
+                    else if (userLike == null)
+                    {
+                        <a id="likeBtn" class="material-icons" style="float: right; cursor: pointer">favorite_border</a>
+                        <div id="postLikes" style="float: right">@Html.Raw(@Model.TotalLikes)</div>
+                        <input id="likes" type="hidden" asp-for="@Model.Id" />
+                        <input id="unlike" type="hidden" asp-for="@userLike.Id" />
+                    }
+
+
                 }
                 else if (!signInManager.IsSignedIn(User))
                 {
-                    <a id="notSignedIn" class="material-icons" style="float: right; cursor: pointer">favorite_border</a>
+                    <a id="notSignedIn" class="material-icons" style="float: right; cursor: pointer">favorite</a>
                     <div id="postLikes" style="float: right">@Html.Raw(@Model.TotalLikes)</div>
                 }
 
@@ -120,13 +132,22 @@
                     type: 'POST',
                     data: {
                         //Passing Input parameter
-                        id: $('#likes').val()
+                        id: $('#likes').val(),
+                        likes: $('#unlike').val() 
                     },
                     success: function (result) {
-                        $("#postLikes").html(result);
-                        if (result.val() == parseInt(document.getElementById("postLikes").innerHtml)) {
-                            document.getElementById("postLikes").innerHTML = "favorite"; 
+                       
+
+                        if (document.getElementById("likeBtn").innerHTML == "favorite_border") {
+                            $("#postLikes").html(result);
+                            document.getElementById("likeBtn").innerHTML = "favorite";
                         }
+                        else if (document.getElementById("likeBtn").innerHTML == "favorite") {
+                            $("#postLikes").html(result);
+                            document.getElementById("likeBtn").innerHTML = "favorite_border";
+                        }
+                       
+
                     },
                     error: function () {
                         alert("error");
