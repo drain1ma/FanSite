@@ -110,7 +110,7 @@ namespace Fan_Website.Service
 
         public IEnumerable<Post> GetTopPosts(int n)
         {
-            return GetAll().OrderByDescending(post => post.Likes).Take(n);
+            return GetAll().OrderByDescending(post => post.TotalLikes).Take(n);
         }
 
         public async Task UpdatePostLikes(int id)

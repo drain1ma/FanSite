@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Post> 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row sectionHeader">
+        <h3>Top Posts</h3>
+    </div>
+    <div class="row forumIndexContent">
+        <table class="table table-hover table-bordered" id="forumIndexTable" style="background-color: white">
+            <tbody>
+                @foreach (var post in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="postData">
+                                <div class="postTitle">
+                                    <a asp-controller="Post" asp-action="Index" asp-route-id="@post.PostId">@post.Title</a>
+                                </div>
+                                <div class="forumSubTitle">
+                                    <div>
+                                        <span class="postAuthor">
+                                            <a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.User.Id">@post.User.UserName</a>
+                                        </span>
+                                        <span class="badge rounded-circle" style="background-color: skyblue"> @post.User.Rating </span> on
+                                        <span class="postData">
+                                            @post.CreatedOn
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="forumPostContent">
+                                Replies: @post.Replies.Count()
+                            </div>
+                        </td>
+                        <td>
+                            <div class="postData">@post.CreatedOn</div>
+                            <div style="float: right" class="material-icons">
+                                favorite
+                            </div><span style="float: right">@post.TotalLikes</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+    </div>
+</body>
+</html>

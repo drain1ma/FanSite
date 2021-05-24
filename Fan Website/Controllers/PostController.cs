@@ -95,9 +95,6 @@ namespace Fan_Website.Controllers
             var likes = post.Likes;
             var userId = userManager.GetUserId(User);
             var user = userService.GetById(userId);
-          
-           
-            
 
             var like = new Like
             {
@@ -144,8 +141,6 @@ namespace Fan_Website.Controllers
             }
 
             return 0; 
-
-           
 
         }
         [HttpPost]
@@ -228,11 +223,12 @@ namespace Fan_Website.Controllers
             return View(model);
         }
 
-        public IActionResult TopPosts(int n)
+        public IActionResult TopPosts()
         {
             var topPosts = postService.GetTopPosts(10);
             return View(topPosts);
         }
+
         [HttpPost]
         public async Task<IActionResult> DeleteReply(PostReply reply)
         {
