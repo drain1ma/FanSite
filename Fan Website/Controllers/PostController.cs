@@ -95,18 +95,58 @@ namespace Fan_Website.Controllers
             var likes = post.Likes;
             var userId = userManager.GetUserId(User);
             var user = userService.GetById(userId);
+          
+           
             
+
             var like = new Like
             {
                 User = user,
                 Post = post
             };
-            context.Add(like);
-            context.SaveChanges();
-            post.TotalLikes = likes.Count();
-            context.Posts.Update(post);
-            context.SaveChanges();
-            return likes.Count();
+            if (likes.Any())
+            {
+                var userLike = likes.Where(l => l.User == like.User).FirstOrDefault(); 
+                if (userLike != null)
+                {
+                    context.Likes.Remove(userLike);
+                    context.SaveChanges();
+                    post.TotalLikes = likes.Count();
+                    context.Posts.Update(post);
+                    context.SaveChanges();
+                    return likes.Count();
+                }
+
+                else if (userLike == null)
+                {
+                    context.Add(like);
+                    context.SaveChanges();
+                    post.TotalLikes = likes.Count();
+                    context.Posts.Update(post);
+                    context.SaveChanges();
+                    return likes.Count();
+                }
+                context.Likes.Remove(likes.Where(l => l.User == like.User).First());
+                context.SaveChanges();
+                post.TotalLikes = likes.Count();
+                context.Posts.Update(post);
+                context.SaveChanges();
+                return likes.Count();
+            }
+            if(!likes.Any())
+            {
+                context.Add(like);
+                context.SaveChanges();
+                post.TotalLikes = likes.Count();
+                context.Posts.Update(post);
+                context.SaveChanges();
+                return likes.Count();
+            }
+
+            return 0; 
+
+           
+
         }
         [HttpPost] 
         public int RemoveLike(int id, int postId)
@@ -114,14 +154,14 @@ namespace Fan_Website.Controllers
 
             var like = postService.GetLikeById(id);
             var post = postService.GetById(postId);
-            var likes = post.Likes; 
+            var likes = post.Likes;
 
             context.Remove(like);
             context.SaveChanges();
             post.TotalLikes = likes.Count();
             context.Posts.Update(post);
-            context.SaveChanges(); 
-            return likes.Count(); 
+            context.SaveChanges();
+            return likes.Count();
         }
         [HttpPost]
         public async Task<IActionResult> AddPost(NewPostModel model)
@@ -146,7 +186,7 @@ namespace Fan_Website.Controllers
                 CreatedOn = DateTime.Now,
                 User = user,
                 Forum = forum,
-                TotalLikes = 0 
+                TotalLikes = 0            
             };
         }
 

@@ -4,14 +4,16 @@ using Fan_Website;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Fan_Website.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210523202250_RemovedLikesTable")]
+    partial class RemovedLikesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,7 +129,7 @@ namespace Fan_Website.Migrations
                         new
                         {
                             ForumId = 1,
-                            CreatedOn = new DateTime(2021, 5, 23, 20, 57, 5, 705, DateTimeKind.Utc).AddTicks(1324),
+                            CreatedOn = new DateTime(2021, 5, 23, 20, 22, 49, 651, DateTimeKind.Utc).AddTicks(8825),
                             Description = "A place to discuss Final Fantasy IX!",
                             PostTitle = "Final Fantasy IX"
                         });
@@ -222,7 +224,7 @@ namespace Fan_Website.Migrations
                         {
                             PostId = 1,
                             Content = "Like I said in the title, this is my favorite game and nothing can change my mind about that.",
-                            CreatedOn = new DateTime(2021, 5, 23, 20, 57, 5, 704, DateTimeKind.Utc).AddTicks(9977),
+                            CreatedOn = new DateTime(2021, 5, 23, 20, 22, 49, 651, DateTimeKind.Utc).AddTicks(7468),
                             Title = "This is my favorite game!",
                             TotalLikes = 0
                         });
@@ -289,7 +291,7 @@ namespace Fan_Website.Migrations
                         new
                         {
                             ScreenshotId = 6,
-                            CreatedOn = new DateTime(2021, 5, 23, 16, 57, 5, 705, DateTimeKind.Local).AddTicks(2856),
+                            CreatedOn = new DateTime(2021, 5, 23, 16, 22, 49, 652, DateTimeKind.Local).AddTicks(376),
                             ImagePath = "Final_Fantasy_XV_Chocobo-1.png",
                             ScreenshotDescription = "I finally managed to find a chocobo",
                             ScreenshotTitle = "Final Fantasy XV Chocobo"
@@ -297,7 +299,7 @@ namespace Fan_Website.Migrations
                         new
                         {
                             ScreenshotId = 9,
-                            CreatedOn = new DateTime(2021, 5, 23, 16, 57, 5, 707, DateTimeKind.Local).AddTicks(533),
+                            CreatedOn = new DateTime(2021, 5, 23, 16, 22, 49, 653, DateTimeKind.Local).AddTicks(7424),
                             ImagePath = "Final-Fantasy-VII-Remake-Sephiroth.png",
                             ScreenshotDescription = "This is my favorite game of all time",
                             ScreenshotTitle = "Sephiroth from Final Fantasy VII"
@@ -447,7 +449,7 @@ namespace Fan_Website.Migrations
             modelBuilder.Entity("Fan_Website.Like", b =>
                 {
                     b.HasOne("Fan_Website.Post", "Post")
-                        .WithMany("Likes")
+                        .WithMany()
                         .HasForeignKey("PostId");
 
                     b.HasOne("Fan_Website.ApplicationUser", "User")
@@ -466,7 +468,7 @@ namespace Fan_Website.Migrations
                         .HasForeignKey("ForumId");
 
                     b.HasOne("Fan_Website.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("LikedPosts")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Forum");
@@ -549,6 +551,11 @@ namespace Fan_Website.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Fan_Website.ApplicationUser", b =>
+                {
+                    b.Navigation("LikedPosts");
+                });
+
             modelBuilder.Entity("Fan_Website.Forum", b =>
                 {
                     b.Navigation("Posts");
@@ -556,8 +563,6 @@ namespace Fan_Website.Migrations
 
             modelBuilder.Entity("Fan_Website.Post", b =>
                 {
-                    b.Navigation("Likes");
-
                     b.Navigation("Replies");
                 });
 #pragma warning restore 612, 618

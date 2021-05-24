@@ -23,7 +23,7 @@ namespace Fan_Website.Services
         Task UpdatePostLikes(int likes); 
         PostReply GetReplyById(int id);
         Like GetLikeById(int id);
-        Post GetAllLikes(int id); 
+        Post GetAllLikes(int id);
 
     }
 }

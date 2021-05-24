@@ -20,7 +20,7 @@ namespace Fan_Website
         public Forum Forum { get; set; }
         public IEnumerable<PostReply> Replies { get; set; }
         public int TotalLikes { get; set; }
-        public IEnumerable<Like> Likes { get; set; }
+        public List<Like> Likes { get; set; }
         public string Slug =>
             Title?.Replace(' ', '-').ToLower();
 

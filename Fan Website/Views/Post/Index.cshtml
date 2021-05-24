@@ -1,7 +1,7 @@
 ﻿@model Fan_Website.Models.Post.PostIndexModel
 @inject SignInManager<ApplicationUser> signInManager
-@{ 
-    var userLike = Model.Likes.Where(l => l.User.UserName == User.Identity.Name).FirstOrDefault(); 
+@{
+    var userLike = Model.Likes.Where(l => l.User.UserName == User.Identity.Name).FirstOrDefault();
 }
 <!DOCTYPE html>
 <html>
@@ -35,30 +35,14 @@
                 <span class="postDate">@Model.Date</span>
             </div>
             <div class="col-md-9 postContentContainer">
-
-
                 @if (signInManager.IsSignedIn(User))
-                {
-                    @if (userLike != null)
-                    {
-                        if (userLike.User.UserName == User.Identity.Name)
-                        {
-                            <a id="unlikeBtn" class="material-icons" style="float: right; cursor: pointer">favorite</a>
-                            <div id="postLikes" style="float: right">@Html.Raw(@Model.TotalLikes)</div>
-                            <input id="getPostId" type="hidden" asp-for="@Model.Id" />
-                            <input id="unlike" type="hidden" asp-for="@userLike.Id" />
-
-                        }
-                    }
-                    else if (userLike == null)
-                    {
-                        <a id="likeBtn" class="material-icons" style="float: right; cursor: pointer">favorite_border</a>
-                        <div id="postLikes" style="float: right">@Html.Raw(@Model.TotalLikes)</div>
-                        <input id="likes" type="hidden" asp-for="@Model.Id" />
-                        <input id="unlike" type="hidden" asp-for="@userLike.Id" />
-                    }
+                { 
+                    <a id="likeBtn" class="material-icons" style="float: right; cursor: pointer">favorite_border</a>
+                    <div id="postLikes" style="float: right">@Html.Raw(@Model.TotalLikes)</div>
+                    <input id="likes" type="hidden" asp-for="@Model.Id" />
+                    <input id="unlike" type="hidden" asp-for="@userLike.Id" />
                 }
-                @if (!signInManager.IsSignedIn(User))
+                else if (!signInManager.IsSignedIn(User))
                 {
                     <a id="notSignedIn" class="material-icons" style="float: right; cursor: pointer">favorite_border</a>
                     <div id="postLikes" style="float: right">@Html.Raw(@Model.TotalLikes)</div>
@@ -76,8 +60,8 @@
                 }
 
             </div>
-               
-            
+
+
         </div>
 
         <div class="row" id="replyDivider"></div>
@@ -129,7 +113,7 @@
     <script>
 
         $(document).ready(function () {
-            $("#likeBtn").one('click', function () {
+            $("#likeBtn").on('click', function () {
                 $.ajax({
                     //base address/controller/Action
                     url: '@Url.Action("UpdateLikes", "Post")',
@@ -140,40 +124,14 @@
                     },
                     success: function (result) {
                         $("#postLikes").html(result);
-                        document.getElementById("likeBtn").innerHTML = "favorite";
-                        
-                       
+                        if (result.val() == parseInt(document.getElementById("postLikes").innerHtml)) {
+                            document.getElementById("postLikes").innerHTML = "favorite"; 
+                        }
                     },
                     error: function () {
                         alert("error");
                     }
 
-                });
-                return false;
-            });
-
-
-        });
-
-        $(document).ready(function () {
-            $("#unlikeBtn").one('click', function () {
-                $.ajax({
-                    //base address/controller/Action
-                    url: '@Url.Action("RemoveLike", "Post")',
-                    type: 'POST',
-                    data: {
-                        //Passing Input parameter
-                        id: $('#unlike').val(),
-                        postId: $('#getPostId').val()
-                    },
-                    success: function (result) {
-                        $("#postLikes").html(result);
-                        document.getElementById("unlikeBtn").innerHTML = "favorite_border";
-
-                    },
-                    error: function () {
-                        alert("error");
-                    }
                 });
                 return false;
             });
