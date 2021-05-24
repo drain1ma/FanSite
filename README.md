@@ -31,7 +31,8 @@ Users are able to post replies to the posts that are in the forum. Currently wha
 - [x] Layout that looks appealing to the users
 - [x] Adding a dropdownlist 
 - [x] Forums should link to specific posts related to that topic
-- [ ] Upvoting system for forum posts
+- [x] Upvoting system for forum posts
+- [ ] Ability to change likes dynamically 
 - [ ] Display most popular posts
 - [ ] Allow users to update a user bio 
 - [ ] A page where users can rate the game from the series
