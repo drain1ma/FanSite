@@ -148,21 +148,6 @@ namespace Fan_Website.Controllers
            
 
         }
-        [HttpPost] 
-        public int RemoveLike(int id, int postId)
-        {
-
-            var like = postService.GetLikeById(id);
-            var post = postService.GetById(postId);
-            var likes = post.Likes;
-
-            context.Remove(like);
-            context.SaveChanges();
-            post.TotalLikes = likes.Count();
-            context.Posts.Update(post);
-            context.SaveChanges();
-            return likes.Count();
-        }
         [HttpPost]
         public async Task<IActionResult> AddPost(NewPostModel model)
         {
@@ -243,6 +228,11 @@ namespace Fan_Website.Controllers
             return View(model);
         }
 
+        public IActionResult TopPosts(int n)
+        {
+            var topPosts = postService.GetTopPosts(10);
+            return View(topPosts);
+        }
         [HttpPost]
         public async Task<IActionResult> DeleteReply(PostReply reply)
         {
