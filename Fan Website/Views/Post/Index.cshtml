@@ -56,7 +56,7 @@
                 }
                 else if (!signInManager.IsSignedIn(User))
                 {
-                    <a id="notSignedIn" class="material-icons" style="float: right; cursor: pointer">favorite</a>
+                    <a id="notSignedIn" class="material-icons" style="float: right; cursor: pointer">favorite_border</a>
                     <div id="postLikes" style="float: right">@Html.Raw(@Model.TotalLikes)</div>
                 }
 
@@ -133,10 +133,10 @@
                     data: {
                         //Passing Input parameter
                         id: $('#likes').val(),
-                        likes: $('#unlike').val() 
+                        likes: $('#unlike').val()
                     },
                     success: function (result) {
-                       
+
 
                         if (document.getElementById("likeBtn").innerHTML == "favorite_border") {
                             $("#postLikes").html(result);
@@ -146,8 +146,6 @@
                             $("#postLikes").html(result);
                             document.getElementById("likeBtn").innerHTML = "favorite_border";
                         }
-                       
-
                     },
                     error: function () {
                         alert("error");
@@ -155,9 +153,15 @@
 
                 });
                 return false;
+              
+
             });
 
 
+        });
+
+        $("#notSignedIn").on('click', function() {
+            alert("Please sign in"); 
         });
     </script>
 </body>
