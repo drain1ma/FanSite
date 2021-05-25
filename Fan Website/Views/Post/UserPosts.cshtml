@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<Fan_Website.Models.PostListingModel>
 @inject SignInManager<ApplicationUser> signInManager
+@{ 
+
+    var userPosts = Model.Where(post => post.AuthorName == User.Identity.Name).FirstOrDefault(); 
+        }
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,53 +31,80 @@
         </div>
         <div class="row forumIndexContent">
 
-            <table class="table table-hover table-bordered" id="forumIndexTable" style="background-color: white">
-                <tbody>
 
-              
-                    @foreach (var post in Model)
-                    {
-                        @if(User.Identity.Name == post.AuthorName)
-                {
 
-                
-                        <tr>
-                            <td>
-                                <div class="postData">
-                                    <div class="postTitle">
-                                        <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">@post.Title</a>
-                                    </div>
-                                    <div class="forumSubTitle">
-                                        <div>
-                                            <span class="postAuthor">
-                                                <a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.AuthorId">@post.AuthorName</a>
-                                            </span>
-                                            <span class="badge rounded-circle" style="background-color: skyblue"> @post.AuthorRating </span> on
-                                            <span class="postData">
-                                                @post.DatePosted
-                                            </span>
+
+            @if (Model.Any())
+            {   
+                <table class="table table-hover table-bordered" id="forumIndexTable" style="background-color: white">
+                    <tbody>
+                        @foreach (var post in Model)
+                        {
+
+                            <tr>
+                                <td>
+                                    <div class="postData">
+                                        <div class="postTitle">
+                                            <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">@post.Title</a>
+                                        </div>
+                                        <div class="forumSubTitle">
+                                            <div>
+                                                <span class="postAuthor">
+                                                    <a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.AuthorId">@post.AuthorName</a>
+                                                </span>
+                                                <span class="badge rounded-circle" style="background-color: skyblue"> @post.AuthorRating </span> on
+                                                <span class="postData">
+                                                    @post.DatePosted
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="forumPostContent">
-                                    Replies: @post.RepliesCount
-                                </div>
-                            </td>
-                            <td>
-                                <div class="postData">@post.DatePosted</div> 
-                                <a class="delete" asp-controller="Post" asp-action="Delete"
-                                asp-route-id="@post.Id">Delete</a>
-                            </td>
-                        </tr>
-                    }
-                    }
-                </tbody>
-            </table>
-                   
+                                </td>
+                                <td>
+                                    <div class="forumPostContent">
+                                        Replies: @post.RepliesCount
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="postData">@post.DatePosted</div>
+                                    <a class="delete" asp-controller="Post" asp-action="Delete"
+                                       asp-route-id="@post.Id">Delete</a>
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            }
+
+            else
+            {
+                <div class="noPosts">
+                    <i class="material-icons md-72">question_answer</i>
+                    <h3>
+                        It looks like there are no posts to be found.
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <partial>
+                                Why not
+                                <a>
+                                    create one
+                                </a>
+                            </partial>
+                        }
+
+                    </h3>
+                </div>
+
+            }
+
+
+
+
+
+
         </div>
-        </div>
+    </div>
 
 </body>
 </html>

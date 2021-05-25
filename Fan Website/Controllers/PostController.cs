@@ -70,7 +70,7 @@ namespace Fan_Website.Controllers
                 ForumName = post.Forum.PostTitle,
                 TotalLikes = post.Likes.Count(), 
                 RepliesCount = post.Replies.Count()
-            });
+            }).Where(p => p.AuthorName == User.Identity.Name);
 
             return View(posts);
         }
