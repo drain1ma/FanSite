@@ -85,12 +85,13 @@
                         It looks like there are no posts to be found.
                         @if (signInManager.IsSignedIn(User))
                         {
-                            <partial>
-                                Why not
-                                <a>
-                                    create one
-                                </a>
-                            </partial>
+                        <partial>
+                            Why not
+                            create one in 
+                            <a asp-controller="Forum" asp-action="Index">
+                                forums
+                            </a>
+                        </partial>
                         }
 
                     </h3>
