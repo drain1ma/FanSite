@@ -136,15 +136,13 @@
                         likes: $('#unlike').val()
                     },
                     success: function (result) {
-
-
                         if (document.getElementById("likeBtn").innerHTML == "favorite_border") {
                             $("#postLikes").html(result);
-                            document.getElementById("likeBtn").innerHTML = "favorite";
+                            $("#likeBtn").html("favorite"); 
                         }
                         else if (document.getElementById("likeBtn").innerHTML == "favorite") {
                             $("#postLikes").html(result);
-                            document.getElementById("likeBtn").innerHTML = "favorite_border";
+                            $("#likeBtn").html("favorite_border"); 
                         }
                     },
                     error: function () {
@@ -153,13 +151,8 @@
 
                 });
                 return false;
-              
-
             });
-
-
         });
-
         $("#notSignedIn").on('click', function() {
             alert("Please sign in"); 
         });

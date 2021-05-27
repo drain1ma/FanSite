@@ -467,3 +467,11 @@ video{
 .like:hover{
     cursor: pointer; 
 }
+
+.deleteBtn{
+
+}
+.deleteBtn:hover{
+    cursor: pointer; 
+     
+}

@@ -58,45 +58,52 @@
                     <tbody>
                         @foreach (var post in Model.Posts)
                         {
-                            <tr>
-                                <td>
-                                    <div class="postData">
-                                        <div class="postTitle">
-                                            <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">@post.Title</a>
+                        <tr>
+                            <td>
+                                <div class="postData">
+                                    <div class="postTitle">
+                                        <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">@post.Title</a>
+                                    </div>
+                                    <div class="forumSubTitle">
+                                        <div>
+                                            <span class="postAuthor">
+                                                <a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.AuthorId">@post.AuthorName</a>
+                                            </span>
+                                            <span class="badge rounded-circle" style="background-color: skyblue"> @post.AuthorRating </span> on
+                                            <span class="postData">
+                                                @post.DatePosted
+                                            </span>
+                                            <i class="material-icons" style="float: right">favorite</i><span style="float: right">@post.TotalLikes</span>
                                         </div>
-                                        <div class="forumSubTitle">
-                                            <div>
-                                                <span class="postAuthor">
-                                                    <a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.AuthorId">@post.AuthorName</a>
-                                                </span>
-                                                <span class="badge rounded-circle" style="background-color: skyblue"> @post.AuthorRating </span> on
-                                                <span class="postData">
-                                                    @post.DatePosted
-                                                </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="forumPostContent">
+                                    Replies: @post.RepliesCount<br />
+                                </div>
+                            </td>
+                            <td>
+                                <ul class="navbar-nav ml-auto" style="float: right">
+                                    @if (post.AuthorName == User.Identity.Name)
+                                    {
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link" href="#" id="navbarDropdownMenuLink"
+                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="material-icons" style="color: gray; float: right">
+                                                    more_horiz
+                                                </i>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                <a class="dropdown-item" asp-controller="Post" asp-action="Edit" asp-route-id="@post.Id">Edit Post </a>
+                                                <a class="dropdown-item" asp-controller="Post" asp-action="Delete" asp-route-id="@post.Id">Delete Post</a>
                                             </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="forumPostContent">
-                                        Replies: @post.RepliesCount
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="postData">@post.DatePosted</div>
-                                    <div style="float: right" class="material-icons">
-                                        favorite
-                                    </div><span style="float: right">@post.TotalLikes</span>
-                                    <!-- @if (post.AuthorName == User.Identity.Name)
-     {
-         <a class="delete" asp-controller="Post" asp-action="Delete"
-            asp-route-id="@post.Id"><i class="trash-icon material-icons">delete</i></a>
-
-     }-->
-
-
-                                </td>
-                            </tr>
+                                        </li>
+                                    }
+                                </ul>
+                                <div style="float: left" class="postData">@post.DatePosted</div>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>
@@ -127,8 +134,28 @@
 </html>
 @section Scripts{
     <script>
-        function clearThis(target) {
-            target.value = "";
-        }
+
+        $(document).ready(function () {
+            $("#deleteBtn").on('click', function () {
+                $.ajax({
+                    //base address/controller/Action
+                    url: '@Url.Action("Delete", "Post")',
+                    type: 'GET',
+                    data: {
+                        //Passing Input parameter
+                        id: $("#postId").val()
+                    },
+                    success: function (result) {
+
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+
+                });
+                return false;
+            });
+        }); 
+
     </script>
 } 
