@@ -103,7 +103,7 @@ namespace Fan_Website.Controllers
             };
             if (likes.Any())
             {
-                var userLike = likes.Where(l => l.User == like.User).FirstOrDefault(); 
+                var userLike = likes.Where(l => l.User == like.User).FirstOrDefault();
                 if (userLike != null)
                 {
                     context.Likes.Remove(userLike);
@@ -130,7 +130,7 @@ namespace Fan_Website.Controllers
                 context.SaveChanges();
                 return likes.Count();
             }
-            if(!likes.Any())
+            if (!likes.Any())
             {
                 context.Add(like);
                 context.SaveChanges();
@@ -140,9 +140,11 @@ namespace Fan_Website.Controllers
                 return likes.Count();
             }
 
-            return 0; 
+            return 0;
 
         }
+
+        
         [HttpPost]
         public async Task<IActionResult> AddPost(NewPostModel model)
         {

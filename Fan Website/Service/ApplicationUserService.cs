@@ -1,5 +1,7 @@
 ﻿using Fan_Website.Infrastructure;
 using Fan_Website.Models;
+using Fan_Website.Models.Follow;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +24,9 @@ namespace Fan_Website.Service
 
         public ApplicationUser GetById(string id)
         {
-            return GetAll().FirstOrDefault(user => user.Id == id); 
+            return context.Users.Where(user => user.Id == id)
+              .Include(user => user.Follows) 
+               .FirstOrDefault();
         }
 
         public async Task UpdateUserRating(string userId, Type type)
@@ -68,6 +72,13 @@ namespace Fan_Website.Service
         public IEnumerable<ApplicationUser> GetLatestUsers(int n)
         {
             return GetAll().OrderByDescending(user => user.MemberSince).Take(n);
+        }
+
+        public IEnumerable<Follow> GetFollowing(string id)
+        {
+            var user = GetById(id);
+            var following = context.Follows.Where(follow => follow.Following == user.UserName) ?? null;
+            return following; 
         }
     }
 }

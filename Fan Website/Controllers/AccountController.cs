@@ -1,5 +1,6 @@
 ﻿using Fan_Website.Infrastructure;
 using Fan_Website.Models;
+using Fan_Website.Models.Follow;
 using Fan_Website.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -115,7 +116,9 @@ namespace Fan_Website.Controllers
                     {
                         UserName = model.UserName,
                         Email = model.Email,
-                        ImagePath = file.FileName
+                        ImagePath = file.FileName,
+                        Followers = 0,
+                        Following = 0
                     };
                     var otherresult = await userManager.CreateAsync(otheruser, model.Password);
 

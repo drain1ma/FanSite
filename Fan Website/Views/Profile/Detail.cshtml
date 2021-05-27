@@ -1,12 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@model Fan_Website.Models.ProfileModel
+@model ProfileModel
 
-@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> signInManager
 
 <!DOCTYPE html>
 <html>
 <head>
     <link href="~/css/site.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div class="container body-content">
@@ -43,13 +44,52 @@
                 <div class="col-md-8">
                     <span id="userName">@Model.UserName</span>
 
-                    <span id="userRating">Current Rating: @Model.UesrRating</span>
+                    <span id="userRating">Current Rating: @Model.UserRating</span>
                     <span id="userCreatedLabel">Member Since: @Model.MemberSince</span>
                     <span id="userActiveLabel">
                     </span>
+                    @if (signInManager.IsSignedIn(User) && User.Identity.Name != Model.UserName){
+                        <span id="follow" class="material-icons" style="cursor: pointer">person_add_alt</span><span id="getFollowers">@Model.Followers</span>
+                        <input id="followers" type="hidden" asp-for="@Model.UserId"/>
+                    }
+
                 </div>
             </div>
         
     </div>
+
+    <script>
+
+        $(document).ready(function () {
+            $("#follow").on('click', function () {
+                $.ajax({
+                    //base address/controller/Action
+                    url: '@Url.Action("UpdateFollows", "Profile")',
+                    type: 'POST',
+                    data: {
+                        //Passing Input parameter
+                        id: $("#followers").val()
+                    },
+                    success: function (result) {
+
+                        if (document.getElementById("follow").innerHTML == "person_add_alt") {
+                            $("#getFollowers").html(result);
+                            $("#follow").html("person_remove");
+                        }
+                        else if (document.getElementById("follow").innerHTML == "person_remove") {
+                            $("#getFollowers").html(result);
+                            $("#follow").html("person_add_alt");
+                        }
+                        
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+
+                });
+                return false;
+            });
+        });
+    </script>
 </body>
 </html>

@@ -4,14 +4,16 @@ using Fan_Website;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Fan_Website.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210527023155_AddedFollows")]
+    partial class AddedFollows
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,9 +39,6 @@ namespace Fan_Website.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<int>("Followers")
-                        .HasColumnType("int");
 
                     b.Property<int>("Following")
                         .HasColumnType("int");
@@ -133,7 +132,7 @@ namespace Fan_Website.Migrations
                         new
                         {
                             ForumId = 1,
-                            CreatedOn = new DateTime(2021, 5, 27, 3, 29, 19, 35, DateTimeKind.Utc).AddTicks(7872),
+                            CreatedOn = new DateTime(2021, 5, 27, 2, 31, 55, 79, DateTimeKind.Utc).AddTicks(2247),
                             Description = "A place to discuss Final Fantasy IX!",
                             PostTitle = "Final Fantasy IX"
                         });
@@ -195,18 +194,12 @@ namespace Fan_Website.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Follower")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Following")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Follows");
                 });
@@ -251,7 +244,7 @@ namespace Fan_Website.Migrations
                         {
                             PostId = 1,
                             Content = "Like I said in the title, this is my favorite game and nothing can change my mind about that.",
-                            CreatedOn = new DateTime(2021, 5, 27, 3, 29, 19, 35, DateTimeKind.Utc).AddTicks(4596),
+                            CreatedOn = new DateTime(2021, 5, 27, 2, 31, 55, 79, DateTimeKind.Utc).AddTicks(870),
                             Title = "This is my favorite game!",
                             TotalLikes = 0
                         });
@@ -318,7 +311,7 @@ namespace Fan_Website.Migrations
                         new
                         {
                             ScreenshotId = 6,
-                            CreatedOn = new DateTime(2021, 5, 26, 23, 29, 19, 35, DateTimeKind.Local).AddTicks(9489),
+                            CreatedOn = new DateTime(2021, 5, 26, 22, 31, 55, 79, DateTimeKind.Local).AddTicks(3769),
                             ImagePath = "Final_Fantasy_XV_Chocobo-1.png",
                             ScreenshotDescription = "I finally managed to find a chocobo",
                             ScreenshotTitle = "Final Fantasy XV Chocobo"
@@ -326,7 +319,7 @@ namespace Fan_Website.Migrations
                         new
                         {
                             ScreenshotId = 9,
-                            CreatedOn = new DateTime(2021, 5, 26, 23, 29, 19, 37, DateTimeKind.Local).AddTicks(8053),
+                            CreatedOn = new DateTime(2021, 5, 26, 22, 31, 55, 81, DateTimeKind.Local).AddTicks(1738),
                             ImagePath = "Final-Fantasy-VII-Remake-Sephiroth.png",
                             ScreenshotDescription = "This is my favorite game of all time",
                             ScreenshotTitle = "Sephiroth from Final Fantasy VII"
@@ -490,9 +483,11 @@ namespace Fan_Website.Migrations
 
             modelBuilder.Entity("Fan_Website.Models.Follow.Follow", b =>
                 {
-                    b.HasOne("Fan_Website.ApplicationUser", null)
-                        .WithMany("Follows")
-                        .HasForeignKey("ApplicationUserId");
+                    b.HasOne("Fan_Website.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Fan_Website.Post", b =>
@@ -583,11 +578,6 @@ namespace Fan_Website.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Fan_Website.ApplicationUser", b =>
-                {
-                    b.Navigation("Follows");
                 });
 
             modelBuilder.Entity("Fan_Website.Forum", b =>

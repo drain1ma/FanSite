@@ -1,5 +1,6 @@
 ﻿using Fan_Website.Infrastructure;
 using Fan_Website.Models;
+using Fan_Website.Models.Follow;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,13 +19,15 @@ namespace Fan_Website.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IApplicationUser userService;
         private readonly IUpload uploadService;
-        private readonly IConfiguration configuration; 
-        public ProfileController(UserManager<ApplicationUser> _userManager, IApplicationUser _userService, IUpload _uploadService, IConfiguration _configuration)
+        private readonly IConfiguration configuration;
+        private readonly AppDbContext context; 
+        public ProfileController(UserManager<ApplicationUser> _userManager, IApplicationUser _userService, IUpload _uploadService, IConfiguration _configuration, AppDbContext ctx)
         {
             userManager = _userManager;
             userService = _userService;
             uploadService = _uploadService;
-            configuration = _configuration; 
+            configuration = _configuration;
+            context = ctx; 
         }
         public IActionResult Detail(string id)
         {
@@ -34,13 +37,85 @@ namespace Fan_Website.Controllers
             {
                 UserId = user.Id,
                 UserName = user.UserName,
-                UesrRating = user.Rating.ToString(),
+                UserRating = user.Rating.ToString(),
                 ProfileImageUrl = user.ImagePath,
-                MemberSince = user.MemberSince
+                MemberSince = user.MemberSince,
+                Following = user.Following,
+                Followers = user.Followers,
+                Follows = user.Follows 
             }; 
             return View(model);
         }
 
+        [HttpPost]
+        public int UpdateFollows(string id)
+        {
+            var user = userService.GetById(id);
+            var userId = userManager.GetUserId(User);
+            var currentUser = userService.GetById(userId);
+            var follows = user.Follows; 
+           
+            var follow = new Follow
+            {
+                Following = user.Id,
+                Follower = currentUser.Id 
+            };
+           
+            if (follows.Any())
+            {
+                var userFollow = follows.Where(follow => follow.Follower == currentUser.Id).Where(follow => follow.Following == user.Id).FirstOrDefault();
+                if (userFollow != null)
+                {
+                    context.Remove(follow);
+                    context.SaveChanges();
+                    user.Followers -= 1;
+                    context.Users.Update(user);
+                    context.SaveChanges();
+                    currentUser.Following -= 1;
+                    context.Users.Update(currentUser);
+                    context.SaveChanges();
+                    return user.Followers;
+                    
+                }
+                else if (userFollow == null)
+                {
+                    context.Add(follow);
+                    context.SaveChanges();
+                    user.Followers += 1;
+                    context.Users.Update(user);
+                    context.SaveChanges();
+                    currentUser.Following += 1;
+                    context.Users.Update(currentUser);
+                    context.SaveChanges();
+                    return user.Followers;
+                }
+                context.Remove(follow);
+                context.SaveChanges();
+                user.Followers -= 1;
+                context.Users.Update(user);
+                context.SaveChanges();
+                currentUser.Following -= 1;
+                context.Users.Update(currentUser);
+                context.SaveChanges();
+                return user.Followers;
+            }
+
+            if (!follows.Any())
+            {
+                context.Add(follow);
+                context.SaveChanges();
+                user.Followers += 1;
+                context.Users.Update(user);
+                context.SaveChanges();
+                currentUser.Following += 1;
+                context.Users.Update(currentUser);
+                context.SaveChanges();
+                return user.Followers;
+            }
+
+
+            return 0; 
+        }
         public async Task<IActionResult> UploadProfileImage(IFormFile file)
         {
             var userId = userManager.GetUserId(User);
