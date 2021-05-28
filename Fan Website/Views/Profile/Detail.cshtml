@@ -32,7 +32,20 @@
 
                         <div id="userProfileImage" style="background-image: url(@Model.ProfileImageUrl); background-size:100%;"></div>
                     }
+                    @if (signInManager.IsSignedIn(User))
+                    {
 
+                        if (User.Identity.Name != Model.UserName && userFollow == null)
+                        {
+                            <span id="follow" class="inline-icon material-icons" style="cursor: pointer; display: block">person_add_alt</span>
+                            <input id="followers" type="hidden" asp-for="@Model.UserId" />
+                        }
+                        else if (User.Identity.Name != Model.UserName && userFollow != null)
+                        {
+                            <span id="follow" class="inline-icon material-icons" style="cursor: pointer; display: block">person_remove</span>
+                            <input id="followers" type="hidden" asp-for="@Model.UserId" />
+                        }
+                    }
                     @if (Context.User.Identity.Name == Model.UserName)
                     {
                         <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage">
@@ -46,8 +59,9 @@
                     }
                 </div>
                 <div class="col-md-8">
-                    <span id="userName">@Model.UserName</span>
-
+                    <span id="userName">
+                        @Model.UserName
+                    </span>    
                     <span id="userRating">Current Rating: @Model.UserRating</span>
                     <span id="userCreatedLabel">Member Since: @Model.MemberSince</span>
                     <span id="userActiveLabel">
@@ -57,17 +71,17 @@
 
                         if (User.Identity.Name != Model.UserName && userFollow == null)
                         {
-                            <span id="follow" class="material-icons" style="cursor: pointer">person_add_alt</span><span id="getFollowers">Followers: @Model.Followers</span><span id="getFollowing">Following: @Model.Following</span>
+                            <span id="getFollowers">Followers: @Model.Followers </span><span id="getFollowing">Following: @Model.Following</span>
                             <input id="followers" type="hidden" asp-for="@Model.UserId" />
                         }
                         else if (User.Identity.Name != Model.UserName && userFollow != null)
                         {
-                            <span id="follow" class="material-icons" style="cursor: pointer">person_remove</span><span id="getFollowers">Followers: @Model.Followers</span><span id="getFollowing">Following: @Model.Following</span>
+                            <span id="getFollowers">Followers: @Model.Followers </span><span id="getFollowing">Following: @Model.Following</span>
                             <input id="followers" type="hidden" asp-for="@Model.UserId" />
                         }
                         else
                         {
-                            <span id="getFollowers">Followers: @Model.Followers</span><span id="getFollowing">Following: @Model.Following</span>
+                            <span id="getFollowers">Followers: @Model.Followers</span><span id="getFollowing"> Following: @Model.Following</span>
                             <input id="followers" type="hidden" asp-for="@Model.UserId" />
                         }
                     }
@@ -92,11 +106,11 @@
                     success: function (result) {
 
                         if (document.getElementById("follow").innerHTML == "person_add_alt") {
-                            $("#getFollowers").html("Followers: " + result);
+                            $("#getFollowers").html(" Followers: " + result + " ");
                             $("#follow").html("person_remove");
                         }
                         else if (document.getElementById("follow").innerHTML == "person_remove") {
-                            $("#getFollowers").html("Followers: " + result);
+                            $("#getFollowers").html(" Followers: " + result + " ");
                             $("#follow").html("person_add_alt");
                         }
                         

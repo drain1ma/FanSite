@@ -154,19 +154,32 @@ body {
 }
 #userRating{
     display: inline; 
+    color: #444; 
     font-family: 'Roboto'; 
     padding-top: 3px; 
 }
-#userEmailLabel, #userBioLabel, #userCreatedLabel, #userActiveLabel {
+#userEmailLabel, #userBioLabel, #userCreatedLabel, #userActiveLabel{
     display: block; 
     color: #444; 
     font-family: 'Roboto'; 
     padding-top: 3px; 
 }
-
-#userName{
-    display: block; 
-    color: crimson; 
+ #getFollowing{
+    display: inline-block; 
+    color: #444; 
+    font-family: 'Roboto'; 
+    padding-top: 3px; 
+    padding-left: 10px; 
+}
+#getFollowers {
+    display: inline-block;
+    color: #444;
+    font-family: 'Roboto';
+    padding-top: 3px;
+}
+#userName {
+    display: block;
+    color: crimson;
     font-family: 'Roboto';
     font-size: 1.7em;
 }
