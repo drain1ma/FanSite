@@ -22,7 +22,9 @@
                 <span class="postIndexTitle">
                     @Model.Title
                 </span>
-                <span id="headingBtn"><a asp-controller="Forum" asp-action="Topic" asp-route-id="@Model.ForumId" class="btn btn-back">Back to @Model.ForumName</a></span>
+                <span id="headingBtn"><a asp-controller="Forum" asp-action="Topic" asp-route-id="@Model.ForumId"><span class="material-icons" style="color: black; float: right">
+                    arrow_back
+                </span></a></span>
             </div>
         </div>
 
