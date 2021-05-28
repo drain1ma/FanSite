@@ -2,7 +2,11 @@
 @model ProfileModel
 
 @inject SignInManager<ApplicationUser> signInManager
-
+@inject UserManager<ApplicationUser> userManager 
+@{ 
+    var userId = userManager.GetUserId(User);
+    var userFollow = Model.Follows.Where(follow => follow.Follower == userId).Where(follow => follow.Following == Model.UserId).FirstOrDefault();
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,9 +52,24 @@
                     <span id="userCreatedLabel">Member Since: @Model.MemberSince</span>
                     <span id="userActiveLabel">
                     </span>
-                    @if (signInManager.IsSignedIn(User) && User.Identity.Name != Model.UserName){
-                        <span id="follow" class="material-icons" style="cursor: pointer">person_add_alt</span><span id="getFollowers">@Model.Followers</span>
-                        <input id="followers" type="hidden" asp-for="@Model.UserId"/>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+
+                        if (User.Identity.Name != Model.UserName && userFollow == null)
+                        {
+                            <span id="follow" class="material-icons" style="cursor: pointer">person_add_alt</span><span id="getFollowers">Followers: @Model.Followers</span><span id="getFollowing">Following: @Model.Following</span>
+                            <input id="followers" type="hidden" asp-for="@Model.UserId" />
+                        }
+                        else if (User.Identity.Name != Model.UserName && userFollow != null)
+                        {
+                            <span id="follow" class="material-icons" style="cursor: pointer">person_remove</span><span id="getFollowers">Followers: @Model.Followers</span><span id="getFollowing">Following: @Model.Following</span>
+                            <input id="followers" type="hidden" asp-for="@Model.UserId" />
+                        }
+                        else
+                        {
+                            <span id="getFollowers">Followers: @Model.Followers</span><span id="getFollowing">Following: @Model.Following</span>
+                            <input id="followers" type="hidden" asp-for="@Model.UserId" />
+                        }
                     }
 
                 </div>
@@ -73,11 +92,11 @@
                     success: function (result) {
 
                         if (document.getElementById("follow").innerHTML == "person_add_alt") {
-                            $("#getFollowers").html(result);
+                            $("#getFollowers").html("Followers: " + result);
                             $("#follow").html("person_remove");
                         }
                         else if (document.getElementById("follow").innerHTML == "person_remove") {
-                            $("#getFollowers").html(result);
+                            $("#getFollowers").html("Followers: " + result);
                             $("#follow").html("person_add_alt");
                         }
                         

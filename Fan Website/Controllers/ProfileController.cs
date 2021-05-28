@@ -66,7 +66,7 @@ namespace Fan_Website.Controllers
                 var userFollow = follows.Where(follow => follow.Follower == currentUser.Id).Where(follow => follow.Following == user.Id).FirstOrDefault();
                 if (userFollow != null)
                 {
-                    context.Remove(follow);
+                    context.Remove(userFollow);
                     context.SaveChanges();
                     user.Followers -= 1;
                     context.Users.Update(user);
@@ -80,6 +80,9 @@ namespace Fan_Website.Controllers
                 else if (userFollow == null)
                 {
                     context.Add(follow);
+                    context.SaveChanges();
+                    user.Follows.Add(follow);
+                    context.Users.Update(user);
                     context.SaveChanges();
                     user.Followers += 1;
                     context.Users.Update(user);
@@ -103,6 +106,9 @@ namespace Fan_Website.Controllers
             if (!follows.Any())
             {
                 context.Add(follow);
+                context.SaveChanges();
+                user.Follows.Add(follow);
+                context.Users.Update(user);
                 context.SaveChanges();
                 user.Followers += 1;
                 context.Users.Update(user);
