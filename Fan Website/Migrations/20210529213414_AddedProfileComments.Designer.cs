@@ -4,14 +4,16 @@ using Fan_Website;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Fan_Website.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210529213414_AddedProfileComments")]
+    partial class AddedProfileComments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,7 +135,7 @@ namespace Fan_Website.Migrations
                         new
                         {
                             ForumId = 1,
-                            CreatedOn = new DateTime(2021, 5, 29, 22, 15, 1, 47, DateTimeKind.Utc).AddTicks(4785),
+                            CreatedOn = new DateTime(2021, 5, 29, 21, 34, 14, 527, DateTimeKind.Utc).AddTicks(5965),
                             Description = "A place to discuss Final Fantasy IX!",
                             PostTitle = "Final Fantasy IX"
                         });
@@ -224,15 +226,12 @@ namespace Fan_Website.Migrations
                     b.Property<DateTime>("CreateOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CurrentUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CurrentUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("ProfileComments");
                 });
@@ -277,7 +276,7 @@ namespace Fan_Website.Migrations
                         {
                             PostId = 1,
                             Content = "Like I said in the title, this is my favorite game and nothing can change my mind about that.",
-                            CreatedOn = new DateTime(2021, 5, 29, 22, 15, 1, 47, DateTimeKind.Utc).AddTicks(3461),
+                            CreatedOn = new DateTime(2021, 5, 29, 21, 34, 14, 527, DateTimeKind.Utc).AddTicks(4587),
                             Title = "This is my favorite game!",
                             TotalLikes = 0
                         });
@@ -344,7 +343,7 @@ namespace Fan_Website.Migrations
                         new
                         {
                             ScreenshotId = 6,
-                            CreatedOn = new DateTime(2021, 5, 29, 18, 15, 1, 47, DateTimeKind.Local).AddTicks(6310),
+                            CreatedOn = new DateTime(2021, 5, 29, 17, 34, 14, 527, DateTimeKind.Local).AddTicks(7537),
                             ImagePath = "Final_Fantasy_XV_Chocobo-1.png",
                             ScreenshotDescription = "I finally managed to find a chocobo",
                             ScreenshotTitle = "Final Fantasy XV Chocobo"
@@ -352,7 +351,7 @@ namespace Fan_Website.Migrations
                         new
                         {
                             ScreenshotId = 9,
-                            CreatedOn = new DateTime(2021, 5, 29, 18, 15, 1, 49, DateTimeKind.Local).AddTicks(4226),
+                            CreatedOn = new DateTime(2021, 5, 29, 17, 34, 14, 529, DateTimeKind.Local).AddTicks(5060),
                             ImagePath = "Final-Fantasy-VII-Remake-Sephiroth.png",
                             ScreenshotDescription = "This is my favorite game of all time",
                             ScreenshotTitle = "Sephiroth from Final Fantasy VII"
@@ -523,11 +522,11 @@ namespace Fan_Website.Migrations
 
             modelBuilder.Entity("Fan_Website.Models.ProfileComment.ProfileComment", b =>
                 {
-                    b.HasOne("Fan_Website.ApplicationUser", "CurrentUser")
+                    b.HasOne("Fan_Website.ApplicationUser", "User")
                         .WithMany("ProfileComments")
-                        .HasForeignKey("CurrentUserId");
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("CurrentUser");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Fan_Website.Post", b =>

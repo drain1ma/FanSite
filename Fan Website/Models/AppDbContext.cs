@@ -1,5 +1,6 @@
 ﻿using Fan_Website.Models;
 using Fan_Website.Models.Follow;
+using Fan_Website.Models.ProfileComment;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,6 +23,7 @@ namespace Fan_Website
         public DbSet<PostReply> Replies { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Follow> Follows { get; set; }
+        public DbSet<ProfileComment> ProfileComments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

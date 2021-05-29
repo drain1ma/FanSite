@@ -1,6 +1,7 @@
 ﻿using Fan_Website.Infrastructure;
 using Fan_Website.Models;
 using Fan_Website.Models.Follow;
+using Fan_Website.Models.ProfileComment;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -56,6 +57,10 @@ namespace Fan_Website.Service
             if (type == typeof(Forum))
             {
                 inc = 2; 
+            }
+            if (type == typeof(ProfileComment))
+            {
+                inc = 3;
             }
 
             return userRating + inc; 
