@@ -18,18 +18,20 @@ namespace Fan_Website.Controllers
             userService = _userService;
             userManager = _userManager; 
         }
-        public IActionResult Create(string id, string otherId)
+        public IActionResult Create(string id)
         {
+            var userId = userManager.GetUserId(User);
+            var currentUser = userService.GetById(userId); 
             var user = userService.GetById(id);
 
             var model = new ProfileCommentModel
             {
-                AuthorId = user.Id,
+                AuthorId = currentUser.Id,
                 AuthorName = User.Identity.Name,
-                AuthorImageUrl = user.ImagePath,
-                AuthorRating = user.Rating,
+                AuthorImageUrl = currentUser.ImagePath, 
+                AuthorRating = currentUser.Rating,
                 Date = DateTime.Now,
-                UserId = otherId 
+                UserId = user.Id 
             };
 
             return View(model);
@@ -45,19 +47,19 @@ namespace Fan_Website.Controllers
 
             await userService.AddComment((ProfileComment)comment);
             await userService.UpdateUserRating(userId, typeof(ProfileComment));
-            return RedirectToAction("Detail", "Profile", new { id = model.AuthorId });
+            return RedirectToAction("Detail", "Profile", new { id = model.UserId });
         }
 
         private object BuildComment(ProfileCommentModel model, ApplicationUser user)
         {
-            var userProfile = userService.GetById(model.AuthorId);
+            var userProfile = userService.GetById(model.UserId);
 
             return new ProfileComment
             {
-                CurrentUser = user,
+                CurrentUser = userProfile,
                 Content = model.CommentContent,
                 CreateOn = DateTime.Now,
-                UserId = userProfile.Id
+                OtherUserId = user.Id
             };
         }
     }

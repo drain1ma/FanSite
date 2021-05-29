@@ -11,6 +11,6 @@ namespace Fan_Website.Models.ProfileComment
         public string Content { get; set; }
         public DateTime CreateOn { get; set; }
         public ApplicationUser CurrentUser { get; set; }
-        public string UserId { get; set; }
+        public string OtherUserId { get; set; }
     }
 }
