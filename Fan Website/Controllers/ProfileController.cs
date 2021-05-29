@@ -42,7 +42,8 @@ namespace Fan_Website.Controllers
                 MemberSince = user.MemberSince,
                 Following = user.Following,
                 Followers = user.Followers,
-                Follows = user.Follows 
+                Follows = user.Follows,
+                ProfileComments = user.ProfileComments 
             }; 
             return View(model);
         }

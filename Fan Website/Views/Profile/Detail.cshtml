@@ -21,78 +21,85 @@
             </div>
         </div>
 
-            <div class="row userProfile">
-                <div class="col-md-4">
-                    @if (Model.ProfileImageUrl == null)
+        <div class="row userProfile">
+            <div class="col-md-4">
+                @if (Model.ProfileImageUrl == null)
+                {
+                    <img src="~/images/blankpicture.png" id="userProfileImage" style="background-size: 100%;">
+                }
+                else
+                {
+
+                    <div id="userProfileImage" style="background-image: url(@Model.ProfileImageUrl); background-size:100%;"></div>
+                }
+                @if (signInManager.IsSignedIn(User))
+                {
+
+                    if (User.Identity.Name != Model.UserName && userFollow == null)
                     {
-                        <img src="~/images/blankpicture.png" id="userProfileImage" style="background-size: 100%;">
+                        <span id="follow" class="inline-icon material-icons" style="cursor: pointer; display: block">person_add_alt</span>
+                        <input id="followers" type="hidden" asp-for="@Model.UserId" />
+
+                        <a asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId">Create Comment</a>
+                    }
+                    else if (User.Identity.Name != Model.UserName && userFollow != null)
+                    {
+                        <span id="follow" class="inline-icon material-icons" style="cursor: pointer; display: block">person_remove</span>
+                        <input id="followers" type="hidden" asp-for="@Model.UserId" />
+                        <a asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId">Create Comment</a>
+                    }
+                }
+                @if (Context.User.Identity.Name == Model.UserName)
+                {
+                    <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage">
+                        <div id="upload">
+                            <label class="btn btn-default btn-file">
+                                Browse <input type="file" name="file" style="display: none;">
+                            </label>
+                        </div>
+                        <button type="submit" id="btn-profile" class="btn btn-default">Submit</button>
+                    </form>
+                }
+            </div>
+            <div class="col-md-8">
+                <span id="userName">
+                    @Model.UserName
+                </span>
+                <span id="userRating">Current Rating: @Model.UserRating</span>
+                <span id="userCreatedLabel">Member Since: @Model.MemberSince</span>
+                <span id="userActiveLabel">
+                </span>
+                @if (signInManager.IsSignedIn(User))
+                {
+
+                    if (User.Identity.Name != Model.UserName && userFollow == null)
+                    {
+                        <span id="getFollowers">Followers: @Model.Followers </span><span id="getFollowing">Following: @Model.Following</span>
+                        <input id="followers" type="hidden" asp-for="@Model.UserId" />
+                    }
+                    else if (User.Identity.Name != Model.UserName && userFollow != null)
+                    {
+                        <span id="getFollowers">Followers: @Model.Followers </span><span id="getFollowing">Following: @Model.Following</span>
+                        <input id="followers" type="hidden" asp-for="@Model.UserId" />
                     }
                     else
                     {
-
-                        <div id="userProfileImage" style="background-image: url(@Model.ProfileImageUrl); background-size:100%;"></div>
+                        <span id="getFollowers">Followers: @Model.Followers</span><span id="getFollowing"> Following: @Model.Following</span>
+                        <input id="followers" type="hidden" asp-for="@Model.UserId" />
                     }
-                    @if (signInManager.IsSignedIn(User))
-                    {
+                }
 
-                        if (User.Identity.Name != Model.UserName && userFollow == null)
-                        {
-                            <span id="follow" class="inline-icon material-icons" style="cursor: pointer; display: block">person_add_alt</span>
-                            <input id="followers" type="hidden" asp-for="@Model.UserId" />
-
-                            <a asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId">Create Comment</a>
-                        }
-                        else if (User.Identity.Name != Model.UserName && userFollow != null)
-                        {
-                            <span id="follow" class="inline-icon material-icons" style="cursor: pointer; display: block">person_remove</span>
-                            <input id="followers" type="hidden" asp-for="@Model.UserId" />
-                            <a asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId">Create Comment</a>
-                        }
-                    }
-                    @if (Context.User.Identity.Name == Model.UserName)
-                    {
-                        <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage">
-                            <div id="upload">
-                                <label class="btn btn-default btn-file">
-                                    Browse <input type="file" name="file" style="display: none;">
-                                </label>
-                            </div>
-                            <button type="submit" id="btn-profile" class="btn btn-default">Submit</button>
-                        </form>
-                    }
-                </div>
-                <div class="col-md-8">
-                    <span id="userName">
-                        @Model.UserName
-                    </span>    
-                    <span id="userRating">Current Rating: @Model.UserRating</span>
-                    <span id="userCreatedLabel">Member Since: @Model.MemberSince</span>
-                    <span id="userActiveLabel">
-                    </span>
-                    @if (signInManager.IsSignedIn(User))
-                    {
-
-                        if (User.Identity.Name != Model.UserName && userFollow == null)
-                        {
-                            <span id="getFollowers">Followers: @Model.Followers </span><span id="getFollowing">Following: @Model.Following</span>
-                            <input id="followers" type="hidden" asp-for="@Model.UserId" />
-                        }
-                        else if (User.Identity.Name != Model.UserName && userFollow != null)
-                        {
-                            <span id="getFollowers">Followers: @Model.Followers </span><span id="getFollowing">Following: @Model.Following</span>
-                            <input id="followers" type="hidden" asp-for="@Model.UserId" />
-                        }
-                        else
-                        {
-                            <span id="getFollowers">Followers: @Model.Followers</span><span id="getFollowing"> Following: @Model.Following</span>
-                            <input id="followers" type="hidden" asp-for="@Model.UserId" />
-                        }
-                    }
-
-                </div>
             </div>
-        
+        </div>
+
     </div>
+    @foreach (var comment in Model.ProfileComments)
+    {
+        <div>
+            @comment.Content 
+        </div>
+    }
+
 
     <script>
 
@@ -116,7 +123,7 @@
                             $("#getFollowers").html(" Followers: " + result + " ");
                             $("#follow").html("person_add_alt");
                         }
-                        
+
                     },
                     error: function () {
                         alert("error");
