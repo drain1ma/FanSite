@@ -18,7 +18,7 @@ namespace Fan_Website.Controllers
             userService = _userService;
             userManager = _userManager; 
         }
-        public async Task<IActionResult> Create(string id)
+        public IActionResult Create(string id)
         {
             var user = userService.GetById(id);
 
@@ -29,8 +29,8 @@ namespace Fan_Website.Controllers
                 AuthorImageUrl = user.ImagePath,
                 AuthorRating = user.Rating,
                 Date = DateTime.Now
-            }; 
-          
+            };
+
             return View(model);
         }
 
@@ -40,9 +40,9 @@ namespace Fan_Website.Controllers
             var userId = userManager.GetUserId(User);
             var user = await userManager.FindByIdAsync(userId);
 
-            var reply = BuildComment(model, user);
+            var comment = BuildComment(model, user);
 
-            
+            await userService.AddComment((ProfileComment)comment);
             await userService.UpdateUserRating(userId, typeof(ProfileComment));
             return RedirectToAction("Detail", "Profile", new { id = model.AuthorId });
         }

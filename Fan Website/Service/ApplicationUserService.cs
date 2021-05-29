@@ -85,5 +85,11 @@ namespace Fan_Website.Service
             var following = context.Follows.Where(follow => follow.Following == user.UserName) ?? null;
             return following; 
         }
+        public async Task AddComment(ProfileComment comment)
+        {
+            context.Add(comment);
+            await context.SaveChangesAsync();
+        }
+
     }
 }
