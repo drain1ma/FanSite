@@ -18,7 +18,7 @@ namespace Fan_Website.Controllers
             userService = _userService;
             userManager = _userManager; 
         }
-        public IActionResult Create(string id)
+        public IActionResult Create(string id, string otherId)
         {
             var user = userService.GetById(id);
 
@@ -28,7 +28,8 @@ namespace Fan_Website.Controllers
                 AuthorName = User.Identity.Name,
                 AuthorImageUrl = user.ImagePath,
                 AuthorRating = user.Rating,
-                Date = DateTime.Now
+                Date = DateTime.Now,
+                UserId = otherId 
             };
 
             return View(model);

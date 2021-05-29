@@ -14,5 +14,6 @@ namespace Fan_Website.Models.ProfileComment
         public string AuthorImageUrl { get; set; }
         public DateTime Date { get; set; }
         public string CommentContent { get; set; }
+        public string UserId { get; set; }
     }
 }

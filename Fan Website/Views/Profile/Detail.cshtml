@@ -39,11 +39,14 @@
                         {
                             <span id="follow" class="inline-icon material-icons" style="cursor: pointer; display: block">person_add_alt</span>
                             <input id="followers" type="hidden" asp-for="@Model.UserId" />
+
+                            <a asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId">Create Comment</a>
                         }
                         else if (User.Identity.Name != Model.UserName && userFollow != null)
                         {
                             <span id="follow" class="inline-icon material-icons" style="cursor: pointer; display: block">person_remove</span>
                             <input id="followers" type="hidden" asp-for="@Model.UserId" />
+                            <a asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId">Create Comment</a>
                         }
                     }
                     @if (Context.User.Identity.Name == Model.UserName)
