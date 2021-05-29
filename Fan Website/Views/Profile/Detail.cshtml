@@ -93,15 +93,44 @@
         </div>
 
     </div>
-    @foreach (var comment in Model.ProfileComments)
-    {
-        <div>
-            @comment.Content 
+    <div id="replyDivider"></div>
+    <div class="postReplyContent">
+        @if (Model.ProfileComments.Any())
+        {
+            foreach (var comment in Model.ProfileComments)
+            {
+                <div class="row replyContent">
+                    <div class="col-md-3 replyAuthorContainer">
+                        <div class="postAuthorImage" style="background-image: url(@comment.CurrentUser.ImagePath); background-size: 100%;"></div>
+                        <a asp-controller="Profile" asp-action="Detail" asp-route-id="@comment.CurrentUser.Id">
+                            <strong>@comment.CurrentUser.UserName</strong>
+                        </a> <span class="badge rounded-circle" style="background-color: skyblue"> @comment.CurrentUser.Rating </span> <br />
+                        <span class="postDate">@comment.CreateOn</span>
+                    </div>
+                    <div class="col-md-9 replyContentContainer">
+                        <div class="postContent">
+                            @Html.Raw(comment.Content)
+                        </div>
+                        @if (User.Identity.Name == comment.OtherUserName)
+                        {
+
+                        }
+
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="noPosts">
+                <h3>
+                    There are no replies to this post.<br />
+                </h3>
+            </div>
+        }
         </div>
-    }
 
-
-    <script>
+        <script>
 
         $(document).ready(function () {
             $("#follow").on('click', function () {
@@ -133,6 +162,6 @@
                 return false;
             });
         });
-    </script>
+        </script>
 </body>
 </html>

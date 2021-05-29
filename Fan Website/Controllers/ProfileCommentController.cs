@@ -18,11 +18,10 @@ namespace Fan_Website.Controllers
             userService = _userService;
             userManager = _userManager; 
         }
-        public IActionResult Create(string id)
+        public async Task<IActionResult> Create(string id)
         {
-            var userId = userManager.GetUserId(User);
-            var currentUser = userService.GetById(userId); 
-            var user = userService.GetById(id);
+            var currentUser = await userManager.FindByNameAsync(User.Identity.Name);
+            var user = userService.GetById(id); 
 
             var model = new ProfileCommentModel
             {
@@ -31,7 +30,10 @@ namespace Fan_Website.Controllers
                 AuthorImageUrl = currentUser.ImagePath, 
                 AuthorRating = currentUser.Rating,
                 Date = DateTime.Now,
-                UserId = user.Id 
+                UserId = user.Id,
+                OtherUserImagePath = user.ImagePath, 
+                OtherUserName = user.UserName, 
+                OtherUserRating = user.Rating 
             };
 
             return View(model);
@@ -42,6 +44,8 @@ namespace Fan_Website.Controllers
         {
             var userId = userManager.GetUserId(User);
             var user = await userManager.FindByIdAsync(userId);
+
+
 
             var comment = BuildComment(model, user);
 
@@ -56,10 +60,13 @@ namespace Fan_Website.Controllers
 
             return new ProfileComment
             {
-                CurrentUser = userProfile,
+                CurrentUser = user,
                 Content = model.CommentContent,
                 CreateOn = DateTime.Now,
-                OtherUserId = user.Id
+                OtherUserId = user.Id,
+                OtherUserImagePath = user.ImagePath, 
+                OtherUserName = user.UserName, 
+                OtherUserRating = user.Rating 
             };
         }
     }
