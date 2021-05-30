@@ -63,10 +63,7 @@ namespace Fan_Website.Controllers
                 CurrentUser = user,
                 Content = model.CommentContent,
                 CreateOn = DateTime.Now,
-                OtherUserId = user.Id,
-                OtherUserImagePath = user.ImagePath, 
-                OtherUserName = user.UserName, 
-                OtherUserRating = user.Rating 
+                OtherUser = userProfile
             };
         }
     }

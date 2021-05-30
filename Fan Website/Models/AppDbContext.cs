@@ -27,6 +27,7 @@ namespace Fan_Website
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<ApplicationUser>().HasMany(user => user.ProfileComments).WithOne(comment => comment.OtherUser); 
             modelBuilder.Entity<Account>().HasData(
                 new Account
                 {

@@ -1,6 +1,7 @@
 ﻿using Fan_Website.Infrastructure;
 using Fan_Website.Models;
 using Fan_Website.Models.Follow;
+using Fan_Website.Models.ProfileComment;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -32,7 +33,7 @@ namespace Fan_Website.Controllers
         public IActionResult Detail(string id)
         {
             var user = userService.GetById(id);
-
+            var comments = BuildProfileComments(user.ProfileComments); 
             var model = new ProfileModel()
             {
                 UserId = user.Id,
@@ -43,11 +44,28 @@ namespace Fan_Website.Controllers
                 Following = user.Following,
                 Followers = user.Followers,
                 Follows = user.Follows,
-                ProfileComments = user.ProfileComments 
+                ProfileComments = comments
             }; 
             return View(model);
         }
 
+        private IEnumerable<ProfileCommentModel> BuildProfileComments(IEnumerable<ProfileComment> comments)
+        {
+            return comments.Select(comment => new ProfileCommentModel
+            {
+                Id = comment.Id,
+                AuthorImageUrl = comment.CurrentUser.ImagePath,
+                AuthorName = comment.CurrentUser.UserName,
+                AuthorId = comment.CurrentUser.Id,
+                AuthorRating = comment.CurrentUser.Rating,
+                Date = comment.CreateOn,
+                CommentContent = comment.Content,
+                OtherUserImagePath = comment.OtherUser.ImagePath,
+                OtherUserName = comment.OtherUser.UserName,
+                OtherUserRating = comment.OtherUser.Rating,
+                UserId = comment.OtherUser.Id
+            });
+        }
         [HttpPost]
         public int UpdateFollows(string id)
         {
