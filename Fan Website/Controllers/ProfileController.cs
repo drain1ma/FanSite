@@ -33,6 +33,8 @@ namespace Fan_Website.Controllers
         public IActionResult Detail(string id)
         {
             var user = userService.GetById(id);
+            var currentUserId = userManager.GetUserId(User);
+            var currentUser = userService.GetById(currentUserId);
             var comments = BuildProfileComments(user.ProfileComments); 
             var model = new ProfileModel()
             {

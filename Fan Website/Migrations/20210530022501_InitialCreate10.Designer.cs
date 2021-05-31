@@ -4,14 +4,16 @@ using Fan_Website;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Fan_Website.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210530022501_InitialCreate10")]
+    partial class InitialCreate10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -481,11 +483,11 @@ namespace Fan_Website.Migrations
             modelBuilder.Entity("Fan_Website.Models.ProfileComment.ProfileComment", b =>
                 {
                     b.HasOne("Fan_Website.ApplicationUser", "CurrentUser")
-                        .WithMany()
+                        .WithMany("ProfileComments")
                         .HasForeignKey("CurrentUserId");
 
                     b.HasOne("Fan_Website.ApplicationUser", "OtherUser")
-                        .WithMany("ProfileComments")
+                        .WithMany()
                         .HasForeignKey("OtherUserId");
 
                     b.Navigation("CurrentUser");

@@ -4,14 +4,16 @@ using Fan_Website;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Fan_Website.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210530025551_InitialCreate12")]
+    partial class InitialCreate12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -208,6 +210,7 @@ namespace Fan_Website.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CurrentUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("OtherUserId")
@@ -481,11 +484,13 @@ namespace Fan_Website.Migrations
             modelBuilder.Entity("Fan_Website.Models.ProfileComment.ProfileComment", b =>
                 {
                     b.HasOne("Fan_Website.ApplicationUser", "CurrentUser")
-                        .WithMany()
-                        .HasForeignKey("CurrentUserId");
+                        .WithMany("ProfileComments")
+                        .HasForeignKey("CurrentUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Fan_Website.ApplicationUser", "OtherUser")
-                        .WithMany("ProfileComments")
+                        .WithMany()
                         .HasForeignKey("OtherUserId");
 
                     b.Navigation("CurrentUser");
