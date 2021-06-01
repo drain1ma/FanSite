@@ -36,16 +36,17 @@
                 {
 
                     if (User.Identity.Name != Model.UserName && userFollow == null)
-                    {
-                        <div id="follow" class="inline-icon material-icons" style="cursor: pointer; display: block">person_add_alt</div>
+                    {   <br />
+                        <div id="follow" class="inline-icon material-icons" style="cursor: pointer; display: inline-block">person_add_alt</div>
                         <input id="followers" type="hidden" asp-for="@Model.UserId" />
-                        <a class="material-icons" asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId" style="color: black; background: white; display: inline-block; text-decoration: none">mode_comment</a>
+                        <a class="inline-icon material-icons" asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId" style="padding-left: 50px; color: black; background: white; display: inline-block; text-decoration: none">mode_comment</a>
                     }
                     else if (User.Identity.Name != Model.UserName && userFollow != null)
                     {
-                        <div id="follow" class="inline-icon material-icons" style="cursor: pointer; display: block">person_remove</div>
+                        <br />
+                        <div id="follow" class="inline-icon material-icons" style="cursor: pointer; display: inline-block">person_remove</div>
                         <input id="followers" type="hidden" asp-for="@Model.UserId" />
-                        <a class="material-icons" asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId" style="color: black; background: white; display: inline-block; text-decoration: none">mode_comment</a>
+                        <a class="inline-icon material-icons" asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId" style="padding-left: 50px; color: black; background: white; display: inline-block; text-decoration: none">mode_comment</a>
                     }
                 }
                 @if (Context.User.Identity.Name == Model.UserName)
