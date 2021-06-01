@@ -100,14 +100,14 @@
             foreach (var comment in Model.ProfileComments)
             {
                 <div class="row replyContent">
-                    <div class="col-md-3 replyAuthorContainer">
+                    <div class="col-md-4 replyAuthorContainer">
                         <div class="postAuthorImage" style="background-image: url(@comment.AuthorImageUrl); background-size: 100%;"></div>
                         <a asp-controller="Profile" asp-action="Detail" asp-route-id="@comment.AuthorId">
                             <strong>@comment.AuthorName</strong>
                         </a> <span class="badge rounded-circle" style="background-color: skyblue"> @comment.AuthorRating </span> <br />
                         <span class="postDate">@comment.Date</span>
                     </div>
-                    <div class="col-md-9 replyContentContainer">
+                    <div class="col-md-8 replyContentContainer">
                         <div class="postContent">
                             @Html.Raw(comment.CommentContent)
                         </div>

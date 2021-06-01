@@ -26,8 +26,8 @@ namespace Fan_Website.Service
         public ApplicationUser GetById(string id)
         {
             return context.Users.Where(user => user.Id == id)
-              .Include(user => user.Follows) 
-              .Include(user => user.ProfileComments)
+              .Include(user => user.Follows)
+              .Include(user => user.ProfileComments).ThenInclude(comment => comment.CurrentUser) 
                .FirstOrDefault();
         }
 
