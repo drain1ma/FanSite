@@ -39,14 +39,14 @@
                     {   <br />
                         <div id="follow" class="inline-icon material-icons" style="cursor: pointer; display: inline-block">person_add_alt</div>
                         <input id="followers" type="hidden" asp-for="@Model.UserId" />
-                        <a class="inline-icon material-icons" asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId" style="padding-left: 50px; color: black; background: white; display: inline-block; text-decoration: none">mode_comment</a>
+                        <a class="inline-icon material-icons" asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId" style="color: black; background: white; display: inline-block; text-decoration: none">mode_comment</a>
                     }
                     else if (User.Identity.Name != Model.UserName && userFollow != null)
                     {
                         <br />
                         <div id="follow" class="inline-icon material-icons" style="cursor: pointer; display: inline-block">person_remove</div>
                         <input id="followers" type="hidden" asp-for="@Model.UserId" />
-                        <a class="inline-icon material-icons" asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId" style="padding-left: 50px; color: black; background: white; display: inline-block; text-decoration: none">mode_comment</a>
+                        <a class="inline-icon material-icons" asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId" style="color: black; background: white; display: inline-block; text-decoration: none">mode_comment</a>
                     }
                 }
                 @if (Context.User.Identity.Name == Model.UserName)
@@ -65,7 +65,7 @@
                 <span id="userName">
                     @Model.UserName
                 </span>
-                <span id="userRating">Current Rating: @Model.UserRating</span>
+                <span id="userRating">Current Rating: </span><span class="badge rounded-circle" style="background-color: skyblue">@Model.UserRating</span>
                 <span id="userCreatedLabel">Member Since: @Model.MemberSince</span>
                 <span id="userActiveLabel">
                 </span>
