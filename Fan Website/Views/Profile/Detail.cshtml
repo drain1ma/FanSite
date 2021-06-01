@@ -37,16 +37,15 @@
 
                     if (User.Identity.Name != Model.UserName && userFollow == null)
                     {
-                        <span id="follow" class="inline-icon material-icons" style="cursor: pointer; display: block">person_add_alt</span>
+                        <div id="follow" class="inline-icon material-icons" style="cursor: pointer; display: block">person_add_alt</div>
                         <input id="followers" type="hidden" asp-for="@Model.UserId" />
-
-                        <a asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId">Create Comment</a>
+                        <a class="material-icons" asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId" style="color: black; background: white; display: inline-block; text-decoration: none">mode_comment</a>
                     }
                     else if (User.Identity.Name != Model.UserName && userFollow != null)
                     {
-                        <span id="follow" class="inline-icon material-icons" style="cursor: pointer; display: block">person_remove</span>
+                        <div id="follow" class="inline-icon material-icons" style="cursor: pointer; display: block">person_remove</div>
                         <input id="followers" type="hidden" asp-for="@Model.UserId" />
-                        <a asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId">Create Comment</a>
+                        <a class="material-icons" asp-controller="ProfileComment" asp-action="Create" asp-route-id="@Model.UserId" style="color: black; background: white; display: inline-block; text-decoration: none">mode_comment</a>
                     }
                 }
                 @if (Context.User.Identity.Name == Model.UserName)
@@ -158,6 +157,8 @@
                 return false;
             });
         });
+
+        
         </script>
 </body>
 </html>

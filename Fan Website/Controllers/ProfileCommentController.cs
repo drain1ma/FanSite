@@ -18,6 +18,7 @@ namespace Fan_Website.Controllers
             userService = _userService;
             userManager = _userManager; 
         }
+
         public async Task<IActionResult> Create(string id)
         {
             var currentUser = await userManager.FindByNameAsync(User.Identity.Name);
