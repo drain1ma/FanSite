@@ -78,13 +78,13 @@ namespace Fan_Website.Controllers
            
             var follow = new Follow
             {
-                Following = user.Id,
-                Follower = currentUser.Id 
+                Following = user,
+                Follower = currentUser
             };
            
             if (follows.Any())
             {
-                var userFollow = follows.Where(follow => follow.Follower == currentUser.Id).Where(follow => follow.Following == user.Id).FirstOrDefault();
+                var userFollow = follows.Where(follow => follow.Follower == currentUser).Where(follow => follow.Following == user).FirstOrDefault();
                 if (userFollow != null)
                 {
                     context.Remove(userFollow);

@@ -26,7 +26,7 @@ namespace Fan_Website.Service
         public ApplicationUser GetById(string id)
         {
             return context.Users.Where(user => user.Id == id)
-              .Include(user => user.Follows)
+              .Include(user => user.Follows).ThenInclude(follow => follow.Follower) 
               .Include(user => user.ProfileComments).ThenInclude(comment => comment.CurrentUser) 
                .FirstOrDefault();
         }
@@ -83,7 +83,7 @@ namespace Fan_Website.Service
         public IEnumerable<Follow> GetFollowing(string id)
         {
             var user = GetById(id);
-            var following = context.Follows.Where(follow => follow.Following == user.UserName) ?? null;
+            var following = context.Follows.Where(follow => follow.Following == user) ?? null;
             return following; 
         }
         public async Task AddComment(ProfileComment comment)

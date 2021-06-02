@@ -5,7 +5,7 @@
 @inject UserManager<ApplicationUser> userManager 
 @{ 
     var userId = userManager.GetUserId(User);
-    var userFollow = Model.Follows.Where(follow => follow.Follower == userId).Where(follow => follow.Following == Model.UserId).FirstOrDefault();
+    var userFollow = Model.Follows.Where(follow => follow.Follower.Id == userId).Where(follow => follow.Following.Id == Model.UserId).FirstOrDefault();
 }
 <!DOCTYPE html>
 <html>
