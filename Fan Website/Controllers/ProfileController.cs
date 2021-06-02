@@ -160,6 +160,24 @@ namespace Fan_Website.Controllers
             };
             return View(model);
         }
+        public IActionResult Following(string id)
+        {
+            var user = userService.GetById(id);
+            var comments = BuildProfileComments(user.ProfileComments);
+            var model = new ProfileModel()
+            {
+                UserId = user.Id,
+                UserName = user.UserName,
+                UserRating = user.Rating.ToString(),
+                ProfileImageUrl = user.ImagePath,
+                MemberSince = user.MemberSince,
+                Following = user.Following,
+                Followers = user.Followers,
+                Follows = user.Follows,
+                ProfileComments = comments
+            };
+            return View(model);
+        }
         public async Task<IActionResult> UploadProfileImage(IFormFile file)
         {
             var userId = userManager.GetUserId(User);

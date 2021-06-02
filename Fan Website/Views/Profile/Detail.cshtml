@@ -74,17 +74,17 @@
 
                     if (User.Identity.Name != Model.UserName && userFollow == null)
                     {
-                        <a id="getFollowers2" asp-controller="Profile" asp-action="Followers" asp-route-id="@Model.UserId" style="cursor: pointer; text-decoration: none; color: #444">Followers</a><span id="getFollowers">: @Model.Followers </span><span id="getFollowing">Following: @Model.Following</span>
+                        <a id="getFollowers2" asp-controller="Profile" asp-action="Followers" asp-route-id="@Model.UserId" style="cursor: pointer; text-decoration: none; color: #444">Followers</a><span id="getFollowers">: @Model.Followers </span><a asp-controller="Profile" asp-action="Following" asp-route-id="@Model.UserId" id="getFollowers2" style="cursor: pointer; text-decoration: none; color: #444">Following</a><span id="getFollowing">: @Model.Following</span>
                         <input id="followers" type="hidden" asp-for="@Model.UserId" />
                     }
                     else if (User.Identity.Name != Model.UserName && userFollow != null)
                     {
-                        <a id="getFollowers2" asp-controller="Profile" asp-action="Followers" asp-route-id="@Model.UserId" style="cursor: pointer; text-decoration: none; color: #444">Followers</a><span id="getFollowers">: @Model.Followers </span><span id="getFollowing">Following: @Model.Following</span>
+                        <a id="getFollowers2" asp-controller="Profile" asp-action="Followers" asp-route-id="@Model.UserId" style="cursor: pointer; text-decoration: none; color: #444">Followers</a><span id="getFollowers">: @Model.Followers </span><a asp-controller="Profile" asp-action="Following" asp-route-id="@Model.UserId" id="getFollowers2" style="cursor: pointer; text-decoration: none; color: #444">Following</a><span id="getFollowing">: @Model.Following</span>
                         <input id="followers" type="hidden" asp-for="@Model.UserId" />
                     }
                     else
                     {
-                        <a id="getFollowers2" asp-controller="Profile" asp-action="Followers" asp-route-id="@Model.UserId" style="cursor: pointer; text-decoration: none; color: #444">Followers</a><span id="getFollowers">: @Model.Followers </span><span id="getFollowing">Following: @Model.Following</span>
+                        <a id="getFollowers2" asp-controller="Profile" asp-action="Followers" asp-route-id="@Model.UserId" style="cursor: pointer; text-decoration: none; color: #444">Followers</a><span id="getFollowers">: @Model.Followers </span><a asp-controller="Profile" asp-action="Following" asp-route-id="@Model.UserId" id="getFollowers2" style="cursor: pointer; text-decoration: none; color: #444">Following</a><span id="getFollowing">: @Model.Following</span>
                         <input id="followers" type="hidden" asp-for="@Model.UserId" />
                     }
                 }

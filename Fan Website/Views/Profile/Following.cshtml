@@ -1,1 +1,47 @@
-﻿
+﻿@model ProfileModel
+@inject SignInManager<ApplicationUser> signInManager
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <link href="~/css/images.css" rel="stylesheet" />
+    <div class="sectionHeader">
+        <h3>Following</h3>
+    </div>
+    @foreach (var follow in Model.Follows)
+    {
+
+        <div class="container body-content border-bottom">
+
+
+            <div class="row userProfile">
+                <div class="col-md-4">
+                    @if (follow.Following.ImagePath == null)
+                    {
+                        <img src="~/images/blankpicture.png" id="userProfileImage" style="background-size: 100%;"><br />
+                    }
+                    else
+                    {
+
+                        <div id="userProfileImage" style="background-image: url(@follow.Following.ImagePath); background-size:100%;"></div>
+                    }
+                </div>
+                <div class="col-md-8">
+                    <a id="userName" asp-controller="Profile" asp-action="Detail" asp-route-id="@follow.Following.Id">@follow.Following.UserName</a>
+                    <div>
+
+                    </div>
+                    <span id="userRating">Current Rating: </span><span class="badge rounded-circle" style="background-color: skyblue"> @follow.Following.Rating </span>
+                    <span id="userCreatedLabel">Member Since: @follow.Following.MemberSince</span>
+                    <span id="userActiveLabel">
+                    </span>
+                </div>
+            </div>
+        </div>
+    }
+
+</body>
+</html>
