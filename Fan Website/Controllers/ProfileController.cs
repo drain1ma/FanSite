@@ -33,8 +33,6 @@ namespace Fan_Website.Controllers
         public IActionResult Detail(string id)
         {
             var user = userService.GetById(id);
-            var currentUserId = userManager.GetUserId(User);
-            var currentUser = userService.GetById(currentUserId);
             var comments = BuildProfileComments(user.ProfileComments); 
             var model = new ProfileModel()
             {
@@ -142,6 +140,25 @@ namespace Fan_Website.Controllers
 
 
             return 0; 
+        }
+
+        public IActionResult Followers(string id)
+        {
+            var user = userService.GetById(id);
+            var comments = BuildProfileComments(user.ProfileComments);
+            var model = new ProfileModel()
+            {
+                UserId = user.Id,
+                UserName = user.UserName,
+                UserRating = user.Rating.ToString(),
+                ProfileImageUrl = user.ImagePath,
+                MemberSince = user.MemberSince,
+                Following = user.Following,
+                Followers = user.Followers,
+                Follows = user.Follows,
+                ProfileComments = comments
+            };
+            return View(model);
         }
         public async Task<IActionResult> UploadProfileImage(IFormFile file)
         {

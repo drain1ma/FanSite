@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Fan_Website.Models.Follow.Follow>
+﻿@model ProfileModel  
 @inject SignInManager<ApplicationUser> signInManager
 
 <!DOCTYPE html>
@@ -11,7 +11,37 @@
         <div class="sectionHeader">
             <h3>Followers</h3>
         </div>
+        @foreach (var follow in Model.Follows)
+        {
 
+            <div class="container body-content border-bottom">
+
+
+                <div class="row userProfile">
+                    <div class="col-md-4">
+                        @if (follow.Follower.ImagePath == null)
+                        {
+                            <img src="~/images/blankpicture.png" id="userProfileImage" style="background-size: 100%;"><br />
+                        }
+                        else
+                        {
+
+                            <div id="userProfileImage" style="background-image: url(@follow.Follower.ImagePath); background-size:100%;"></div>
+                        }
+                    </div>
+                    <div class="col-md-8">
+                        <a id="userName" asp-controller="Profile" asp-action="Detail" asp-route-id="@follow.Follower.Id">@follow.Follower.UserName</a>
+                        <div>
+
+                        </div>
+                        <span id="userRating">Current Rating: </span><span class="badge rounded-circle" style="background-color: skyblue"> @follow.Follower.Rating </span>
+                        <span id="userCreatedLabel">Member Since: @follow.Follower.MemberSince</span>
+                        <span id="userActiveLabel">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        }
 
     </body>
 </html>
