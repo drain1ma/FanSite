@@ -30,7 +30,16 @@
 
         <div class="row" id="postIndexContent">
             <div class="col-md-3 postAuthorContainer">
-                <div class="postAuthorImage" style="background-image: url(@Model.AuthorImageUrl); background-size: 100%;"></div>
+                @if (Model.AuthorImageUrl == null)
+                {
+                    <div class="postAuthorImage" style="background-image: url(https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png);
+        background-size: 100%;"></div>
+                }
+                else
+                {
+                    <div class="postAuthorImage" style="background-image: url(@Model.AuthorImageUrl); background-size: 100%;"></div>
+                }
+
                 <a asp-controller="Profile" asp-action="Detail" asp-route-id="@Model.AuthorId">
                     <strong>@Model.AuthorName</strong>
                 </a> <span class="badge rounded-circle" style="background-color: skyblue"> @Model.AuthorRating </span> <br />

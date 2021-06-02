@@ -74,17 +74,17 @@
 
                     if (User.Identity.Name != Model.UserName && userFollow == null)
                     {
-                        <span id="getFollowers">Followers: @Model.Followers </span><span id="getFollowing">Following: @Model.Following</span>
+                        <a id="getFollowers" style="cursor: pointer; text-decoration: none; color: #444">Followers</a><span id="getFollowers">: @Model.Followers </span><span id="getFollowing">Following: @Model.Following</span>
                         <input id="followers" type="hidden" asp-for="@Model.UserId" />
                     }
                     else if (User.Identity.Name != Model.UserName && userFollow != null)
                     {
-                        <span id="getFollowers">Followers: @Model.Followers </span><span id="getFollowing">Following: @Model.Following</span>
+                        <a id="getFollowers" style="cursor: pointer; text-decoration: none; color: #444">Followers</a><span id="getFollowers">: @Model.Followers </span><span id="getFollowing">Following: @Model.Following</span>
                         <input id="followers" type="hidden" asp-for="@Model.UserId" />
                     }
                     else
                     {
-                        <span id="getFollowers">Followers: @Model.Followers</span><span id="getFollowing"> Following: @Model.Following</span>
+                        <a id="getFollowers" style="cursor: pointer; text-decoration: none; color: #444">Followers</a><span id="getFollowers">: @Model.Followers </span><span id="getFollowing">Following: @Model.Following</span>
                         <input id="followers" type="hidden" asp-for="@Model.UserId" />
                     }
                 }
