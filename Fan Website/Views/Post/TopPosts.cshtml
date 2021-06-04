@@ -40,9 +40,11 @@
                         </td>
                         <td>
                             <div class="postData">@post.CreatedOn</div>
-                            <div style="float: right" class="material-icons">
-                                favorite
-                            </div><span style="float: right">@post.TotalLikes</span>
+                            <div style="float: right">
+                                <span style="margin-bottom: 15px; margin-left: 20px">@post.TotalLikes</span>
+                                <div class="inline-icon material-icons">favorite</div>
+                            </div>
+
                         </td>
                     </tr>
                 }
