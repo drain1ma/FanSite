@@ -28,7 +28,8 @@ namespace Fan_Website
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ApplicationUser>().HasMany(user => user.ProfileComments).WithOne(comment => comment.OtherUser);
-            modelBuilder.Entity<ApplicationUser>().HasMany(user => user.Follows).WithOne(comment => comment.Following); 
+            modelBuilder.Entity<ApplicationUser>().HasMany(user => user.Follows).WithOne(follow => follow.Following);
+             modelBuilder.Entity<ApplicationUser>().HasMany(user => user.Followings).WithOne(follow => follow.Follower);
         }
     }
 }

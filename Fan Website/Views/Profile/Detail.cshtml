@@ -101,7 +101,15 @@
             {
                 <div class="row replyContent">
                     <div class="col-md-4 replyAuthorContainer">
-                        <div class="postAuthorImage" style="background-image: url(@comment.AuthorImageUrl); background-size: 100%;"></div>
+                        @if (comment.AuthorImageUrl == null)
+                        {
+                            <div class="postAuthorImage" style="background-image: url(https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png); background-size: 100%;"></div>
+                        }
+                        else
+                        {
+                            <div class="postAuthorImage" style="background-image: url(@comment.AuthorImageUrl); background-size: 100%;"></div>
+                        }
+
                         <a asp-controller="Profile" asp-action="Detail" asp-route-id="@comment.AuthorId">
                             <strong>@comment.AuthorName</strong>
                         </a> <span class="badge rounded-circle" style="background-color: skyblue"> @comment.AuthorRating </span> <br />
@@ -120,7 +128,7 @@
         {
             <div class="noPosts">
                 <h3>
-                    There are no replies to this post.<br />
+                    There are no comments on this profile.<br />
                 </h3>
             </div>
         }

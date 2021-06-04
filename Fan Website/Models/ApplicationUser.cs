@@ -17,7 +17,9 @@ namespace Fan_Website
         public int Following { get; set; }
         public int Followers { get; set; }
         public List<Follow> Follows { get; set; }
+        public List<Follow> Followings { get; set; }
         public IEnumerable<ProfileComment> ProfileComments { get; set; }
+       
 
     }
 }

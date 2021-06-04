@@ -44,6 +44,7 @@ namespace Fan_Website.Controllers
                 Following = user.Following,
                 Followers = user.Followers,
                 Follows = user.Follows,
+                Followings = user.Followings, 
                 ProfileComments = comments
             }; 
             return View(model);
@@ -109,6 +110,9 @@ namespace Fan_Website.Controllers
                     currentUser.Following += 1;
                     context.Users.Update(currentUser);
                     context.SaveChanges();
+                    currentUser.Followings.Add(follow);
+                    context.Users.Update(currentUser);
+                    context.SaveChanges();
                     return user.Followers;
                 }
                 context.Remove(follow);
@@ -135,6 +139,9 @@ namespace Fan_Website.Controllers
                 currentUser.Following += 1;
                 context.Users.Update(currentUser);
                 context.SaveChanges();
+                currentUser.Followings.Add(follow);
+                context.Users.Update(currentUser);
+                context.SaveChanges();
                 return user.Followers;
             }
 
@@ -156,6 +163,7 @@ namespace Fan_Website.Controllers
                 Following = user.Following,
                 Followers = user.Followers,
                 Follows = user.Follows,
+                Followings = user.Followings, 
                 ProfileComments = comments
             };
             return View(model);
@@ -174,6 +182,7 @@ namespace Fan_Website.Controllers
                 Following = user.Following,
                 Followers = user.Followers,
                 Follows = user.Follows,
+                Followings = user.Followings, 
                 ProfileComments = comments
             };
             return View(model);

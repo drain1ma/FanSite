@@ -27,6 +27,7 @@ namespace Fan_Website.Service
         {
             return context.Users.Where(user => user.Id == id)
               .Include(user => user.Follows).ThenInclude(follow => follow.Follower) 
+              .Include(user => user.Followings).ThenInclude(follow => follow.Following) 
               .Include(user => user.ProfileComments).ThenInclude(comment => comment.CurrentUser) 
                .FirstOrDefault();
         }
