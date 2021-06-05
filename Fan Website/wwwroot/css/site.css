@@ -306,6 +306,11 @@ btn-newPost:hover{
     padding: 15px; 
 }
 
+#replyContentDivider {
+    display: block; 
+    padding: 15px;
+    background-color: white;
+}
 #replyRow{
     padding: 15px; 
 }
@@ -427,8 +432,12 @@ video{
     display: block; 
     padding-left: 15px; 
     padding-top: 15px; 
+    border-top: thin; 
 }
 
+.authorBlockName{
+    color: red; 
+}
 .btn-submitPost{
     background: #cb0a31; 
     color: #333; 

@@ -81,16 +81,8 @@ namespace Fan_Website.Service
         }
         public IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery)
         {
-            var query = searchQuery.ToLower();
-
-            return context.Posts
-                .Include(post => post.Forum)
-                .Include(post => post.User)
-                .Include(post => post.Replies)
-                .Include(post => post.Likes)
-                .Where(post =>
-                    post.Title.ToLower().Contains(query)
-                 || post.Content.ToLower().Contains(query));
+            return string.IsNullOrEmpty(searchQuery) ? forum.Posts :
+                forum.Posts.Where(post => post.Title.ToLower().Contains(searchQuery) || post.Content.ToLower().Contains(searchQuery) || post.Content.Contains(searchQuery) || post.Title.Contains(searchQuery));
         }
 
         public IEnumerable<Post> GetFilteredPosts(string searchQuery)
