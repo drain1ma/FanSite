@@ -17,7 +17,9 @@
         <div class="row sectionHeader">
             <div class="sectionHeading" style="padding-bottom: 15px">
                 Reply | @Model.PostTitle
-                <span id="headingBtn"><a asp-controller="Forum" asp-action="Topic" asp-route-id="@Model.ForumId" class="btn btn-back">Back to @Model.ForumName</a></span>
+                <span id="headingBtn"><a asp-controller="Post" asp-action="Index" asp-route-id="@Model.PostId"><span class="material-icons" style="color: black; float: right">
+                    arrow_back
+            </span></a></span>
             </div>
         </div>
         <div class="row replyOriginalPost">
@@ -37,7 +39,7 @@
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="ReplyContent">Post Content</label>
-                        <textarea asp-for="ReplyContent" rows="10" cols="90" class="form-control" placeholder="Write your reply here."></textarea>
+                        <textarea asp-for="ReplyContent" rows="10" class="form-control" placeholder="Write your reply here."></textarea>
                         <span asp-validation-for="ReplyContent" class="text-danger"></span>
                     </div>
                     <button type="submit" id="registerBtn" class="btn btn-submitPost">Submit Reply</button>
