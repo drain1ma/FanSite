@@ -22,14 +22,14 @@
         </div>
         <div class="row" style="background-color: white">
             <div class="createPostSection">
-                <div class="row authorBlock">
-                    You're submitting this Reply as <span class="authorBlockName">@Model.AuthorName</span>
+                <div class="authorBlock">
+                    You're submitting this comment as <span class="authorBlockName">@Model.AuthorName</span>
                 </div>
                 <form asp-action="AddComment" method="post" id="addPostForm">
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="CommentContent">Post Content</label>
-                        <textarea asp-for="CommentContent" rows="10" cols="90" class="form-control" placeholder="Write your reply here."></textarea>
+                        <textarea asp-for="CommentContent" rows="5" cols="180" class="form-control" placeholder="Write your comment here."></textarea>
                         <span asp-validation-for="CommentContent" class="text-danger"></span>
                     </div>
                     <button type="submit" id="registerBtn" class="btn btn-submitPost">Submit Reply</button>
