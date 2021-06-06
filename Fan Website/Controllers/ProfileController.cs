@@ -1,6 +1,7 @@
 ﻿using Fan_Website.Infrastructure;
 using Fan_Website.Models;
 using Fan_Website.Models.Follow;
+using Fan_Website.Models.Profile;
 using Fan_Website.Models.ProfileComment;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -45,7 +46,8 @@ namespace Fan_Website.Controllers
                 Followers = user.Followers,
                 Follows = user.Follows,
                 Followings = user.Followings, 
-                ProfileComments = comments
+                ProfileComments = comments,
+                Bio = user.Bio 
             }; 
             return View(model);
         }
@@ -186,6 +188,28 @@ namespace Fan_Website.Controllers
                 ProfileComments = comments
             };
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(string id)
+        {
+            var user = userService.GetById(id);
+
+            var model = new ProfileEditModel
+            {
+                UserId = user.Id, 
+                UserName = user.UserName, 
+                ProfileImageUrl = user.ImagePath, 
+                Bio = user.Bio 
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProfileEditModel user)
+        {
+            await userService.EditProfile(user.UserId, user.Bio, user.UserName);
+            return RedirectToAction("Detail", "Profile", new { id = user.UserId });
         }
         public async Task<IActionResult> UploadProfileImage(IFormFile file)
         {

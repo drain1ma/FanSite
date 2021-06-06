@@ -16,6 +16,7 @@ namespace Fan_Website.Infrastructure
         Task UpdateUserRating(string id, Type type);
         IEnumerable<ApplicationUser> GetLatestUsers(int n);
         IEnumerable<Follow> GetFollowing(string id);
-        Task AddComment(ProfileComment comment); 
+        Task AddComment(ProfileComment comment);
+        Task EditProfile(string id, string bio, string username); 
     }
 }

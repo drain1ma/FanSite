@@ -93,5 +93,13 @@ namespace Fan_Website.Service
             await context.SaveChangesAsync();
         }
 
+        public async Task EditProfile(string id, string bio, string username)
+        {
+            var user = GetById(id);
+            user.UserName = username;
+            user.Bio = bio;
+            context.Update(user);
+            await context.SaveChangesAsync(); 
+        }
     }
 }
