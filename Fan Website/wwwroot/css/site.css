@@ -164,6 +164,12 @@ body {
     font-family: 'Roboto'; 
     padding-top: 3px; 
 }
+
+#userEditLabel{
+    display: block; 
+    padding-top: 3px; 
+}
+
  #getFollowing{
     display: inline-block; 
     color: #444; 

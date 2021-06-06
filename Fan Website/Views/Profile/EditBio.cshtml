@@ -1,0 +1,30 @@
+﻿@model Fan_Website.Models.Profile.ProfileEditModel
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="sectionHeader">
+        <h1>Edit Profile | @Model.UserName</h1>
+    </div>
+
+
+    <form asp-action="EditBio" method="post" id="addPostForm">
+
+        <div class="addPost">
+            <input type="hidden" asp-for="@Model.UserId" />
+            <input type="hidden" asp-for="@Model.UserName" /> 
+            <div class="form-group">
+                <label asp-for="Bio"></label>
+                <textarea asp-for="Bio" class="form-control"></textarea>
+            </div>
+            <button type="submit" id="submitPostBtn" class="btn btn-primary">Edit Profile</button>
+        </div>
+    </form>
+
+</body>
+</html>

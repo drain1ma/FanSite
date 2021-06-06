@@ -62,17 +62,19 @@
                         </div>
                         <button type="submit" id="btn-profile" class="btn btn-default">Submit</button>
                     </form>
-                    <a class="inline-icon material-icons" asp-controller="Profile" asp-action="Edit" asp-route-id="@Model.UserId" style="text-decoration: none; color: black">edit</a>
+                    <a asp-controller="Profile" asp-action="EditBio" asp-route-id="@Model.UserId" style="text-decoration: none; color: black">Add bio</a>
                 }
             </div>
             <div class="col-md-8">
                 <span id="userName">
-                    @Model.UserName
+                    @Model.UserName <a id="userEditLabel" class="inline-icon material-icons" style="text-decoration: none; display: inline-block; color: black" asp-controller="Profile" asp-action="EditUserName" asp-route-id="@Model.UserId">edit</a>
                 </span>
+                
                 <span id="userRating">Current Rating: </span><span class="badge rounded-circle" style="background-color: skyblue">@Model.UserRating</span>
                 <span id="userCreatedLabel">Member Since: @Model.MemberSince</span>
                 <span id="userActiveLabel">
                 </span>
+
                 @if (signInManager.IsSignedIn(User))
                 {
 
@@ -92,7 +94,7 @@
                         <input id="followers" type="hidden" asp-for="@Model.UserId" />
                     }
                 }
-
+                <span id="userBioLabel">@Model.Bio</span>
             </div>
         </div>
 

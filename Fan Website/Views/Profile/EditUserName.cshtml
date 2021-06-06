@@ -9,20 +9,19 @@
 </head>
 <body>
     <div class="sectionHeader">
-        <h1>Edit Profile | @Model.UserName</h1>
+        <h1>Change Username | @Model.UserName</h1>
     </div>
 
 
-    <form asp-action="Edit" method="post" id="addPostForm">
+    <form asp-action="EditUsername" method="post" id="addPostForm">
 
         <div class="addPost">
             <input type="hidden" asp-for="@Model.UserId" />
-            <input type="hidden" asp-for="@Model.UserName" />
             <div class="form-group">
-                <label asp-for="Bio"></label>
-                <textarea asp-for="Bio" class="form-control"></textarea>
+                <label asp-for="UserName"></label>
+                <input asp-for="UserName" class="form-control">
             </div>
-            <button type="submit" id="submitPostBtn" class="btn btn-primary">Edit Profile</button>
+            <button type="submit" id="submitPostBtn" class="btn btn-primary">Change Username</button>
         </div>
     </form>
 

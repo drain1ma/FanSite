@@ -19,13 +19,15 @@ namespace Fan_Website.Controllers
     public class ProfileController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager; 
         private readonly IApplicationUser userService;
         private readonly IUpload uploadService;
         private readonly IConfiguration configuration;
         private readonly AppDbContext context; 
-        public ProfileController(UserManager<ApplicationUser> _userManager, IApplicationUser _userService, IUpload _uploadService, IConfiguration _configuration, AppDbContext ctx)
+        public ProfileController(UserManager<ApplicationUser> _userManager, SignInManager<ApplicationUser> _signInManager, IApplicationUser _userService, IUpload _uploadService, IConfiguration _configuration, AppDbContext ctx)
         {
             userManager = _userManager;
+            signInManager = _signInManager; 
             userService = _userService;
             uploadService = _uploadService;
             configuration = _configuration;
@@ -191,7 +193,7 @@ namespace Fan_Website.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(string id)
+        public IActionResult EditBio(string id)
         {
             var user = userService.GetById(id);
 
@@ -206,10 +208,31 @@ namespace Fan_Website.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(ProfileEditModel user)
+        public async Task<IActionResult> EditBio(ProfileEditModel user)
         {
             await userService.EditProfile(user.UserId, user.Bio, user.UserName);
             return RedirectToAction("Detail", "Profile", new { id = user.UserId });
+        }
+        [HttpGet]
+        public IActionResult EditUserName(string id)
+        {
+            var user = userService.GetById(id);
+
+            var model = new ProfileEditModel
+            {
+                UserId = user.Id,
+                UserName = user.UserName,
+                ProfileImageUrl = user.ImagePath,
+                Bio = user.Bio
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditUsername(ProfileEditModel user)
+        {
+            await userService.EditProfile(user.UserId, user.Bio, user.UserName);
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
         public async Task<IActionResult> UploadProfileImage(IFormFile file)
         {

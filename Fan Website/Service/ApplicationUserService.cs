@@ -97,6 +97,11 @@ namespace Fan_Website.Service
         {
             var user = GetById(id);
             user.UserName = username;
+            context.Update(user);
+            await context.SaveChangesAsync();
+            user.NormalizedUserName = username.ToUpper();
+            context.Update(user);
+            await context.SaveChangesAsync();
             user.Bio = bio;
             context.Update(user);
             await context.SaveChangesAsync(); 
