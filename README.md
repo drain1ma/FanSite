@@ -32,8 +32,8 @@ Users are able to post replies to the posts that are in the forum. Currently wha
 - [x] Adding a dropdownlist 
 - [x] Forums should link to specific posts related to that topic
 - [x] Upvoting system for forum posts
-- [ ] Ability to change likes dynamically 
-- [ ] Display most popular posts
-- [ ] Allow users to update a user bio 
+- [x] Ability to change likes dynamically 
+- [x] Display most popular posts
+- [x] Allow users to update a user bio 
 - [ ] A page where users can rate the game from the series
 - [ ] A star rating system 
